@@ -21,6 +21,15 @@ internal class Game
 
 
 
+    private void Initialize()
+    {
+        // TODO: Initialize game.
+        // - Set up game board.
+        // - Initialize score.
+        // - Set up input handling.
+        // - Set up rendering.
+    }
+
     private void Run()
     {
         var stopwatch = Stopwatch.StartNew();
@@ -36,21 +45,9 @@ internal class Game
 
             double frameTime = stopwatch.Elapsed.TotalMilliseconds - currentTime;
             double sleepTime = _targetFrameTime - frameTime;
-
             if (sleepTime > 0)
-            {
                 Thread.Sleep((int)sleepTime);
-            }
         }
-    }
-
-    private void Initialize()
-    {
-        // TODO: Initialize game.
-        // - Set up game board.
-        // - Initialize score.
-        // - Set up input handling.
-        // - Set up rendering.
     }
 
     private void MainLoop(double deltaTime)
