@@ -6,6 +6,7 @@ internal class Game
 {
     private const int _targetFps = 60;
     private const double _targetFrameTime = 1000.0 / _targetFps;
+    private bool _isRunning = true;
 
     public void Start()
     {
@@ -15,7 +16,7 @@ internal class Game
 
     public void Stop()
     {
-        // TODO: Stop the game loop.
+        _isRunning = false;
     }
 
 
@@ -25,7 +26,7 @@ internal class Game
         var stopwatch = Stopwatch.StartNew();
         double lastFrameTime = 0;
 
-        while (true) // TODO: Implement exit condition.
+        while (_isRunning)
         {
             double currentTime = stopwatch.Elapsed.TotalMilliseconds;
             double deltaTime = currentTime - lastFrameTime;
