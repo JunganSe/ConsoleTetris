@@ -9,20 +9,6 @@ internal static class InputReader_Single
         {
             key = Console.ReadKey(true).Key;
         }
-        return MapKey(key);
-    }
-
-    private static Input MapKey(ConsoleKey key)
-    {
-        return key switch
-        {
-            ConsoleKey.LeftArrow => Input.Left,
-            ConsoleKey.RightArrow => Input.Right,
-            ConsoleKey.UpArrow => Input.Up,
-            ConsoleKey.DownArrow => Input.Down,
-            ConsoleKey.Q => Input.Quit,
-            ConsoleKey.Spacebar => Input.Pause,
-            _ => Input.Nothing,
-        };
+        return KeyMapper.Map(key);
     }
 }
