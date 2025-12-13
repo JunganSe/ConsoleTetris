@@ -10,8 +10,10 @@ internal static class KeyMapper
             ConsoleKey.RightArrow => Input.Right,
             ConsoleKey.UpArrow => Input.Up,
             ConsoleKey.DownArrow => Input.Down,
-            ConsoleKey.Q => Input.Quit,
+            ConsoleKey.A => Input.SpinLeft,
+            ConsoleKey.D => Input.SpinRight,
             ConsoleKey.Spacebar => Input.Pause,
+            ConsoleKey.Q => Input.Quit,
             _ => Input.Nothing,
         };
     }

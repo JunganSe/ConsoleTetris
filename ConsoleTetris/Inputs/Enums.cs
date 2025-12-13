@@ -7,6 +7,8 @@ public enum Input
     Down,
     Left,
     Right,
+    SpinLeft,
+    SpinRight,
     Pause,
     Quit,
 
