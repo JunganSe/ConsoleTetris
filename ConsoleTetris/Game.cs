@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ConsoleTetris.Inputs;
+using System.Diagnostics;
 
 namespace ConsoleTetris;
 
@@ -52,14 +53,14 @@ internal class Game
 
     private void MainLoop(double deltaTime)
     {
-        GetInput();
+        var input = GetInput();
         Update(deltaTime);
         Render();
     }
 
-    private void GetInput()
+    private Input GetInput()
     {
-        // TODO: Handle input.
+        return InputReader_Single.ReadInput();
     }
 
     private void Update(double deltaTime)
