@@ -1,4 +1,5 @@
 ﻿using ConsoleTetris.Inputs;
+using ConsoleTetris.Rendering;
 using System.Diagnostics;
 
 namespace ConsoleTetris;
@@ -8,6 +9,7 @@ internal class Game
     private const int _targetFps = 60;
     private const double _targetFrameTime = 1000.0 / _targetFps;
     private bool _isRunning = true;
+    private Renderer _renderer = new Renderer();
 
     public void Start()
     {
@@ -29,6 +31,8 @@ internal class Game
         // - Initialize score.
         // - Set up input handling.
         // - Set up rendering.
+        
+        _renderer.DrawFrame(0, 0, 20, 20, doubleWall: true); // TODO: Find and use correct dimensions.
     }
 
     private void Run()

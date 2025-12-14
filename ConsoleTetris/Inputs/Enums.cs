@@ -11,5 +11,4 @@ public enum Input
     SpinRight,
     Pause,
     Quit,
-
 }
