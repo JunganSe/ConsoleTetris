@@ -32,8 +32,13 @@ internal class Game
         // - Set up input handling.
         // - Set up rendering.
 
-        new ConsoleManager().InitializeConsole();
-        _renderer.DrawFrame(0, 0, 20, 20, doubleWall: true); // TODO: Find and use correct dimensions.
+        ConsoleManager.InitializeConsole();
+        _renderer.DrawRectangle(
+            GlobalConstants.PlayArea.X,
+            GlobalConstants.PlayArea.Y,
+            GlobalConstants.PlayArea.Width,
+            GlobalConstants.PlayArea.Height,
+            doubleWall: true);
     }
 
     private void Run()

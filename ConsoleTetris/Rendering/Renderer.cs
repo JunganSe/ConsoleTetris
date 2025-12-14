@@ -2,7 +2,7 @@
 
 internal class Renderer
 {
-    public void DrawFrame(int x, int y, int width, int height, bool doubleWall = false)
+    public void DrawRectangle(int x, int y, int width, int height, bool doubleWall = false)
     {
         string parts = doubleWall ? "═║╔╗╚╝" : "─│┌┐└┘";
         string horizontalLine = new string(parts[0], width - 2); // Reusable horizontal line without corners.

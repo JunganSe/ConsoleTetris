@@ -1,8 +1,8 @@
 ﻿namespace ConsoleTetris.Rendering;
 
-internal class ConsoleManager
+internal static class ConsoleManager
 {
-    public void InitializeConsole()
+    public static void InitializeConsole()
     {
         Console.CursorVisible = false;
         Console.Clear();
