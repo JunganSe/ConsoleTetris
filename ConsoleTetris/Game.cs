@@ -31,7 +31,8 @@ internal class Game
         // - Initialize score.
         // - Set up input handling.
         // - Set up rendering.
-        
+
+        new ConsoleManager().InitializeConsole();
         _renderer.DrawFrame(0, 0, 20, 20, doubleWall: true); // TODO: Find and use correct dimensions.
     }
 
