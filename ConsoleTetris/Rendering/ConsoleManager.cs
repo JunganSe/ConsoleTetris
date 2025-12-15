@@ -7,8 +7,8 @@ internal static class ConsoleManager
         Console.CursorVisible = false;
         Console.Clear();
 
-        int width = GlobalConstants.PlayArea.X * 2 + GlobalConstants.PlayArea.Width * 2;
-        int height = GlobalConstants.PlayArea.Y + GlobalConstants.PlayArea.Height;
+        int width = GlobalConstants.PlayArea.X * 2 + GlobalConstants.PlayArea.Width * 2 + 3;
+        int height = GlobalConstants.PlayArea.Y + GlobalConstants.PlayArea.Height + 2;
         Console.SetWindowSize(width, height);
     }
 }
