@@ -5,11 +5,13 @@ internal class GuiRenderer
     private const string _singleWallParts = "─│┌┐└┘";
     private const string _doubleWallParts = "═║╔╗╚╝";
 
-    public void DrawRectangle_Single(int x, int y, int width, int height) =>
-        DrawRectangle(x, y, width, height, _singleWallParts);
-
-    public void DrawRectangle_Double(int x, int y, int width, int height) =>
-        DrawRectangle(x, y, width, height, _doubleWallParts);
+    public void DrawPlayAreaBorder() =>
+        DrawRectangle(
+            GlobalConstants.PlayArea.X - 1,
+            GlobalConstants.PlayArea.Y - 1,
+            GlobalConstants.PlayArea.Width * 2 + 1,
+            GlobalConstants.PlayArea.Height * 2 + 1,
+            _doubleWallParts);
 
     /// <param name="parts">A string containing the line and corner parts in this order: "─│┌┐└┘"</param>
     private void DrawRectangle(int x, int y, int width, int height, string parts)

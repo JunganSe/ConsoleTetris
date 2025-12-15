@@ -33,11 +33,7 @@ internal class Game
         // - Set up rendering.
 
         ConsoleManager.InitializeConsole();
-        _guiRenderer.DrawRectangle_Double(
-            GlobalConstants.PlayArea.X,
-            GlobalConstants.PlayArea.Y,
-            GlobalConstants.PlayArea.Width,
-            GlobalConstants.PlayArea.Height);
+        _guiRenderer.DrawPlayAreaBorder();
     }
 
     private void Run()
