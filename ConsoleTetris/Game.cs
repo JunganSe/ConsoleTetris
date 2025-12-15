@@ -8,8 +8,8 @@ internal class Game
 {
     private const int _targetFps = 60;
     private const double _targetFrameTime = 1000.0 / _targetFps;
+    private readonly GuiRenderer _guiRenderer = new();
     private bool _isRunning = true;
-    private Renderer _renderer = new Renderer();
 
     public void Start()
     {
@@ -33,12 +33,11 @@ internal class Game
         // - Set up rendering.
 
         ConsoleManager.InitializeConsole();
-        _renderer.DrawRectangle(
+        _guiRenderer.DrawRectangle_Double(
             GlobalConstants.PlayArea.X,
             GlobalConstants.PlayArea.Y,
             GlobalConstants.PlayArea.Width,
-            GlobalConstants.PlayArea.Height,
-            doubleWall: true);
+            GlobalConstants.PlayArea.Height);
     }
 
     private void Run()
