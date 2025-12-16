@@ -6,7 +6,7 @@ namespace ConsoleTetris;
 
 internal class Game
 {
-    private const int _targetFps = 60;
+    private const int _targetFps = 30;
     private const double _targetFrameTime = 1000.0 / _targetFps;
     private readonly GuiRenderer _guiRenderer = new();
     private bool _isRunning = true;
@@ -65,7 +65,7 @@ internal class Game
 
     private Input GetInput()
     {
-        return InputReader_Single.ReadInput();
+        return InputReader.Read();
     }
 
     private void Update(double deltaTime)
