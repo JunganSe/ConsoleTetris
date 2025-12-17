@@ -2,18 +2,18 @@
 
 internal static class KeyMapper
 {
-    public static Input Map(ConsoleKey key)
+    public static Input Map(Key key)
     {
         return key switch
         {
-            ConsoleKey.LeftArrow => Input.Left,
-            ConsoleKey.RightArrow => Input.Right,
-            ConsoleKey.UpArrow => Input.Up,
-            ConsoleKey.DownArrow => Input.Down,
-            ConsoleKey.A => Input.SpinLeft,
-            ConsoleKey.D => Input.SpinRight,
-            ConsoleKey.Spacebar => Input.Pause,
-            ConsoleKey.Q => Input.Quit,
+            Key.Left => Input.Left,
+            Key.Right => Input.Right,
+            Key.Up => Input.Up,
+            Key.Down => Input.Down,
+            Key.A => Input.SpinLeft,
+            Key.D => Input.SpinRight,
+            Key.Space => Input.Pause,
+            Key.Escape => Input.Quit,
             _ => Input.Nothing,
         };
     }
