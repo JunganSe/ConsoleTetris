@@ -14,24 +14,15 @@ internal partial class InputReader
         return (state & 0x8000) != 0;
     }
 
-    // Checks if a specific key was pressed (and still is) since the last call to GetAsyncKeyState.
-    public static bool IsKeyPressed(Key key)
+    // Gets a set of all keys in the provided enum that are currently being held down.
+    public static HashSet<TKey> GetHeldKeys<TKey>() where TKey : struct, Enum
     {
-        short state = GetAsyncKeyState((int)key);
-        return (state & 0x8001) != 0;
-    }
-
-    // Gets a set of all keys in the "Key" enum that are currently being held down.
-    public static HashSet<Key> GetHeldKeys()
-    {
-        var heldKeys = new HashSet<Key>();
-
-        foreach (Key key in Enum.GetValues<Key>())
+        var heldKeys = new HashSet<TKey>();
+        foreach (TKey key in Enum.GetValues<TKey>())
         {
-            if (IsKeyHeld((int)key))
+            if (IsKeyHeld(Convert.ToInt32(key)))
                 heldKeys.Add(key);
         }
-
         return heldKeys;
     }
 }
