@@ -2,7 +2,7 @@
 
 public enum Input
 {
-    Nothing,
+    Unknown,
     Up,
     Down,
     Left,

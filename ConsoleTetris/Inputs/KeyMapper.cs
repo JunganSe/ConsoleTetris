@@ -12,6 +12,6 @@ internal static class KeyMapper
         Key.D      => Input.SpinRight,
         Key.Space  => Input.Pause,
         Key.Escape => Input.Quit,
-        _          => Input.Nothing,
+        _          => Input.Unknown,
     };
 }
