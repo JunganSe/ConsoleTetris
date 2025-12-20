@@ -8,7 +8,8 @@ internal class Game
 {
     private const int _targetFps = 30;
     private const double _targetFrameTime = 1000.0 / _targetFps;
-    private readonly InputReader _inputReader = new();
+
+    private readonly InputManager _inputManager = new();
     private readonly GuiRenderer _guiRenderer = new();
     private bool _isRunning = true;
 
@@ -59,14 +60,10 @@ internal class Game
 
     private void MainLoop(double deltaTime)
     {
-        var input = GetInput();
+        _inputManager.Update();
+
         Update(deltaTime);
         Render();
-    }
-
-    private Input[] GetInput()
-    {
-        return _inputReader.Read();
     }
 
     private void Update(double deltaTime)

@@ -5,28 +5,25 @@ internal class InputManager
     private HashSet<Input> _currentHeldInputs = [];
     private HashSet<Input> _previousHeldInputs = [];
 
-    /// <summary> Updates the state of held inputs. Should be called once per frame. </summary>
+    public InputState InputState { get; private set; } = new();
+
+    /// <summary> Updates the state of inputs. Should be called once per frame. </summary>
+    /// <remarks> Inputs are stored in the <see cref="InputState"/> property. </remarks>
     public void Update()
     {
         _previousHeldInputs = [.. _currentHeldInputs];
         _currentHeldInputs = InputReader.GetHeldKeys<Key>()
                                         .Select(KeyMapper.Map)
                                         .ToHashSet();
+        InputState = GetInputState();
     }
 
-    /// <summary> Gets a snapshot of the current input state. </summary>
-    /// <remarks> This is typically called after updating the input state with <see cref="Update"/>. </remarks>
-    public InputState GetInputState()
-    {
-        var pressedInputs = _currentHeldInputs
+    private InputState GetInputState() => new(
+        Held: new HashSet<Input>(_currentHeldInputs),
+        Pressed: _currentHeldInputs
             .Where(input => !_previousHeldInputs.Contains(input))
-            .ToHashSet();
-        var releasedInputs = _previousHeldInputs
+            .ToHashSet(),
+        Released: _previousHeldInputs
             .Where(input => !_currentHeldInputs.Contains(input))
-            .ToHashSet();
-        return new InputState(
-            Held: new HashSet<Input>(_currentHeldInputs),
-            Pressed: pressedInputs,
-            Released: releasedInputs);
-    }
+            .ToHashSet());
 }

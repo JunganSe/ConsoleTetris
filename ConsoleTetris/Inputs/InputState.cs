@@ -5,6 +5,12 @@ internal record InputState(
     IReadOnlySet<Input> Pressed,
     IReadOnlySet<Input> Released)
 {
+    public InputState() : this(
+        new HashSet<Input>(),
+        new HashSet<Input>(),
+        new HashSet<Input>())
+    { }
+
     public bool IsHeld(Input input) => Held.Contains(input);
     public bool IsPressed(Input input) => Pressed.Contains(input);
     public bool IsReleased(Input input) => Released.Contains(input);
