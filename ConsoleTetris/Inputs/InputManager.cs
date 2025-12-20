@@ -2,24 +2,26 @@
 
 internal class InputManager
 {
-    private HashSet<Key> _currentHeldKeys = [];
-    private HashSet<Key> _previousHeldKeys = [];
+    private HashSet<Input> _currentHeldInputs = [];
+    private HashSet<Input> _previousHeldInputs = [];
 
     /// <summary>
-    /// Updates the state of held keys. Should be called once per frame.
+    /// Updates the state of held inputs. Should be called once per frame.
     /// </summary>
     public void Update()
     {
-        _previousHeldKeys = _currentHeldKeys;
-        _currentHeldKeys = InputReader.GetHeldKeys<Key>();
+        _previousHeldInputs = _currentHeldInputs;
+        _currentHeldInputs = InputReader.GetHeldKeys<Key>()
+                                        .Select(KeyMapper.Map)
+                                        .ToHashSet();
     }
 
-    public bool IsKeyHeld(Key key) =>
-        _currentHeldKeys.Contains(key);
+    public bool IsHeld(Input input) =>
+        _currentHeldInputs.Contains(input);
 
-    public bool IsKeyPressed(Key key) =>
-        _currentHeldKeys.Contains(key) && !_previousHeldKeys.Contains(key);
+    public bool IsPressed(Input input) =>
+        _currentHeldInputs.Contains(input) && !_previousHeldInputs.Contains(input);
 
-    public bool IsKeyReleased(Key key) =>
-        !_currentHeldKeys.Contains(key) && _previousHeldKeys.Contains(key);
+    public bool IsReleased(Input input) =>
+        !_currentHeldInputs.Contains(input) && _previousHeldInputs.Contains(input);
 }
