@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace ConsoleTetris;
 
-internal class Game
+internal class Controller
 {
     private const int _targetFps = 30;
     private const double _targetFrameTime = 1000.0 / _targetFps;
