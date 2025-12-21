@@ -35,4 +35,10 @@ internal class GuiRenderer
         Console.SetCursorPosition(x, y + height - 1);
         Console.Write(parts[4] + horizontalLine + parts[5]);
     }
+
+    public void DrawFps(double fps)
+    {
+        Console.SetCursorPosition(Console.WindowWidth - 7, 0);
+        Console.Write($"FPS: {fps:F0}"); // F0 formats as integer.
+    }
 }

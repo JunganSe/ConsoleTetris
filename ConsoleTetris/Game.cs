@@ -13,6 +13,10 @@ internal class Game
     private readonly GuiRenderer _guiRenderer = new();
     private bool _isRunning = true;
 
+    private double _currentFps = 0;
+    private double _fpsUpdateTimer = 0;
+    private const double _fpsUpdateInterval = 200; // Update FPS display every 200ms
+
     public void Start()
     {
         Initialize();
@@ -68,11 +72,19 @@ internal class Game
 
     private void Update(double deltaTime)
     {
+        _fpsUpdateTimer += deltaTime;
+        if (_fpsUpdateTimer >= _fpsUpdateInterval)
+        {
+            _currentFps = deltaTime > 0 ? 1000.0 / deltaTime : 0;
+            _fpsUpdateTimer = 0;
+        }
+
         // TODO: Update game state.
     }
 
     private void Render()
     {
+        _guiRenderer.DrawFps(_currentFps);
         // TODO: Render game state.
     }
 }
