@@ -5,7 +5,7 @@ internal class InputManager
     private HashSet<Input> _currentHeldInputs = [];
     private HashSet<Input> _previousHeldInputs = [];
 
-    public InputState InputState { get; private set; } = new();
+    public InputState InputState { get; private set; } = InputState.Empty;
 
     /// <summary> Updates the state of inputs. Should be called once per frame. </summary>
     /// <remarks> Inputs are stored in the <see cref="InputState"/> property. </remarks>
