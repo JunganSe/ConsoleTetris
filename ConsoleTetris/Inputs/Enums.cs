@@ -3,10 +3,10 @@
 public enum Input
 {
     Unknown,
-    Up,
-    Down,
     Left,
     Right,
+    HardDrop,
+    SoftDrop,
     SpinLeft,
     SpinRight,
     Pause,
@@ -16,10 +16,10 @@ public enum Input
 /// <summary> Virtual key codes </summary>
 public enum Key
 {
-    Up = 0x26,
-    Down = 0x28,
     Left = 0x25,
     Right = 0x27,
+    Up = 0x26,
+    Down = 0x28,
     A = 0x41,
     S = 0x53,
     D = 0x44,
