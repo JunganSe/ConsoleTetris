@@ -16,6 +16,7 @@ internal class GuiRenderer
     /// <param name="parts">A string containing the line and corner parts in this order: "─│┌┐└┘"</param>
     private void DrawRectangle(int x, int y, int width, int height, string parts)
     {
+        Console.ForegroundColor = GuiColor.Border;
         string horizontalLine = new(parts[0], width - 2); // Reusable horizontal line without corners.
 
         // Top part
@@ -38,6 +39,7 @@ internal class GuiRenderer
 
     public void DrawFps(double fps)
     {
+        Console.ForegroundColor = GuiColor.FpsText;
         Console.SetCursorPosition(Console.WindowWidth - 7, 0);
         Console.Write($"FPS: {fps:F0}"); // F0 formats as integer.
     }
