@@ -1,4 +1,5 @@
-﻿using ConsoleTetris.Inputs;
+﻿using ConsoleTetris.Game;
+using ConsoleTetris.Inputs;
 using ConsoleTetris.Rendering;
 using ConsoleTetris.Utilities;
 using System.Diagnostics;
@@ -10,9 +11,12 @@ internal class Controller
     private const int _targetFps = 30;
     private const double _targetFrameTime = 1000.0 / _targetFps;
 
-    private readonly FpsTracker _fpsTracker = new();
     private readonly InputManager _inputManager = new();
+    private readonly Playfield _playfield = new();
+    private readonly FpsTracker _fpsTracker = new();
     private readonly GuiRenderer _guiRenderer = new();
+    private readonly PlayfieldRenderer _playfieldRenderer = new();
+
     private bool _isRunning = true;
 
     public void Start()
@@ -77,7 +81,18 @@ internal class Controller
 
     private void Render()
     {
+        // Test code:
+        _playfield.Pieces[0, 0] = TetrominoType.I;
+        _playfield.Pieces[1, 0] = TetrominoType.O;
+        _playfield.Pieces[2, 1] = TetrominoType.T;
+        _playfield.Pieces[3, 1] = TetrominoType.S;
+        _playfield.Pieces[4, 2] = TetrominoType.Z;
+        _playfield.Pieces[5, 2] = TetrominoType.J;
+        _playfield.Pieces[6, 2] = TetrominoType.L;
+        // Test code end.
+
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
-        // TODO: Render game state.
+        _playfieldRenderer.DrawPlayfield(_playfield);
+        // TODO: Render more game state.
     }
 }
