@@ -1,4 +1,4 @@
-﻿using ConsoleTetris.Game;
+﻿using ConsoleTetris.GameComponents;
 
 namespace ConsoleTetris.Rendering;
 

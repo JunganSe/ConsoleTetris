@@ -1,4 +1,4 @@
-﻿namespace ConsoleTetris.Game;
+﻿namespace ConsoleTetris.GameComponents;
 
 internal class Playfield
 {

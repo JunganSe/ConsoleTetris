@@ -1,4 +1,4 @@
-﻿using ConsoleTetris.Game;
+﻿using ConsoleTetris.GameComponents;
 using ConsoleTetris.Inputs;
 using ConsoleTetris.Rendering;
 using ConsoleTetris.Utilities;
