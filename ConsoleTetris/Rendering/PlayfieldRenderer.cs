@@ -23,11 +23,11 @@ internal class PlayfieldRenderer
                 if (piece.HasValue)
                 {
                     Console.ForegroundColor = ColorMapper.GetTetrominoColor(piece.Value);
-                    Console.Write("██");
+                    Console.Write(PieceTexture.Block);
                 }
                 else
                 {
-                    Console.Write("  ");
+                    Console.Write(PieceTexture.Empty);
                 }
             }
         }
