@@ -8,6 +8,6 @@ internal class Playfield
 
     public Playfield()
     {
-        Pieces = new TetrominoPiece?[10, 20];
+        Pieces = new TetrominoPiece?[GlobalConstants.Playfield.Width, GlobalConstants.Playfield.Height];
     }
 }
