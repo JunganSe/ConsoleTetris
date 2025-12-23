@@ -11,7 +11,14 @@ internal enum TetrominoType
     L,
 }
 
-internal enum  Direction
+internal enum TetrominoState
+{
+    Moving,
+    Locked,
+    Ghost,
+}
+
+internal enum Direction
 {
     Up = 0,
     Right = 1,

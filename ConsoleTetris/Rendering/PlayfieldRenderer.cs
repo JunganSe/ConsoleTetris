@@ -20,9 +20,9 @@ internal class PlayfieldRenderer
                 Console.SetCursorPosition(cursorX, cursorY);
 
                 var piece = playfield.Pieces[x, y];
-                if (piece.HasValue)
+                if (piece is not null)
                 {
-                    Console.ForegroundColor = ColorMapper.GetTetrominoColor(piece.Value);
+                    Console.ForegroundColor = ColorMapper.GetTetrominoColor(piece.Type);
                     Console.Write(PieceTexture.Block);
                 }
                 else

@@ -82,13 +82,13 @@ internal class Controller
     private void Render()
     {
         // Test code:
-        _playfield.Pieces[0, 0] = TetrominoType.I;
-        _playfield.Pieces[1, 0] = TetrominoType.O;
-        _playfield.Pieces[2, 1] = TetrominoType.T;
-        _playfield.Pieces[3, 1] = TetrominoType.S;
-        _playfield.Pieces[4, 2] = TetrominoType.Z;
-        _playfield.Pieces[5, 2] = TetrominoType.J;
-        _playfield.Pieces[6, 2] = TetrominoType.L;
+        _playfield.Pieces[0, 0] = new() { Type = TetrominoType.I, State = TetrominoState.Locked };
+        _playfield.Pieces[1, 0] = new() { Type = TetrominoType.O, State = TetrominoState.Locked };
+        _playfield.Pieces[2, 1] = new() { Type = TetrominoType.T, State = TetrominoState.Locked };
+        _playfield.Pieces[3, 1] = new() { Type = TetrominoType.S, State = TetrominoState.Locked };
+        _playfield.Pieces[4, 2] = new() { Type = TetrominoType.Z, State = TetrominoState.Locked };
+        _playfield.Pieces[5, 2] = new() { Type = TetrominoType.J, State = TetrominoState.Locked };
+        _playfield.Pieces[6, 2] = new() { Type = TetrominoType.L, State = TetrominoState.Locked };
         // Test code end.
 
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
