@@ -8,8 +8,8 @@ internal class PlayfieldRenderer
     {
         int playfieldWidth = playfield.Pieces.GetLength(0);
         int playfieldHeight = playfield.Pieces.GetLength(1);
-        int cursorOffsetX = GlobalConstants.PlayArea.X * 2;
-        int cursorOffsetY = GlobalConstants.PlayArea.Y + GlobalConstants.PlayArea.Height - 1;
+        int cursorOffsetX = GlobalConstants.Playfield.X * 2;
+        int cursorOffsetY = GlobalConstants.Playfield.Y + GlobalConstants.Playfield.Height - 1;
 
         for (int x = 0; x < playfieldWidth; x++)
         {

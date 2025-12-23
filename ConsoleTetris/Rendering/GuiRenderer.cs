@@ -7,10 +7,10 @@ internal class GuiRenderer
 
     public void DrawPlayAreaBorder() =>
         DrawRectangle(
-            GlobalConstants.PlayArea.X * 2 - 1,
-            GlobalConstants.PlayArea.Y - 1,
-            GlobalConstants.PlayArea.Width * 2 + 2,
-            GlobalConstants.PlayArea.Height + 2,
+            GlobalConstants.Playfield.X * 2 - 1,
+            GlobalConstants.Playfield.Y - 1,
+            GlobalConstants.Playfield.Width * 2 + 2,
+            GlobalConstants.Playfield.Height + 2,
             _doubleWallParts);
 
     /// <param name="parts">A string containing the line and corner parts in this order: "─│┌┐└┘"</param>
