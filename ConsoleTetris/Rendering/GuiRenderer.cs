@@ -5,7 +5,7 @@ internal class GuiRenderer
     private const string _singleWallParts = "─│┌┐└┘";
     private const string _doubleWallParts = "═║╔╗╚╝";
 
-    public void DrawPlayAreaBorder() =>
+    public void DrawPlayfieldBorder() =>
         DrawRectangle(
             GlobalConstants.Playfield.X * 2 - 1,
             GlobalConstants.Playfield.Y - 1,

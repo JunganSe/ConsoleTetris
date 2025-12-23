@@ -41,7 +41,7 @@ internal class Controller
         // - Set up rendering.
 
         ConsoleManager.InitializeConsole();
-        _guiRenderer.DrawPlayAreaBorder();
+        _guiRenderer.DrawPlayfieldBorder();
     }
 
     private void Run()
