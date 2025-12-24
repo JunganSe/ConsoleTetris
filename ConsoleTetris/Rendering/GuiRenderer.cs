@@ -1,4 +1,6 @@
-﻿namespace ConsoleTetris.Rendering;
+﻿using ConsoleTetris.GameComponents;
+
+namespace ConsoleTetris.Rendering;
 
 internal class GuiRenderer
 {
@@ -7,10 +9,10 @@ internal class GuiRenderer
 
     public void DrawPlayfieldBorder() =>
         DrawRectangle(
-            GlobalConstants.Playfield.X * 2 - 1,
-            GlobalConstants.Playfield.Y - 1,
-            GlobalConstants.Playfield.Width * 2 + 2,
-            GlobalConstants.Playfield.Height + 2,
+            PlayfieldSize.X * 2 - 1,
+            PlayfieldSize.Y - 1,
+            PlayfieldSize.Width * 2 + 2,
+            PlayfieldSize.Height + 2,
             _doubleWallParts);
 
     /// <param name="parts">A string containing the line and corner parts in this order: "─│┌┐└┘"</param>

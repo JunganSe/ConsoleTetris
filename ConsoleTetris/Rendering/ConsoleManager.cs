@@ -6,6 +6,6 @@ internal static class ConsoleManager
     {
         Console.CursorVisible = false;
         Console.Clear();
-        Console.SetWindowSize(GlobalConstants.WindowSize.Width, GlobalConstants.WindowSize.Height);
+        Console.SetWindowSize(WindowSize.Width, WindowSize.Height);
     }
 }

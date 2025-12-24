@@ -1,5 +1,11 @@
 ﻿namespace ConsoleTetris.Rendering;
 
+public class WindowSize
+{
+    public const int Width = 32;
+    public const int Height = 24;
+}
+
 internal class GuiColor
 {
     public const ConsoleColor Border = ConsoleColor.White;
