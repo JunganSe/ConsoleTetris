@@ -4,6 +4,7 @@ namespace ConsoleTetris.Rendering;
 
 internal class PlayfieldRenderer
 {
+    /// <summary> Redraw entire playfield. </summary>
     public void DrawPlayfield(Playfield playfield)
     {
         int playfieldWidth = playfield.Pieces.GetLength(0);
