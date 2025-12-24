@@ -2,8 +2,8 @@
 
 internal class PlayfieldSize
 {
-    public const int X = 2;
-    public const int Y = 5;
+    public const int X = 1;
+    public const int Y = 1;
     public const int Width = 10;
     public const int Height = 20;
 }

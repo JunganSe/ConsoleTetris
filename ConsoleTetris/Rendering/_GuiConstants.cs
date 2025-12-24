@@ -1,9 +1,9 @@
 ﻿namespace ConsoleTetris.Rendering;
 
-public class WindowSize
+internal class WindowSize
 {
     public const int Width = 32;
-    public const int Height = 24;
+    public const int Height = 23;
 }
 
 internal class GuiColor
