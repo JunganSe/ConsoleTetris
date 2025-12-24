@@ -9,8 +9,8 @@ internal class PlayfieldRenderer
     {
         int playfieldWidth = playfield.Pieces.GetLength(0);
         int playfieldHeight = playfield.Pieces.GetLength(1);
-        int cursorOffsetX = PlayfieldSize.X;
-        int cursorOffsetY = PlayfieldSize.Y + PlayfieldSize.Height - 1;
+        int cursorOffsetX = GuiPosition.PlayfieldX;
+        int cursorOffsetY = GuiPosition.PlayfieldY + PlayfieldSize.Height - 1;
 
         for (int x = 0; x < playfieldWidth; x++)
         {
