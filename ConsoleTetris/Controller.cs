@@ -34,15 +34,10 @@ internal class Controller
 
     private void Initialize()
     {
-        // TODO: Initialize game.
-        // - Set up game board.
-        // - Initialize score.
-        // - Set up input handling.
-        // - Set up rendering.
+        // TODO: Initialize score.
 
         ConsoleManager.InitializeConsole();
         _guiRenderer.DrawGui();
-        //_guiRenderer.DrawPlayfieldBorder();
     }
 
     private void Run()
@@ -92,8 +87,8 @@ internal class Controller
         _playfield.Pieces[6, 2] = new() { Type = TetrominoType.L, State = TetrominoState.Locked };
         // Test code end.
 
-        _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
-        _playfieldRenderer.DrawPlayfield(_playfield);
         // TODO: Render more game state.
+        _playfieldRenderer.DrawPlayfield(_playfield);
+        _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }
 }

@@ -2,8 +2,8 @@
 
 internal class WindowSize
 {
-    public const int Width = 32;
-    public const int Height = 23;
+    public const int Width = 31;
+    public const int Height = 22;
 }
 
 internal class GuiPosition
