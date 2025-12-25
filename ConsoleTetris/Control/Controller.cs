@@ -4,7 +4,7 @@ using ConsoleTetris.Rendering;
 using ConsoleTetris.Utilities;
 using System.Diagnostics;
 
-namespace ConsoleTetris;
+namespace ConsoleTetris.Control;
 
 internal class Controller
 {
