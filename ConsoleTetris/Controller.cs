@@ -12,7 +12,7 @@ internal class Controller
     private const double _targetFrameTime = 1000.0 / _targetFps;
 
     private readonly InputManager _inputManager = new();
-    private readonly Playfield _playfield = new();
+    private readonly Game _game = new();
     private readonly FpsTracker _fpsTracker = new();
     private readonly GuiRenderer _guiRenderer = new();
     private readonly PlayfieldRenderer _playfieldRenderer = new();
@@ -78,17 +78,17 @@ internal class Controller
     private void Render()
     {
         // Test code:
-        _playfield.Pieces[0, 0] = new() { Type = TetrominoType.I, State = TetrominoState.Locked };
-        _playfield.Pieces[1, 0] = new() { Type = TetrominoType.O, State = TetrominoState.Locked };
-        _playfield.Pieces[2, 1] = new() { Type = TetrominoType.T, State = TetrominoState.Locked };
-        _playfield.Pieces[3, 1] = new() { Type = TetrominoType.S, State = TetrominoState.Locked };
-        _playfield.Pieces[4, 2] = new() { Type = TetrominoType.Z, State = TetrominoState.Locked };
-        _playfield.Pieces[5, 2] = new() { Type = TetrominoType.J, State = TetrominoState.Locked };
-        _playfield.Pieces[6, 2] = new() { Type = TetrominoType.L, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[0, 0] = new() { Type = TetrominoType.I, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[1, 0] = new() { Type = TetrominoType.O, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[2, 1] = new() { Type = TetrominoType.T, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[3, 1] = new() { Type = TetrominoType.S, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[4, 2] = new() { Type = TetrominoType.Z, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[5, 2] = new() { Type = TetrominoType.J, State = TetrominoState.Locked };
+        _game.Playfield.Pieces[6, 2] = new() { Type = TetrominoType.L, State = TetrominoState.Locked };
         // Test code end.
 
         // TODO: Render more game state.
-        _playfieldRenderer.DrawPlayfield(_playfield);
+        _playfieldRenderer.DrawPlayfield(_game.Playfield);
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }
 }
