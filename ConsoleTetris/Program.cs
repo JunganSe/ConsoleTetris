@@ -1,4 +1,6 @@
-﻿namespace ConsoleTetris;
+﻿using ConsoleTetris.Control;
+
+namespace ConsoleTetris;
 
 internal class Program
 {
