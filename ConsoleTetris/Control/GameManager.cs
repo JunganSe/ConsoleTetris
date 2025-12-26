@@ -52,4 +52,10 @@ internal class GameManager
     {
         throw new NotImplementedException();
     }
+
+    public void LockTetromino()
+    {
+        // TODO: Add the pieces to playfield.
+        throw new NotImplementedException();
+    }
 }
