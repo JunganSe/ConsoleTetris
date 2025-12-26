@@ -60,16 +60,24 @@ internal class Controller
 
         while (_isRunning)
         {
-            double currentTime = stopwatch.Elapsed.TotalMilliseconds;
-            double deltaTime = currentTime - lastFrameTime;
-            lastFrameTime = currentTime;
+            double frameStartTime = stopwatch.Elapsed.TotalMilliseconds;
+            double deltaTime = frameStartTime - lastFrameTime;
+            lastFrameTime = frameStartTime;
 
             MainLoop(deltaTime);
 
-            double frameTime = stopwatch.Elapsed.TotalMilliseconds - currentTime;
+            double frameTime = stopwatch.Elapsed.TotalMilliseconds - frameStartTime;
             double sleepTime = _targetFrameTime - frameTime;
-            if (sleepTime > 0)
-                Thread.Sleep((int)sleepTime);
+            double targetEndTime = frameStartTime + _targetFrameTime;
+
+            // Spin waiting for up to 23ms is very cpu heavy, but the sleep oversteps if the value is lower.
+            if (sleepTime > 23)
+                Thread.Sleep((int)(sleepTime - 1));
+
+            while (stopwatch.Elapsed.TotalMilliseconds < targetEndTime)
+            {
+                Thread.SpinWait(100);
+            }
         }
     }
 
