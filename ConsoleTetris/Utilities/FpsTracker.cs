@@ -2,8 +2,9 @@
 
 internal class FpsTracker
 {
+    private const double _fpsUpdateInterval = 500;
     private double _fpsUpdateTimer = 0;
-    private const double _fpsUpdateInterval = 200;
+    private int _frameCount = 0;
 
     public double CurrentFps { get; private set; } = 0;
 
@@ -12,12 +13,14 @@ internal class FpsTracker
     public void Update(double deltaTime)
     {
         _fpsUpdateTimer += deltaTime;
+        _frameCount++;
+
         if (_fpsUpdateTimer < _fpsUpdateInterval)
             return;
 
+        CurrentFps = _frameCount * 1000.0 / _fpsUpdateTimer;
+
         _fpsUpdateTimer = 0;
-        CurrentFps = (deltaTime > 0)
-            ? 1000.0 / deltaTime
-            : 0;
+        _frameCount = 0;
     }
 }
