@@ -93,7 +93,10 @@ internal class Controller
     {
         _fpsTracker.Update(deltaTime);
 
-        // TODO: Update game state.
+        if (!_gameManager.IsTetrominoOnBoard)
+            _gameManager.SpawnTetromino();
+
+        // TODO: Update more game state.
     }
 
     private void Render()
