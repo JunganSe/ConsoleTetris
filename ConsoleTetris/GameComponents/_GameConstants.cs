@@ -26,8 +26,8 @@ internal enum TetrominoState
 
 internal enum Direction
 {
-    Up = 0,
-    Right = 1,
-    Down = 2,
-    Left = 3,
+    A = 0,
+    B = 1,
+    C = 2,
+    D = 3,
 }
