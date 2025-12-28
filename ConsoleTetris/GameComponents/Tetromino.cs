@@ -6,7 +6,7 @@ internal class Tetromino
 {
     public int X { get; set; }
     public int Y { get; set; }
-    public TetrominoType Type { get; init; }
+    public TetrominoShape Shape { get; init; }
     public Direction Direction { get; set; }
 
     /// <summary> Gets an array of coordinates for all pieces. </summary>
@@ -21,17 +21,17 @@ internal class Tetromino
     /// Gets an array of coordinates for the secondary pieces,
     /// relative to the primary piece at the tetromino's coordinates.
     /// </summary>
-    public (int x, int y)[] RelativeSecondaryPiecesCoords => Type switch
+    public (int x, int y)[] RelativeSecondaryPiecesCoords => Shape switch
     {
-        TetrominoType.I => Direction switch
+        TetrominoShape.I => Direction switch
         {
             Direction.A or Direction.C => [(-1, 0), (1, 0), (2, 0)],
             Direction.D or Direction.B => [(0, -1), (0, 1), (0, 2)],
         },
 
-        TetrominoType.O => [(1, 0), (0, 1), (1, 1)],
+        TetrominoShape.O => [(1, 0), (0, 1), (1, 1)],
 
-        TetrominoType.T => Direction switch
+        TetrominoShape.T => Direction switch
         {
             Direction.A => [(0, -1), (-1, 0), (1, 0)],
             Direction.B => [(0, -1), (-1, 0), (0, 1)],
@@ -39,19 +39,19 @@ internal class Tetromino
             Direction.D => [(0, -1), (1, 0), (0, 1)],
         },
 
-        TetrominoType.S => Direction switch
+        TetrominoShape.S => Direction switch
         {
             Direction.A or Direction.C => [(-1, -1), (0, -1), (1, 0)],
             Direction.B or Direction.D => [(1, -1), (1, 0), (0, 1)],
         },
 
-        TetrominoType.Z => Direction switch
+        TetrominoShape.Z => Direction switch
         {
             Direction.A or Direction.C => [(0, -1), (1, -1), (-1, 0)],
             Direction.B or Direction.D => [(0, -1), (1, 0), (1, 1)],
         },
 
-        TetrominoType.J => Direction switch
+        TetrominoShape.J => Direction switch
         {
             Direction.A => [(1, -1), (-1, 0), (1, 0)],
             Direction.B => [(-1, -1), (0, -1), (0, 1)],
@@ -59,7 +59,7 @@ internal class Tetromino
             Direction.D => [(0, -1), (0, 1), (1, 1)],
         },
 
-        TetrominoType.L => Direction switch
+        TetrominoShape.L => Direction switch
         {
             Direction.A => [(-1, -1), (-1, 0), (1, 0)],
             Direction.B => [(0, -1), (-1, 1), (0, 1)],

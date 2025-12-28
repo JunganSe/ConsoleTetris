@@ -2,6 +2,6 @@
 
 internal class TetrominoPiece
 {
-    public TetrominoType Type { get; set; }
+    public TetrominoShape Shape { get; set; }
     public TetrominoState State { get; set; }
 }

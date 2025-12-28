@@ -6,7 +6,7 @@ internal class PlayfieldSize
     public const int Height = 20;
 }
 
-internal enum TetrominoType
+internal enum TetrominoShape
 {
     I,
     O,

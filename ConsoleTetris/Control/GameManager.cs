@@ -17,7 +17,7 @@ internal class GameManager
     {
         Tetromino = new Tetromino
         {
-            Type = TetrominoType.L, // TODO: Randomize type.
+            Shape = TetrominoShape.L, // TODO: Randomize shape.
             X = PlayfieldSize.Width / 2 - 1,
             Y = 17,
             Direction = Direction.A,

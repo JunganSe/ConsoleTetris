@@ -18,7 +18,7 @@ internal class Playfield
             if (y >= PlayfieldSize.Height)
                 continue;
 
-            var piece = new TetrominoPiece { Type = tetromino.Type, State = state };
+            var piece = new TetrominoPiece { Shape = tetromino.Shape, State = state };
             Pieces[x, y] = piece;
         }
     }

@@ -4,15 +4,15 @@ namespace ConsoleTetris.Rendering;
 
 internal class ColorMapper
 {
-    public static ConsoleColor GetTetrominoColor(TetrominoType tetrominoType) => tetrominoType switch
+    public static ConsoleColor GetTetrominoColor(TetrominoShape shape) => shape switch
     {
-        TetrominoType.I => ConsoleColor.Cyan,
-        TetrominoType.O => ConsoleColor.Yellow,
-        TetrominoType.T => ConsoleColor.Magenta,
-        TetrominoType.S => ConsoleColor.Green,
-        TetrominoType.Z => ConsoleColor.Red,
-        TetrominoType.J => ConsoleColor.Blue,
-        TetrominoType.L => ConsoleColor.DarkYellow,
+        TetrominoShape.I => ConsoleColor.Cyan,
+        TetrominoShape.O => ConsoleColor.Yellow,
+        TetrominoShape.T => ConsoleColor.Magenta,
+        TetrominoShape.S => ConsoleColor.Green,
+        TetrominoShape.Z => ConsoleColor.Red,
+        TetrominoShape.J => ConsoleColor.Blue,
+        TetrominoShape.L => ConsoleColor.DarkYellow,
         _ => ConsoleColor.White,
     };
 }

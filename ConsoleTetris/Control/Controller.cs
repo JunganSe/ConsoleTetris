@@ -38,13 +38,13 @@ internal class Controller
     private void Initialize()
     {
         // Test code:
-        Playfield.Pieces[0, 0] = new() { Type = TetrominoType.I, State = TetrominoState.Locked };
-        Playfield.Pieces[1, 0] = new() { Type = TetrominoType.O, State = TetrominoState.Locked };
-        Playfield.Pieces[2, 1] = new() { Type = TetrominoType.T, State = TetrominoState.Locked };
-        Playfield.Pieces[3, 1] = new() { Type = TetrominoType.S, State = TetrominoState.Locked };
-        Playfield.Pieces[4, 2] = new() { Type = TetrominoType.Z, State = TetrominoState.Locked };
-        Playfield.Pieces[5, 2] = new() { Type = TetrominoType.J, State = TetrominoState.Locked };
-        Playfield.Pieces[6, 2] = new() { Type = TetrominoType.L, State = TetrominoState.Locked };
+        Playfield.Pieces[0, 0] = new() { Shape = TetrominoShape.I, State = TetrominoState.Locked };
+        Playfield.Pieces[1, 0] = new() { Shape = TetrominoShape.O, State = TetrominoState.Locked };
+        Playfield.Pieces[2, 1] = new() { Shape = TetrominoShape.T, State = TetrominoState.Locked };
+        Playfield.Pieces[3, 1] = new() { Shape = TetrominoShape.S, State = TetrominoState.Locked };
+        Playfield.Pieces[4, 2] = new() { Shape = TetrominoShape.Z, State = TetrominoState.Locked };
+        Playfield.Pieces[5, 2] = new() { Shape = TetrominoShape.J, State = TetrominoState.Locked };
+        Playfield.Pieces[6, 2] = new() { Shape = TetrominoShape.L, State = TetrominoState.Locked };
         // Test code end.
 
         // TODO: Initialize score.
