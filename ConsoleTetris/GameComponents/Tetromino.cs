@@ -10,18 +10,20 @@ internal class Tetromino
     public Direction Direction { get; set; }
 
     /// <summary> Gets an array of coordinates for all pieces. </summary>
-    public (int x, int y)[] PiecesCoords =>
-        [(X, Y), .. SecondaryPiecesCoords];
+    public (int x, int y)[] GetPiecesCoords() =>
+        [(X, Y), .. GetSecondaryPiecesCoords()];
 
     /// <summary> Gets an array of coordinates for the secondary pieces. </summary>
-    public (int x, int y)[] SecondaryPiecesCoords =>
-        RelativeSecondaryPiecesCoords.Select(coord => (X + coord.x, Y + coord.y)).ToArray();
+    public (int x, int y)[] GetSecondaryPiecesCoords() =>
+        GetRelativeSecondaryPiecesCoords()
+            .Select(coord => (X + coord.x, Y + coord.y))
+            .ToArray();
 
     /// <summary>
     /// Gets an array of coordinates for the secondary pieces,
     /// relative to the primary piece at the tetromino's coordinates.
     /// </summary>
-    public (int x, int y)[] RelativeSecondaryPiecesCoords => Shape switch
+    private (int x, int y)[] GetRelativeSecondaryPiecesCoords() => Shape switch
     {
         TetrominoShape.I => Direction switch
         {
@@ -64,7 +66,7 @@ internal class Tetromino
             Direction.A => [(-1, -1), (-1, 0), (1, 0)],
             Direction.B => [(0, -1), (-1, 1), (0, 1)],
             Direction.C => [(-1, 0), (1, 0), (1, 1)],
-            Direction.D => [(0, -1) , (1, -1), (0, 1)],
+            Direction.D => [(0, -1), (1, -1), (0, 1)],
         }
     };
 }

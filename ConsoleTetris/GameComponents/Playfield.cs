@@ -13,7 +13,7 @@ internal class Playfield
 
     public void AddPieces(Tetromino tetromino, TetrominoState state)
     {
-        foreach (var (x, y) in tetromino.PiecesCoords)
+        foreach (var (x, y) in tetromino.GetPiecesCoords())
         {
             if (y >= PlayfieldSize.Height)
                 continue;
@@ -25,7 +25,7 @@ internal class Playfield
 
     public void RemovePieces(Tetromino tetromino)
     {
-        foreach (var (x, y) in tetromino.PiecesCoords)
+        foreach (var (x, y) in tetromino.GetPiecesCoords())
         {
             if (y >= PlayfieldSize.Height)
                 continue;
