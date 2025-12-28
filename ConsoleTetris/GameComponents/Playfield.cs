@@ -10,4 +10,27 @@ internal class Playfield
     {
         Pieces = new TetrominoPiece?[PlayfieldSize.Width, PlayfieldSize.Height];
     }
+
+    public void AddPieces(Tetromino tetromino, TetrominoState state)
+    {
+        foreach (var (x, y) in tetromino.PiecesCoords)
+        {
+            if (y >= PlayfieldSize.Height)
+                continue;
+
+            var piece = new TetrominoPiece { Type = tetromino.Type, State = state };
+            Pieces[x, y] = piece;
+        }
+    }
+
+    public void RemovePieces(Tetromino tetromino)
+    {
+        foreach (var (x, y) in tetromino.PiecesCoords)
+        {
+            if (y >= PlayfieldSize.Height)
+                continue;
+
+            Pieces[x, y] = null;
+        }
+    }
 }

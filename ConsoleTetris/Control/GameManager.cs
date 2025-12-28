@@ -15,7 +15,6 @@ internal class GameManager
 
     public void SpawnTetromino()
     {
-        // Add new Tetromino at start location.
         Tetromino = new Tetromino
         {
             Type = TetrominoType.L, // TODO: Randomize type.
@@ -24,15 +23,7 @@ internal class GameManager
             Direction = Direction.A,
         };
 
-        // Add pieces to playfield.
-        foreach (var (x, y) in Tetromino.PiecesCoords)
-        {
-            if (y >= PlayfieldSize.Height)
-                continue;
-
-            var piece = new TetrominoPiece { Type = Tetromino.Type, State = TetrominoState.Moving };
-            Game.Playfield.Pieces[x, y] = piece;
-        }
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoDown()
@@ -59,23 +50,9 @@ internal class GameManager
         // - Kick from wall if necessary and possible.
         // - Abort if rotation is not possible.
 
-        foreach (var coord in Tetromino.SecondaryPiecesCoords)
-        {
-            if (coord.y >= PlayfieldSize.Height)
-                continue;
-
-            Game.Playfield.Pieces[coord.x, coord.y] = null;
-        }
-
+        Game.Playfield.RemovePieces(Tetromino);
         Tetromino.Direction = Tetromino.Direction.Next();
-        foreach (var coord in Tetromino.SecondaryPiecesCoords)
-        {
-            if (coord.y >= PlayfieldSize.Height)
-                continue;
-
-            var piece = new TetrominoPiece { Type = Tetromino.Type, State = TetrominoState.Moving };
-            Game.Playfield.Pieces[coord.x, coord.y] = piece;
-        }
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void RotateTetrominoCounterClockwise()
