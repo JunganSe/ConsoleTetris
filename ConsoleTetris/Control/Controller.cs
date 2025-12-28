@@ -98,6 +98,9 @@ internal class Controller
 
         if (_inputManager.InputState.IsPressed(Input.SpinRight))
             _gameManager.RotateTetrominoClockwise();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
+            _gameManager.RotateTetrominoCounterClockwise();
         // TODO: Update more game state.
     }
 

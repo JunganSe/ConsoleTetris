@@ -57,7 +57,16 @@ internal class GameManager
 
     public void RotateTetrominoCounterClockwise()
     {
-        throw new NotImplementedException();
+        if (Tetromino is null)
+            return;
+
+        // TODO: Check if rotation is possible.
+        // - Kick from wall if necessary and possible.
+        // - Abort if rotation is not possible.
+
+        Game.Playfield.RemovePieces(Tetromino);
+        Tetromino.Direction = Tetromino.Direction.Previous();
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void SoftDropTetromino()
