@@ -96,6 +96,8 @@ internal class Controller
         if (!_gameManager.IsTetrominoOnBoard)
             _gameManager.SpawnTetromino();
 
+        if (_inputManager.InputState.IsPressed(Input.SpinRight))
+            _gameManager.RotateTetrominoClockwise();
         // TODO: Update more game state.
     }
 

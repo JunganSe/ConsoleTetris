@@ -31,3 +31,12 @@ internal enum Direction
     C = 2,
     D = 3,
 }
+
+internal static class DirectionExtensions
+{
+    public static Direction Next(this Direction currentDirection) =>
+        (Direction)(((int)currentDirection + 1) % 4);
+
+    public static Direction Previous(this Direction currentDirection) =>
+        (Direction)(((int)currentDirection - 1 + 4) % 4);
+}
