@@ -25,15 +25,13 @@ internal class GameManager
         };
 
         // Add pieces to playfield.
-        var absoluteSecondaryCoords = Tetromino.SecondaryPiecesCoords.Select(coord => (Tetromino.X + coord.x, Tetromino.Y + coord.y));
-        (int x, int y)[] piecesCoords = [(Tetromino.X, Tetromino.Y), .. absoluteSecondaryCoords];
-        foreach (var coord in piecesCoords)
+        foreach (var (x, y) in Tetromino.PiecesCoords)
         {
-            if (coord.y >= PlayfieldSize.Height)
+            if (y >= PlayfieldSize.Height)
                 continue;
 
             var piece = new TetrominoPiece { Type = Tetromino.Type, State = TetrominoState.Moving };
-            Game.Playfield.Pieces[coord.x, coord.y] = piece;
+            Game.Playfield.Pieces[x, y] = piece;
         }
     }
 

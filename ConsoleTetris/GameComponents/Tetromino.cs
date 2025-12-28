@@ -9,11 +9,19 @@ internal class Tetromino
     public TetrominoType Type { get; init; }
     public Direction Direction { get; set; }
 
+    /// <summary> Gets an array of coordinates for all pieces. </summary>
+    public (int x, int y)[] PiecesCoords =>
+        [(X, Y), .. SecondaryPiecesCoords];
+
+    /// <summary> Gets an array of coordinates for the secondary pieces. </summary>
+    public (int x, int y)[] SecondaryPiecesCoords =>
+        RelativeSecondaryPiecesCoords.Select(coord => (X + coord.x, Y + coord.y)).ToArray();
+
     /// <summary>
-    /// Gets an array of 3 coordinates for the secondary pieces,
+    /// Gets an array of coordinates for the secondary pieces,
     /// relative to the primary piece at the tetromino's coordinates.
     /// </summary>
-    public (int x, int y)[] SecondaryPiecesCoords => Type switch
+    public (int x, int y)[] RelativeSecondaryPiecesCoords => Type switch
     {
         TetrominoType.I => Direction switch
         {
