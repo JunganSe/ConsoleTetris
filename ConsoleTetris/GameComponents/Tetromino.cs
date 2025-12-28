@@ -64,7 +64,7 @@ internal class Tetromino
             Direction.A => [(-1, -1), (-1, 0), (1, 0)],
             Direction.B => [(0, -1), (-1, 1), (0, 1)],
             Direction.C => [(-1, 0), (1, 0), (1, 1)],
-            Direction.D => [(0, -1), (1, 1), (0, 1)],
+            Direction.D => [(0, -1) , (1, -1), (0, 1)],
         }
     };
 }
