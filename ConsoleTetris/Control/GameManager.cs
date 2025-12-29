@@ -5,8 +5,7 @@ namespace ConsoleTetris.Control;
 internal class GameManager
 {
     public Game Game { get; set; }
-    public Tetromino? Tetromino { get; private set; }
-    public bool IsTetrominoOnBoard => Tetromino is not null;
+    public bool IsTetrominoOnBoard => Game.ActiveTetromino is not null;
 
     public GameManager()
     {
@@ -15,7 +14,7 @@ internal class GameManager
 
     public void SpawnTetromino()
     {
-        Tetromino = new Tetromino()
+        Game.ActiveTetromino = new Tetromino()
         {
             Shape = TetrominoShape.L, // TODO: Randomize shape.
             X = PlayfieldSize.Width / 2 - 1,
@@ -23,95 +22,95 @@ internal class GameManager
             Direction = Direction.A,
         };
 
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoDown()
     {
-        if (Tetromino is null)
+        if (Game.ActiveTetromino is null)
             return;
 
         var tempTetromino = new Tetromino()
         {
-            Shape = Tetromino.Shape,
-            X = Tetromino.X,
-            Y = Tetromino.Y - 1,
-            Direction = Tetromino.Direction,
+            Shape = Game.ActiveTetromino.Shape,
+            X = Game.ActiveTetromino.X,
+            Y = Game.ActiveTetromino.Y - 1,
+            Direction = Game.ActiveTetromino.Direction,
         };
         if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
             return;
 
-        Game.Playfield.RemovePieces(Tetromino);
-        Tetromino.Y--;
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.ActiveTetromino.Y--;
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoLeft()
     {
-        if (Tetromino is null)
+        if (Game.ActiveTetromino is null)
             return;
 
         var tempTetromino = new Tetromino()
         {
-            Shape = Tetromino.Shape,
-            X = Tetromino.X - 1,
-            Y = Tetromino.Y,
-            Direction = Tetromino.Direction,
+            Shape = Game.ActiveTetromino.Shape,
+            X = Game.ActiveTetromino.X - 1,
+            Y = Game.ActiveTetromino.Y,
+            Direction = Game.ActiveTetromino.Direction,
         };
         if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
             return;
 
-        Game.Playfield.RemovePieces(Tetromino);
-        Tetromino.X--;
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.ActiveTetromino.X--;
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoRight()
     {
-        if (Tetromino is null)
+        if (Game.ActiveTetromino is null)
             return;
 
         var tempTetromino = new Tetromino()
         {
-            Shape = Tetromino.Shape,
-            X = Tetromino.X + 1,
-            Y = Tetromino.Y,
-            Direction = Tetromino.Direction,
+            Shape = Game.ActiveTetromino.Shape,
+            X = Game.ActiveTetromino.X + 1,
+            Y = Game.ActiveTetromino.Y,
+            Direction = Game.ActiveTetromino.Direction,
         };
         if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
             return;
 
-        Game.Playfield.RemovePieces(Tetromino);
-        Tetromino.X++;
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.ActiveTetromino.X++;
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void RotateTetrominoClockwise()
     {
-        if (Tetromino is null)
+        if (Game.ActiveTetromino is null)
             return;
 
         // TODO: Check if rotation is possible.
         // - Kick from wall if necessary and possible.
         // - Abort if rotation is not possible.
 
-        Game.Playfield.RemovePieces(Tetromino);
-        Tetromino.Direction = Tetromino.Direction.Next();
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.ActiveTetromino.Direction = Game.ActiveTetromino.Direction.Next();
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void RotateTetrominoCounterClockwise()
     {
-        if (Tetromino is null)
+        if (Game.ActiveTetromino is null)
             return;
 
         // TODO: Check if rotation is possible.
         // - Kick from wall if necessary and possible.
         // - Abort if rotation is not possible.
 
-        Game.Playfield.RemovePieces(Tetromino);
-        Tetromino.Direction = Tetromino.Direction.Previous();
-        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.ActiveTetromino.Direction = Game.ActiveTetromino.Direction.Previous();
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
     public void SoftDropTetromino()
