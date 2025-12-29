@@ -93,9 +93,16 @@ internal class Controller
     {
         _fpsTracker.Update(deltaTime);
 
+        HandleInputs();
+
         if (!_gameManager.IsTetrominoOnBoard)
             _gameManager.SpawnTetromino();
 
+        // TODO: Update more game state.
+    }
+
+    private void HandleInputs()
+    {
         if (_inputManager.InputState.IsPressed(Input.SpinRight))
             _gameManager.RotateTetrominoClockwise();
 
@@ -110,8 +117,6 @@ internal class Controller
 
         if (_inputManager.InputState.IsHeld(Input.Right))
             _gameManager.MoveTetrominoRight();
-
-        // TODO: Update more game state.
     }
 
     private void Render()
