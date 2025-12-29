@@ -101,6 +101,16 @@ internal class Controller
 
         if (_inputManager.InputState.IsPressed(Input.SpinLeft))
             _gameManager.RotateTetrominoCounterClockwise();
+
+        if (_inputManager.InputState.IsHeld(Input.SoftDrop))
+            _gameManager.MoveTetrominoDown();
+
+        if (_inputManager.InputState.IsHeld(Input.Left))
+            _gameManager.MoveTetrominoLeft();
+
+        if (_inputManager.InputState.IsHeld(Input.Right))
+            _gameManager.MoveTetrominoRight();
+
         // TODO: Update more game state.
     }
 

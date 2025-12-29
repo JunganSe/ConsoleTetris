@@ -28,17 +28,38 @@ internal class GameManager
 
     public void MoveTetrominoDown()
     {
-        throw new NotImplementedException();
+        if (Tetromino is null)
+            return;
+
+        // TODO: Check if movement is possible.
+
+        Game.Playfield.RemovePieces(Tetromino);
+        Tetromino.Y--;
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoLeft()
     {
-        throw new NotImplementedException();
+        if (Tetromino is null)
+            return;
+
+        // TODO: Check if movement is possible.
+
+        Game.Playfield.RemovePieces(Tetromino);
+        Tetromino.X--;
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void MoveTetrominoRight()
     {
-        throw new NotImplementedException();
+        if (Tetromino is null)
+            return;
+
+        // TODO: Check if movement is possible.
+
+        Game.Playfield.RemovePieces(Tetromino);
+        Tetromino.X++;
+        Game.Playfield.AddPieces(Tetromino, TetrominoState.Moving);
     }
 
     public void RotateTetrominoClockwise()
