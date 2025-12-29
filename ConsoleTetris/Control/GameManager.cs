@@ -15,7 +15,7 @@ internal class GameManager
 
     public void SpawnTetromino()
     {
-        Tetromino = new Tetromino
+        Tetromino = new Tetromino()
         {
             Shape = TetrominoShape.L, // TODO: Randomize shape.
             X = PlayfieldSize.Width / 2 - 1,
@@ -31,7 +31,15 @@ internal class GameManager
         if (Tetromino is null)
             return;
 
-        // TODO: Check if movement is possible.
+        var tempTetromino = new Tetromino()
+        {
+            Shape = Tetromino.Shape,
+            X = Tetromino.X,
+            Y = Tetromino.Y - 1,
+            Direction = Tetromino.Direction,
+        };
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+            return;
 
         Game.Playfield.RemovePieces(Tetromino);
         Tetromino.Y--;
@@ -43,7 +51,15 @@ internal class GameManager
         if (Tetromino is null)
             return;
 
-        // TODO: Check if movement is possible.
+        var tempTetromino = new Tetromino()
+        {
+            Shape = Tetromino.Shape,
+            X = Tetromino.X - 1,
+            Y = Tetromino.Y,
+            Direction = Tetromino.Direction,
+        };
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+            return;
 
         Game.Playfield.RemovePieces(Tetromino);
         Tetromino.X--;
@@ -55,7 +71,15 @@ internal class GameManager
         if (Tetromino is null)
             return;
 
-        // TODO: Check if movement is possible.
+        var tempTetromino = new Tetromino()
+        {
+            Shape = Tetromino.Shape,
+            X = Tetromino.X + 1,
+            Y = Tetromino.Y,
+            Direction = Tetromino.Direction,
+        };
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+            return;
 
         Game.Playfield.RemovePieces(Tetromino);
         Tetromino.X++;
