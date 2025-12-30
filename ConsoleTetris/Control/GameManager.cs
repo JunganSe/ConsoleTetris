@@ -75,12 +75,17 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        // TODO: Check if rotation is possible.
-        // - Kick from wall if necessary and possible.
-        // - Abort if rotation is not possible.
+        // TODO: Kick from wall if necessary and possible.
+
+        var targetDirection = Game.ActiveTetromino.Direction.Next();
+
+        var tempTetromino = Game.ActiveTetromino.GetCopy();
+        tempTetromino.Direction = targetDirection;
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+            return;
 
         Game.Playfield.RemovePieces(Game.ActiveTetromino);
-        Game.ActiveTetromino.Direction = Game.ActiveTetromino.Direction.Next();
+        Game.ActiveTetromino.Direction = targetDirection;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
@@ -89,12 +94,17 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        // TODO: Check if rotation is possible.
-        // - Kick from wall if necessary and possible.
-        // - Abort if rotation is not possible.
+        // TODO: Kick from wall if necessary and possible.
+
+        var targetDirection = Game.ActiveTetromino.Direction.Previous();
+
+        var tempTetromino = Game.ActiveTetromino.GetCopy();
+        tempTetromino.Direction = targetDirection;
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+            return;
 
         Game.Playfield.RemovePieces(Game.ActiveTetromino);
-        Game.ActiveTetromino.Direction = Game.ActiveTetromino.Direction.Previous();
+        Game.ActiveTetromino.Direction = targetDirection;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
