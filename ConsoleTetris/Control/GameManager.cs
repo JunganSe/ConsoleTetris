@@ -30,13 +30,8 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        var tempTetromino = new Tetromino()
-        {
-            Shape = Game.ActiveTetromino.Shape,
-            X = Game.ActiveTetromino.X,
-            Y = Game.ActiveTetromino.Y - 1,
-            Direction = Game.ActiveTetromino.Direction,
-        };
+        var tempTetromino = Game.ActiveTetromino.GetCopy();
+        tempTetromino.Y--;
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
@@ -50,13 +45,8 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        var tempTetromino = new Tetromino()
-        {
-            Shape = Game.ActiveTetromino.Shape,
-            X = Game.ActiveTetromino.X - 1,
-            Y = Game.ActiveTetromino.Y,
-            Direction = Game.ActiveTetromino.Direction,
-        };
+        var tempTetromino = Game.ActiveTetromino.GetCopy();
+        tempTetromino.X--;
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
@@ -70,13 +60,8 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        var tempTetromino = new Tetromino()
-        {
-            Shape = Game.ActiveTetromino.Shape,
-            X = Game.ActiveTetromino.X + 1,
-            Y = Game.ActiveTetromino.Y,
-            Direction = Game.ActiveTetromino.Direction,
-        };
+        var tempTetromino = Game.ActiveTetromino.GetCopy();
+        tempTetromino.X++;
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 

@@ -10,6 +10,14 @@ internal class Tetromino
     public Direction Direction { get; set; }
     public Coord[] PiecesCoords => GetPiecesCoords();
 
+    public Tetromino GetCopy() => new()
+    {
+        X = X,
+        Y = Y,
+        Shape = Shape,
+        Direction = Direction,
+    };
+
 
 
     /// <summary> Gets an array of coordinates for the secondary pieces. </summary>
