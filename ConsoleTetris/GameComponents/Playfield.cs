@@ -34,11 +34,11 @@ internal class Playfield
         }
     }
 
-    public bool AreCoordsFree((int x, int y)[] coords) =>
-        coords.All(coord => IsCoordFree(coord.x, coord.y));
+    public bool AreCoordsFree(Coord[] coords) =>
+        coords.All(IsCoordFree);
 
-    public bool IsCoordFree(int x, int y) =>
-        x >= 0 && x < PlayfieldSize.Width
-        && y >= 0 && y < PlayfieldSize.Height
-        && Pieces[x, y]?.State != TetrominoState.Locked;
+    public bool IsCoordFree(Coord coord) =>
+        coord.X >= 0 && coord.X < PlayfieldSize.Width
+        && coord.Y >= 0 && coord.Y < PlayfieldSize.Height
+        && Pieces[coord.X, coord.Y]?.State != TetrominoState.Locked;
 }

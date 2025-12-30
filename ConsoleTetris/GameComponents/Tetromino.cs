@@ -8,66 +8,66 @@ internal class Tetromino
     public int Y { get; set; }
     public TetrominoShape Shape { get; init; }
     public Direction Direction { get; set; }
-    public (int x, int y)[] PiecesCoords => GetPiecesCoords();
+    public Coord[] PiecesCoords => GetPiecesCoords();
 
 
 
     /// <summary> Gets an array of coordinates for the secondary pieces. </summary>
-    private (int x, int y)[] GetPiecesCoords()
+    private Coord[] GetPiecesCoords()
     {
         var secondaryPiecesCoords = GetRelativeSecondaryPiecesCoords()
-            .Select(coord => (X + coord.x, Y + coord.y));
-        return [(X, Y), .. secondaryPiecesCoords];
+            .Select(coord => new Coord(X + coord.X, Y + coord.Y));
+        return [new Coord(X, Y), .. secondaryPiecesCoords];
     }
 
     /// <summary>
     /// Gets an array of coordinates for the secondary pieces,
     /// relative to the primary piece at the tetromino's coordinates.
     /// </summary>
-    private (int x, int y)[] GetRelativeSecondaryPiecesCoords() => Shape switch
+    private Coord[] GetRelativeSecondaryPiecesCoords() => Shape switch
     {
         TetrominoShape.I => Direction switch
         {
-            Direction.A or Direction.C => [(-1, 0), (1, 0), (2, 0)],
-            Direction.D or Direction.B => [(0, -1), (0, 1), (0, 2)],
+            Direction.A or Direction.C => [new(-1, 0), new(1, 0), new(2, 0)],
+            Direction.D or Direction.B => [new(0, -1), new(0, 1), new(0, 2)],
         },
 
-        TetrominoShape.O => [(1, 0), (0, 1), (1, 1)],
+        TetrominoShape.O => [new(1, 0), new(0, 1), new(1, 1)],
 
         TetrominoShape.T => Direction switch
         {
-            Direction.A => [(0, -1), (-1, 0), (1, 0)],
-            Direction.B => [(0, -1), (-1, 0), (0, 1)],
-            Direction.C => [(-1, 0), (1, 0), (0, 1)],
-            Direction.D => [(0, -1), (1, 0), (0, 1)],
+            Direction.A => [new(0, -1), new(-1, 0), new(1, 0)],
+            Direction.B => [new(0, -1), new(-1, 0), new(0, 1)],
+            Direction.C => [new(-1, 0), new(1, 0), new(0, 1)],
+            Direction.D => [new(0, -1), new(1, 0), new(0, 1)],
         },
 
         TetrominoShape.S => Direction switch
         {
-            Direction.A or Direction.C => [(-1, -1), (0, -1), (1, 0)],
-            Direction.B or Direction.D => [(1, -1), (1, 0), (0, 1)],
+            Direction.A or Direction.C => [new(-1, -1), new(0, -1), new(1, 0)],
+            Direction.B or Direction.D => [new(1, -1), new(1, 0), new(0, 1)],
         },
 
         TetrominoShape.Z => Direction switch
         {
-            Direction.A or Direction.C => [(0, -1), (1, -1), (-1, 0)],
-            Direction.B or Direction.D => [(0, -1), (1, 0), (1, 1)],
+            Direction.A or Direction.C => [new(0, -1), new(1, -1), new(-1, 0)],
+            Direction.B or Direction.D => [new(0, -1), new(1, 0), new(1, 1)],
         },
 
         TetrominoShape.J => Direction switch
         {
-            Direction.A => [(1, -1), (-1, 0), (1, 0)],
-            Direction.B => [(-1, -1), (0, -1), (0, 1)],
-            Direction.C => [(-1, 0), (1, 0), (-1, 1)],
-            Direction.D => [(0, -1), (0, 1), (1, 1)],
+            Direction.A => [new(1, -1), new(-1, 0), new(1, 0)],
+            Direction.B => [new(-1, -1), new(0, -1), new(0, 1)],
+            Direction.C => [new(-1, 0), new(1, 0), new(-1, 1)],
+            Direction.D => [new(0, -1), new(0, 1), new(1, 1)],
         },
 
         TetrominoShape.L => Direction switch
         {
-            Direction.A => [(-1, -1), (-1, 0), (1, 0)],
-            Direction.B => [(0, -1), (-1, 1), (0, 1)],
-            Direction.C => [(-1, 0), (1, 0), (1, 1)],
-            Direction.D => [(0, -1), (1, -1), (0, 1)],
+            Direction.A => [new(-1, -1), new(-1, 0), new(1, 0)],
+            Direction.B => [new(0, -1), new(-1, 1), new(0, 1)],
+            Direction.C => [new(-1, 0), new(1, 0), new(1, 1)],
+            Direction.D => [new(0, -1), new(1, -1), new(0, 1)],
         }
     };
 }
