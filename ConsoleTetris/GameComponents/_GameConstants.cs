@@ -1,6 +1,6 @@
 ﻿namespace ConsoleTetris.GameComponents;
 
-internal class PlayfieldSize
+internal abstract class PlayfieldSize
 {
     public const int Width = 10;
     public const int Height = 20;

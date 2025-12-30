@@ -1,12 +1,12 @@
 ﻿namespace ConsoleTetris.Rendering;
 
-internal class WindowSize
+internal abstract class WindowSize
 {
     public const int Width = 31;
     public const int Height = 22;
 }
 
-internal class GuiPosition
+internal abstract class GuiPosition
 {
     public const int PlayfieldX = 1;
     public const int PlayfieldY = 1;
@@ -20,13 +20,13 @@ internal class GuiPosition
     public const int FpsY = 21;
 }
 
-internal class GuiColor
+internal abstract class GuiColor
 {
     public const ConsoleColor Border = ConsoleColor.White;
     public const ConsoleColor FpsText = ConsoleColor.Gray;
 }
 
-internal class PieceTexture
+internal abstract class PieceTexture
 {
     public const string Block = "██";
     public const string Ghost = "░░";
