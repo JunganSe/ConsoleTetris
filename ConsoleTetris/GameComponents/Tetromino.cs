@@ -8,16 +8,17 @@ internal class Tetromino
     public int Y { get; set; }
     public TetrominoShape Shape { get; init; }
     public Direction Direction { get; set; }
+    public (int x, int y)[] PiecesCoords => GetPiecesCoords();
 
-    /// <summary> Gets an array of coordinates for all pieces. </summary>
-    public (int x, int y)[] GetPiecesCoords() =>
-        [(X, Y), .. GetSecondaryPiecesCoords()];
+
 
     /// <summary> Gets an array of coordinates for the secondary pieces. </summary>
-    public (int x, int y)[] GetSecondaryPiecesCoords() =>
-        GetRelativeSecondaryPiecesCoords()
-            .Select(coord => (X + coord.x, Y + coord.y))
-            .ToArray();
+    private (int x, int y)[] GetPiecesCoords()
+    {
+        var secondaryPiecesCoords = GetRelativeSecondaryPiecesCoords()
+            .Select(coord => (X + coord.x, Y + coord.y));
+        return [(X, Y), .. secondaryPiecesCoords];
+    }
 
     /// <summary>
     /// Gets an array of coordinates for the secondary pieces,

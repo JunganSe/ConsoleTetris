@@ -37,7 +37,7 @@ internal class GameManager
             Y = Game.ActiveTetromino.Y - 1,
             Direction = Game.ActiveTetromino.Direction,
         };
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
         Game.Playfield.RemovePieces(Game.ActiveTetromino);
@@ -57,7 +57,7 @@ internal class GameManager
             Y = Game.ActiveTetromino.Y,
             Direction = Game.ActiveTetromino.Direction,
         };
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
         Game.Playfield.RemovePieces(Game.ActiveTetromino);
@@ -77,7 +77,7 @@ internal class GameManager
             Y = Game.ActiveTetromino.Y,
             Direction = Game.ActiveTetromino.Direction,
         };
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.GetPiecesCoords()))
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
         Game.Playfield.RemovePieces(Game.ActiveTetromino);
