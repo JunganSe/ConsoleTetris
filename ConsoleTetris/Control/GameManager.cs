@@ -4,13 +4,8 @@ namespace ConsoleTetris.Control;
 
 internal class GameManager
 {
-    public Game Game { get; set; }
+    public Game Game { get; } = new();
     public bool IsTetrominoOnBoard => Game.ActiveTetromino is not null;
-
-    public GameManager()
-    {
-        Game = new();
-    }
 
     public void SpawnTetromino()
     {
@@ -120,7 +115,7 @@ internal class GameManager
 
     public void LockTetromino()
     {
-        // TODO: Add the pieces to playfield.
+        // TODO: Add the pieces to playfield and remove the active tetromino.
         throw new NotImplementedException();
     }
 }
