@@ -30,7 +30,7 @@ internal class GameManager
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
         Game.ActiveTetromino.Y--;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
@@ -45,7 +45,7 @@ internal class GameManager
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
         Game.ActiveTetromino.X--;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
@@ -60,7 +60,7 @@ internal class GameManager
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
         Game.ActiveTetromino.X++;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
@@ -79,7 +79,7 @@ internal class GameManager
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
         Game.ActiveTetromino.Direction = targetDirection;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
@@ -98,7 +98,7 @@ internal class GameManager
         if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        Game.Playfield.RemovePieces(Game.ActiveTetromino);
+        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
         Game.ActiveTetromino.Direction = targetDirection;
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
