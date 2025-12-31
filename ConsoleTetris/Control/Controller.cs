@@ -110,7 +110,7 @@ internal class Controller
             _gameManager.RotateTetrominoCounterClockwise();
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop))
-            _gameManager.MoveTetrominoDown();
+            _gameManager.SoftDropTetromino();
 
         if (_inputManager.InputState.IsHeld(Input.Left))
             _gameManager.MoveTetrominoLeft();

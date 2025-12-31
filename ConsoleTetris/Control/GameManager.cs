@@ -20,21 +20,6 @@ internal class GameManager
         Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void MoveTetrominoDown()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        var tempTetromino = Game.ActiveTetromino.GetCopy();
-        tempTetromino.Y--;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
-        Game.ActiveTetromino.Y--;
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
     public void MoveTetrominoLeft()
     {
         if (Game.ActiveTetromino is null)
@@ -105,12 +90,28 @@ internal class GameManager
 
     public void SoftDropTetromino()
     {
-        throw new NotImplementedException();
+        if (Game.ActiveTetromino is null)
+            return;
+
+        TryMoveTetrominoDown(Game.ActiveTetromino);
     }
 
     public void HardDropTetromino()
     {
         throw new NotImplementedException();
+    }
+
+    private bool TryMoveTetrominoDown(Tetromino tetromino)
+    {
+        var tempTetromino = tetromino.GetCopy();
+        tempTetromino.Y--;
+        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+            return false;
+
+        Game.Playfield.RemovePieces(tetromino.PiecesCoords);
+        tetromino.Y--;
+        Game.Playfield.AddPieces(tetromino, TetrominoState.Moving);
+        return true;
     }
 
     public void LockTetromino()
