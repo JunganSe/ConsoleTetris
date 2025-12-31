@@ -98,7 +98,14 @@ internal class GameManager
 
     public void HardDropTetromino()
     {
-        throw new NotImplementedException();
+        if (Game.ActiveTetromino is null)
+            return;
+
+        do
+        { }
+        while (TryMoveTetrominoDown(Game.ActiveTetromino));
+
+        // TODO: Lock the tetromino immediately after hard drop.
     }
 
     private bool TryMoveTetrominoDown(Tetromino tetromino)

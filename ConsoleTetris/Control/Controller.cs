@@ -95,6 +95,9 @@ internal class Controller
 
         HandleInputs();
 
+        // TODO: Move tetromino down based on timer.
+        // TODO: Lock tetromino if it cannot move down or overlaps a piece.
+
         if (!_gameManager.IsTetrominoOnBoard)
             _gameManager.SpawnTetromino();
 
@@ -103,20 +106,24 @@ internal class Controller
 
     private void HandleInputs()
     {
-        if (_inputManager.InputState.IsPressed(Input.SpinRight))
-            _gameManager.RotateTetrominoClockwise();
-
-        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
-            _gameManager.RotateTetrominoCounterClockwise();
-
-        if (_inputManager.InputState.IsHeld(Input.SoftDrop))
-            _gameManager.SoftDropTetromino();
 
         if (_inputManager.InputState.IsHeld(Input.Left))
             _gameManager.MoveTetrominoLeft();
 
         if (_inputManager.InputState.IsHeld(Input.Right))
             _gameManager.MoveTetrominoRight();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
+            _gameManager.RotateTetrominoCounterClockwise();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinRight))
+            _gameManager.RotateTetrominoClockwise();
+
+        if (_inputManager.InputState.IsHeld(Input.SoftDrop))
+            _gameManager.SoftDropTetromino();
+
+        if (_inputManager.InputState.IsPressed(Input.HardDrop))
+            _gameManager.HardDropTetromino();
     }
 
     private void Render()
