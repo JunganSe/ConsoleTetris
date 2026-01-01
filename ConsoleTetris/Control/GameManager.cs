@@ -106,8 +106,6 @@ internal class GameManager
         {
             isBottomReached = !TryMoveTetrominoDown(Game.ActiveTetromino);
         }
-
-        // TODO: Lock the tetromino immediately after hard drop.
     }
 
     private bool TryMoveTetrominoDown(Tetromino tetromino)
@@ -125,7 +123,10 @@ internal class GameManager
 
     public void LockTetromino()
     {
-        // TODO: Add the pieces to playfield and remove the active tetromino.
-        throw new NotImplementedException();
+        if (Game.ActiveTetromino is null)
+            return;
+
+        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Locked);
+        Game.ActiveTetromino = null;
     }
 }

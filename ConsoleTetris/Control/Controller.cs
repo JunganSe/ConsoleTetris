@@ -123,7 +123,13 @@ internal class Controller
             _gameManager.SoftDropTetromino();
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
+        {
             _gameManager.HardDropTetromino();
+            _gameManager.LockTetromino();
+        }
+
+        if (_inputManager.InputState.IsPressed(Input.Pause)) // Temporary for testing.
+            _gameManager.LockTetromino();
     }
 
     private void Render()
