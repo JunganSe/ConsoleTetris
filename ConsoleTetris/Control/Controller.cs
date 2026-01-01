@@ -1,5 +1,4 @@
 ﻿using ConsoleTetris.GameComponents;
-using ConsoleTetris.Inputs;
 using ConsoleTetris.Rendering;
 using ConsoleTetris.Utilities;
 using System.Diagnostics;
@@ -11,7 +10,6 @@ internal class Controller
     private const int _targetFps = 30;
     private const double _targetFrameTime = 1000.0 / _targetFps;
 
-    private readonly InputManager _inputManager = new();
     private readonly GameManager _gameManager = new();
     private readonly FpsTracker _fpsTracker = new();
     private readonly GuiRenderer _guiRenderer = new();
@@ -19,7 +17,6 @@ internal class Controller
 
     private bool _isRunning = true;
 
-    private Game Game => _gameManager.Game;
     private Playfield Playfield => _gameManager.Game.Playfield;
 
     public void Start()
@@ -83,8 +80,7 @@ internal class Controller
 
     private void MainLoop(double deltaTime)
     {
-        _inputManager.Update();
-
+        _gameManager.UpdateInput();
         Update(deltaTime);
         Render();
     }
@@ -93,48 +89,20 @@ internal class Controller
     {
         _fpsTracker.Update(deltaTime);
 
-        HandleInputs();
+        _gameManager.HandleInput();
+        _gameManager.SpawnTetrominoIfApplicable();
 
         // TODO: Move tetromino down based on timer.
         // TODO: Lock tetromino if it cannot move down or overlaps a piece.
-
-        if (!_gameManager.IsTetrominoOnBoard)
-            _gameManager.SpawnTetromino();
-
-        // TODO: Update more game state.
-    }
-
-    private void HandleInputs()
-    {
-
-        if (_inputManager.InputState.IsHeld(Input.Left))
-            _gameManager.MoveTetrominoLeft();
-
-        if (_inputManager.InputState.IsHeld(Input.Right))
-            _gameManager.MoveTetrominoRight();
-
-        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
-            _gameManager.RotateTetrominoCounterClockwise();
-
-        if (_inputManager.InputState.IsPressed(Input.SpinRight))
-            _gameManager.RotateTetrominoClockwise();
-
-        if (_inputManager.InputState.IsHeld(Input.SoftDrop))
-            _gameManager.SoftDropTetromino();
-
-        if (_inputManager.InputState.IsPressed(Input.HardDrop))
-        {
-            _gameManager.HardDropTetromino();
-            _gameManager.LockTetromino();
-        }
-
-        if (_inputManager.InputState.IsPressed(Input.Pause)) // Temporary for testing.
-            _gameManager.LockTetromino();
+        // TODO: Update score.
+        // TODO: Update more things?
     }
 
     private void Render()
     {
-        // TODO: Render more game state.
+        // TODO: Render Score.
+        // TODO: Render Held tetromino.
+        // TODO: Render next tetromino.
         _playfieldRenderer.DrawPlayfield(Playfield);
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }

@@ -1,132 +1,60 @@
 ﻿using ConsoleTetris.GameComponents;
+using ConsoleTetris.Inputs;
 
 namespace ConsoleTetris.Control;
 
 internal class GameManager
 {
-    public Game Game { get; } = new();
+    private readonly InputManager _inputManager;
+    private readonly TetrominoManager _tetrominoManager;
+
+    public Game Game { get; }
     public bool IsTetrominoOnBoard => Game.ActiveTetromino is not null;
 
-    public void SpawnTetromino()
+    public GameManager()
     {
-        Game.ActiveTetromino = new Tetromino()
+        _inputManager = new();
+        Game = new();
+        _tetrominoManager = new(Game);
+    }
+
+    public void UpdateInput()
+    {
+        _inputManager.Update();
+    }
+
+    public void HandleInput()
+    {
+
+        if (_inputManager.InputState.IsHeld(Input.Left))
+            _tetrominoManager.MoveTetrominoLeft();
+
+        if (_inputManager.InputState.IsHeld(Input.Right))
+            _tetrominoManager.MoveTetrominoRight();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
+            _tetrominoManager.RotateTetrominoCounterClockwise();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinRight))
+            _tetrominoManager.RotateTetrominoClockwise();
+
+        if (_inputManager.InputState.IsHeld(Input.SoftDrop))
+            _tetrominoManager.SoftDropTetromino();
+
+        if (_inputManager.InputState.IsPressed(Input.HardDrop))
         {
-            Shape = TetrominoShape.L, // TODO: Randomize shape.
-            X = PlayfieldSize.Width / 2 - 1,
-            Y = 17,
-            Direction = Direction.A,
-        };
-
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void MoveTetrominoLeft()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        var tempTetromino = Game.ActiveTetromino.GetCopy();
-        tempTetromino.X--;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
-        Game.ActiveTetromino.X--;
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void MoveTetrominoRight()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        var tempTetromino = Game.ActiveTetromino.GetCopy();
-        tempTetromino.X++;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
-        Game.ActiveTetromino.X++;
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void RotateTetrominoClockwise()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        // TODO: Kick from wall if necessary and possible.
-
-        var targetDirection = Game.ActiveTetromino.Direction.Next();
-
-        var tempTetromino = Game.ActiveTetromino.GetCopy();
-        tempTetromino.Direction = targetDirection;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
-        Game.ActiveTetromino.Direction = targetDirection;
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void RotateTetrominoCounterClockwise()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        // TODO: Kick from wall if necessary and possible.
-
-        var targetDirection = Game.ActiveTetromino.Direction.Previous();
-
-        var tempTetromino = Game.ActiveTetromino.GetCopy();
-        tempTetromino.Direction = targetDirection;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Game.Playfield.RemovePieces(Game.ActiveTetromino.PiecesCoords);
-        Game.ActiveTetromino.Direction = targetDirection;
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void SoftDropTetromino()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        TryMoveTetrominoDown(Game.ActiveTetromino);
-    }
-
-    public void HardDropTetromino()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        bool isBottomReached = false;
-        while (!isBottomReached)
-        {
-            isBottomReached = !TryMoveTetrominoDown(Game.ActiveTetromino);
+            _tetrominoManager.HardDropTetromino();
+            _tetrominoManager.LockTetromino();
         }
+
+        if (_inputManager.InputState.IsPressed(Input.Pause)) // Temporary for testing.
+            _tetrominoManager.LockTetromino();
     }
 
-    private bool TryMoveTetrominoDown(Tetromino tetromino)
+    public void SpawnTetrominoIfApplicable()
     {
-        var tempTetromino = tetromino.GetCopy();
-        tempTetromino.Y--;
-        if (!Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return false;
+        if (!IsTetrominoOnBoard)
+            _tetrominoManager.SpawnTetromino();
 
-        Game.Playfield.RemovePieces(tetromino.PiecesCoords);
-        tetromino.Y--;
-        Game.Playfield.AddPieces(tetromino, TetrominoState.Moving);
-        return true;
-    }
-
-    public void LockTetromino()
-    {
-        if (Game.ActiveTetromino is null)
-            return;
-
-        Game.Playfield.AddPieces(Game.ActiveTetromino, TetrominoState.Locked);
-        Game.ActiveTetromino = null;
     }
 }
