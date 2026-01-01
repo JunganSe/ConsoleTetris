@@ -101,9 +101,11 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
             return;
 
-        do
-        { }
-        while (TryMoveTetrominoDown(Game.ActiveTetromino));
+        bool isBottomReached = false;
+        while (!isBottomReached)
+        {
+            isBottomReached = !TryMoveTetrominoDown(Game.ActiveTetromino);
+        }
 
         // TODO: Lock the tetromino immediately after hard drop.
     }
