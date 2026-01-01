@@ -9,6 +9,7 @@ public enum Input
     SoftDrop,
     SpinLeft,
     SpinRight,
+    Hold,
     Pause,
     Quit,
 }
@@ -23,6 +24,7 @@ public enum Key
     A = 0x41,
     S = 0x53,
     D = 0x44,
+    C = 0x43,
     Enter = 0x0D,
     Space = 0x20,
     Escape = 0x1B,

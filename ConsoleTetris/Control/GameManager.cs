@@ -47,6 +47,9 @@ internal class GameManager
             _tetrominoManager.LockTetromino();
         }
 
+        if (_inputManager.InputState.IsPressed(Input.Hold))
+            _tetrominoManager.HoldTetromino();
+
         if (_inputManager.InputState.IsPressed(Input.Pause)) // Temporary for testing.
             _tetrominoManager.LockTetromino();
     }

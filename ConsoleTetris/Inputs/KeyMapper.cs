@@ -10,6 +10,7 @@ internal static class KeyMapper
         Key.Down   => Input.SoftDrop,
         Key.A      => Input.SpinLeft,
         Key.D      => Input.SpinRight,
+        Key.C      => Input.Hold,
         Key.Space  => Input.Pause,
         Key.Escape => Input.Quit,
         _          => Input.Unknown,

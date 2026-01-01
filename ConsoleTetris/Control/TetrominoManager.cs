@@ -125,6 +125,17 @@ internal class TetrominoManager
         return true;
     }
 
+    public bool HoldTetromino()
+    {
+        // TODO: Implement holding logic.
+        // - Check if holding is allowed.
+        // - If no tetromino is held, store the active tetromino and spawn a new one.
+        // - If a tetromino is held, swap it with the active tetromino and put it at the top.
+        // - Store the held tetromino in a separate variable.
+        // - Disable further holds until the next tetromino is locked.
+        throw new NotImplementedException();
+    }
+
     public void LockTetromino()
     {
         if (_game.ActiveTetromino is null)
