@@ -5,6 +5,7 @@ namespace ConsoleTetris.Control;
 internal class TetrominoManager
 {
     private readonly Game _game;
+    private readonly TetrominoRandomizer _tetrominoRandomizer = new();
 
     public TetrominoManager(Game game)
     {
@@ -15,7 +16,7 @@ internal class TetrominoManager
     {
         _game.ActiveTetromino = new Tetromino()
         {
-            Shape = TetrominoShape.L, // TODO: Randomize shape.
+            Shape = _tetrominoRandomizer.GetNext(),
             X = PlayfieldSize.Width / 2 - 1,
             Y = 17,
             Direction = Direction.A,
