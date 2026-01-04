@@ -19,11 +19,11 @@ internal class InputManager
     }
 
     private InputState GetInputState() => new(
-        Held: new HashSet<Input>(_currentHeldInputs),
-        Pressed: _currentHeldInputs
+        held: new HashSet<Input>(_currentHeldInputs),
+        pressed: _currentHeldInputs
             .Where(input => !_previousHeldInputs.Contains(input))
             .ToHashSet(),
-        Released: _previousHeldInputs
+        released: _previousHeldInputs
             .Where(input => !_currentHeldInputs.Contains(input))
             .ToHashSet());
 }
