@@ -12,7 +12,7 @@ internal class TetrominoManager
         _game = game;
     }
 
-    public void SpawnTetromino()
+    public void Spawn()
     {
         _game.ActiveTetromino = new Tetromino()
         {
@@ -25,7 +25,7 @@ internal class TetrominoManager
         _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void MoveTetrominoLeft()
+    public void MoveLeft()
     {
         if (_game.ActiveTetromino is null)
             return;
@@ -40,7 +40,7 @@ internal class TetrominoManager
         _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void MoveTetrominoRight()
+    public void MoveRight()
     {
         if (_game.ActiveTetromino is null)
             return;
@@ -55,26 +55,7 @@ internal class TetrominoManager
         _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void RotateTetrominoClockwise()
-    {
-        if (_game.ActiveTetromino is null)
-            return;
-
-        // TODO: Kick from wall if necessary and possible.
-
-        var targetDirection = _game.ActiveTetromino.Direction.Next();
-
-        var tempTetromino = _game.ActiveTetromino.GetCopy();
-        tempTetromino.Direction = targetDirection;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
-        _game.ActiveTetromino.Direction = targetDirection;
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
-    }
-
-    public void RotateTetrominoCounterClockwise()
+    public void SpinLeft()
     {
         if (_game.ActiveTetromino is null)
             return;
@@ -93,15 +74,34 @@ internal class TetrominoManager
         _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void SoftDropTetromino()
+    public void SpinRight()
     {
         if (_game.ActiveTetromino is null)
             return;
 
-        TryMoveTetrominoDown(_game.ActiveTetromino);
+        // TODO: Kick from wall if necessary and possible.
+
+        var targetDirection = _game.ActiveTetromino.Direction.Next();
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+        tempTetromino.Direction = targetDirection;
+        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+            return;
+
+        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
+        _game.ActiveTetromino.Direction = targetDirection;
+        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
     }
 
-    public void HardDropTetromino()
+    public void SoftDrop()
+    {
+        if (_game.ActiveTetromino is null)
+            return;
+
+        TryMoveDown(_game.ActiveTetromino);
+    }
+
+    public void HardDrop()
     {
         if (_game.ActiveTetromino is null)
             return;
@@ -109,11 +109,11 @@ internal class TetrominoManager
         bool isBottomReached = false;
         while (!isBottomReached)
         {
-            isBottomReached = !TryMoveTetrominoDown(_game.ActiveTetromino);
+            isBottomReached = !TryMoveDown(_game.ActiveTetromino);
         }
     }
 
-    private bool TryMoveTetrominoDown(Tetromino tetromino)
+    private bool TryMoveDown(Tetromino tetromino)
     {
         var tempTetromino = tetromino.GetCopy();
         tempTetromino.Y--;
@@ -126,7 +126,7 @@ internal class TetrominoManager
         return true;
     }
 
-    public bool HoldTetromino()
+    public bool Hold()
     {
         // TODO: Implement holding logic.
         // - Check if holding is allowed.
@@ -137,7 +137,7 @@ internal class TetrominoManager
         throw new NotImplementedException();
     }
 
-    public void LockTetromino()
+    public void Lock()
     {
         if (_game.ActiveTetromino is null)
             return;

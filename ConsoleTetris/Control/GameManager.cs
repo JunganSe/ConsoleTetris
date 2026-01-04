@@ -27,37 +27,37 @@ internal class GameManager
     {
 
         if (_inputManager.InputState.IsHeld(Input.Left))
-            _tetrominoManager.MoveTetrominoLeft();
+            _tetrominoManager.MoveLeft();
 
         if (_inputManager.InputState.IsHeld(Input.Right))
-            _tetrominoManager.MoveTetrominoRight();
+            _tetrominoManager.MoveRight();
 
         if (_inputManager.InputState.IsPressed(Input.SpinLeft))
-            _tetrominoManager.RotateTetrominoCounterClockwise();
+            _tetrominoManager.SpinLeft();
 
         if (_inputManager.InputState.IsPressed(Input.SpinRight))
-            _tetrominoManager.RotateTetrominoClockwise();
+            _tetrominoManager.SpinRight();
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop))
-            _tetrominoManager.SoftDropTetromino();
+            _tetrominoManager.SoftDrop();
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
         {
-            _tetrominoManager.HardDropTetromino();
-            _tetrominoManager.LockTetromino();
+            _tetrominoManager.HardDrop();
+            _tetrominoManager.Lock();
         }
 
         if (_inputManager.InputState.IsPressed(Input.Hold))
-            _tetrominoManager.HoldTetromino();
+            _tetrominoManager.Hold();
 
-        if (_inputManager.InputState.IsPressed(Input.Pause)) // Temporary for testing.
-            _tetrominoManager.LockTetromino();
+        if (_inputManager.InputState.IsPressed(Input.Pause))
+            _tetrominoManager.Lock(); // Temporary for testing.
     }
 
     public void SpawnTetrominoIfApplicable()
     {
         if (!IsTetrominoOnBoard)
-            _tetrominoManager.SpawnTetromino();
+            _tetrominoManager.Spawn();
 
     }
 }
