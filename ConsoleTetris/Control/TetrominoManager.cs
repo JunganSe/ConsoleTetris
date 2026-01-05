@@ -22,7 +22,7 @@ internal class TetrominoManager
             Direction = Direction.A,
         };
 
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void MoveLeft()
@@ -37,7 +37,7 @@ internal class TetrominoManager
 
         _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
         _game.ActiveTetromino.X--;
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void MoveRight()
@@ -52,7 +52,7 @@ internal class TetrominoManager
 
         _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
         _game.ActiveTetromino.X++;
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void SpinLeft()
@@ -71,7 +71,7 @@ internal class TetrominoManager
 
         _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
         _game.ActiveTetromino.Direction = targetDirection;
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void SpinRight()
@@ -90,7 +90,7 @@ internal class TetrominoManager
 
         _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
         _game.ActiveTetromino.Direction = targetDirection;
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void SoftDrop()
@@ -122,7 +122,7 @@ internal class TetrominoManager
 
         _game.Playfield.RemovePieces(tetromino.PiecesCoords);
         tetromino.Y--;
-        _game.Playfield.AddPieces(tetromino, TetrominoState.Moving);
+        _game.Playfield.AddMovingPieces(tetromino);
         return true;
     }
 
@@ -142,7 +142,7 @@ internal class TetrominoManager
         if (_game.ActiveTetromino is null)
             return;
 
-        _game.Playfield.AddPieces(_game.ActiveTetromino, TetrominoState.Locked);
+        _game.Playfield.AddLockedPieces(_game.ActiveTetromino);
         _game.ActiveTetromino = null;
     }
 }

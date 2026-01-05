@@ -11,8 +11,11 @@ internal class Playfield
         Pieces = new TetrominoPiece?[PlayfieldSize.Width, PlayfieldSize.Height];
     }
 
-    public void AddPieces(Tetromino tetromino, TetrominoState state) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, state);
+    public void AddMovingPieces(Tetromino tetromino) =>
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoState.Moving);
+
+    public void AddLockedPieces(Tetromino tetromino) =>
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoState.Locked);
 
     public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoState state)
     {

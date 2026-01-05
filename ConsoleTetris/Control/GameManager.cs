@@ -25,6 +25,7 @@ internal class GameManager
 
     public void HandleInput()
     {
+        // TODO: Limit movement speed and soft drop speed.
 
         if (_inputManager.InputState.IsHeld(Input.Left))
             _tetrominoManager.MoveLeft();
@@ -57,7 +58,10 @@ internal class GameManager
     public void SpawnTetrominoIfApplicable()
     {
         if (!IsTetrominoOnBoard)
+        {
             _tetrominoManager.Spawn();
+            // TODO: Check the next piece and render it in the GUI.
+        }
 
     }
 }
