@@ -7,6 +7,8 @@ internal class TetrominoManager
     private readonly Game _game;
     private readonly TetrominoRandomizer _tetrominoRandomizer = new();
 
+    public TetrominoShape NextShape => _tetrominoRandomizer.PeekNext();
+
     public TetrominoManager(Game game)
     {
         _game = game;
@@ -18,7 +20,7 @@ internal class TetrominoManager
         {
             Shape = _tetrominoRandomizer.GetNext(),
             X = PlayfieldSize.Width / 2 - 1,
-            Y = 17,
+            Y = 19,
             Direction = Direction.A,
         };
 

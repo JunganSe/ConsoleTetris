@@ -43,6 +43,7 @@ internal class Playfield
     public bool AreCoordsFree(Coord[] coords) =>
         coords.All(IsCoordFree);
 
+    // TOOD: Consider coord free if it's above the playfield.
     public bool IsCoordFree(Coord coord) =>
         coord.X >= 0 && coord.X < PlayfieldSize.Width
         && coord.Y >= 0 && coord.Y < PlayfieldSize.Height

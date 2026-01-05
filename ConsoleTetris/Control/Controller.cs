@@ -102,8 +102,8 @@ internal class Controller
     {
         // TODO: Render Score.
         // TODO: Render Held tetromino.
-        // TODO: Render next tetromino.
         _playfieldRenderer.DrawPlayfield(Playfield);
+        _guiRenderer.DrawNextTetromino(_gameManager.NextTetrominoShape);
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }
 }
