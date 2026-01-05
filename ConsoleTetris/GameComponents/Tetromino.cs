@@ -8,6 +8,7 @@ internal class Tetromino
     public int Y { get; set; }
     public TetrominoShape Shape { get; init; }
     public Direction Direction { get; set; }
+    // TODO: Optimize by caching the result and invalidate it when X, Y, or Direction changes.
     public Coord[] PiecesCoords => GetPiecesCoords();
 
     public Tetromino GetCopy() => new()

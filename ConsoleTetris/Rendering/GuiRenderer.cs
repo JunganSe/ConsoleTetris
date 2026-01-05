@@ -45,7 +45,6 @@ internal class GuiRenderer
             X = 1,
             Y = 1,
         };
-        var piecesCoords = tetromino.PiecesCoords;
         Console.ForegroundColor = ColorMapper.GetTetrominoColor(shape);
 
         for (int x = 0; x < GuiPosition.NextWith; x++)
@@ -54,7 +53,7 @@ internal class GuiRenderer
             {
                 int cursorX = GuiPosition.NextX + x * 2;
                 int cursorY = GuiPosition.NextY - y;
-                var texture = (piecesCoords.Any(coord => coord.X == x && coord.Y == y))
+                var texture = (tetromino.PiecesCoords.Any(coord => coord.X == x && coord.Y == y))
                     ? PieceTexture.Block
                     : PieceTexture.Empty;
                 Console.SetCursorPosition(cursorX, cursorY);
