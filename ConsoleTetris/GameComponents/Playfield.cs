@@ -43,9 +43,10 @@ internal class Playfield
     public bool AreCoordsFree(Coord[] coords) =>
         coords.All(IsCoordFree);
 
-    // TOOD: Consider coord free if it's above the playfield.
-    public bool IsCoordFree(Coord coord) =>
-        coord.X >= 0 && coord.X < PlayfieldSize.Width
-        && coord.Y >= 0 && coord.Y < PlayfieldSize.Height
-        && Pieces[coord.X, coord.Y]?.State != TetrominoState.Locked;
+    public bool IsCoordFree(Coord coord)
+    {
+        return coord.X >= 0 && coord.X < PlayfieldSize.Width // Within X bounds.
+            && ((coord.Y >= PlayfieldSize.Height) // Above playfield is ok.
+                || (coord.Y >= 0 && Pieces[coord.X, coord.Y]?.State != TetrominoState.Locked)); // In playfield and no locked piece at coordinate.
+    }
 }
