@@ -40,7 +40,7 @@ internal class Tetromino
             Direction.D or Direction.B => [new(0, -1), new(0, 1), new(0, 2)],
         },
 
-        TetrominoShape.O => [new(1, 0), new(0, 1), new(1, 1)],
+        TetrominoShape.O => [new(0, -1), new(1, -1), new(1, 0)],
 
         TetrominoShape.T => Direction switch
         {
