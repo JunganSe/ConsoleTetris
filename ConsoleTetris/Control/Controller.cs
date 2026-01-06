@@ -34,16 +34,6 @@ internal class Controller
 
     private void Initialize()
     {
-        // Test code:
-        Playfield.Pieces[0, 0] = new() { Shape = TetrominoShape.I, State = TetrominoState.Locked };
-        Playfield.Pieces[1, 0] = new() { Shape = TetrominoShape.O, State = TetrominoState.Locked };
-        Playfield.Pieces[2, 1] = new() { Shape = TetrominoShape.T, State = TetrominoState.Locked };
-        Playfield.Pieces[3, 1] = new() { Shape = TetrominoShape.S, State = TetrominoState.Locked };
-        Playfield.Pieces[4, 2] = new() { Shape = TetrominoShape.Z, State = TetrominoState.Locked };
-        Playfield.Pieces[5, 2] = new() { Shape = TetrominoShape.J, State = TetrominoState.Locked };
-        Playfield.Pieces[6, 2] = new() { Shape = TetrominoShape.L, State = TetrominoState.Locked };
-        // Test code end.
-
         // TODO: Initialize score.
 
         ConsoleManager.InitializeConsole();
@@ -94,7 +84,8 @@ internal class Controller
 
         // TODO: Move tetromino down based on timer.
         // TODO: Lock tetromino if it cannot move down or overlaps a piece.
-        // TODO: Update score.
+        // TODO: Check for overlapping pieces and end the game if applicable.
+        // TODO: Handle line clears.
         // TODO: Update more things?
     }
 
@@ -103,6 +94,7 @@ internal class Controller
         // TODO: Render Score.
         // TODO: Render Held tetromino.
         _playfieldRenderer.DrawPlayfield(Playfield);
+        // TODO: Optimize to only draw next tetromino when it has changed.
         _guiRenderer.DrawNextTetromino(_gameManager.NextTetrominoShape);
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }

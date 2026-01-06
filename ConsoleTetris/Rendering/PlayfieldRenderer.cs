@@ -7,6 +7,8 @@ internal class PlayfieldRenderer
     /// <summary> Draw the entire playfield. </summary>
     public void DrawPlayfield(Playfield playfield)
     {
+        // TODO: Optimize to only redraw changed pieces. Maybe keep a buffer of the last drawn state?
+
         int playfieldWidth = playfield.Pieces.GetLength(0);
         int playfieldHeight = playfield.Pieces.GetLength(1);
         int cursorOffsetX = GuiPosition.PlayfieldX;
