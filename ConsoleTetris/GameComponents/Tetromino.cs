@@ -4,12 +4,13 @@ namespace ConsoleTetris.GameComponents;
 
 internal class Tetromino
 {
-    public int X { get; set; }
-    public int Y { get; set; }
+    private Coord[]? _piecesCoords;
+
+    public int X { get; set { field = value; _piecesCoords = null; } }
+    public int Y { get; set { field = value; _piecesCoords = null; } }
     public TetrominoShape Shape { get; init; }
-    public Direction Direction { get; set; }
-    // TODO: Optimize by caching the result and invalidate it when X, Y, or Direction changes.
-    public Coord[] PiecesCoords => GetPiecesCoords();
+    public Direction Direction { get; set { field = value; _piecesCoords = null; } }
+    public Coord[] PiecesCoords => _piecesCoords ??= GetPiecesCoords();
 
     public Tetromino GetCopy() => new()
     {
@@ -68,7 +69,7 @@ internal class Tetromino
 
         TetrominoShape.L => Direction switch
         {
-            Direction.A => [new(-1, -1), new(-1, 0),new(0, 0),  new(1, 0)],
+            Direction.A => [new(-1, -1), new(-1, 0), new(0, 0), new(1, 0)],
             Direction.B => [new(0, -1), new(0, 0), new(-1, 1), new(0, 1)],
             Direction.C => [new(-1, 0), new(0, 0), new(1, 0), new(1, 1)],
             Direction.D => [new(0, -1), new(1, -1), new(0, 0), new(0, 1)],
