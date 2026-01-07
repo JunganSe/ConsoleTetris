@@ -19,8 +19,8 @@ internal class TetrominoManager
         _game.ActiveTetromino = new Tetromino()
         {
             Shape = _tetrominoRandomizer.GetNext(),
-            X = PlayfieldSize.Width / 2 - 1,
-            Y = 19,
+            X = PlayfieldSize.Width / 2 - 2,
+            Y = PlayfieldSize.Height - 2,
             Direction = Direction.A,
         };
 

@@ -47,7 +47,7 @@ internal class GuiRenderer
             {
                 int cursorX = GuiPosition.NextX + x * 2;
                 int cursorY = GuiPosition.NextY - y;
-                var texture = relativeCoords.Any(coord => coord.X == x - 1 && coord.Y == y - 1)
+                string texture = relativeCoords.Any(coord => coord.X == x && coord.Y == y)
                     ? PieceTexture.Block
                     : PieceTexture.Empty;
                 Console.SetCursorPosition(cursorX, cursorY);
