@@ -64,8 +64,9 @@ internal class GuiRenderer
 
     public void DrawFps(double fps)
     {
+        string fpsText = string.Format($"{fps:F0}").PadLeft(2); // F0 formats as integer.
         Console.ForegroundColor = GuiColor.FpsText;
         Console.SetCursorPosition(GuiPosition.FpsX, GuiPosition.FpsY);
-        Console.Write($"FPS:{fps:F0}"); // F0 formats as integer.
+        Console.Write($"FPS:{fpsText}");
     }
 }
