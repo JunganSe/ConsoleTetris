@@ -1,4 +1,5 @@
 ﻿using ConsoleTetris.GameComponents;
+using System.Xml.Linq;
 
 namespace ConsoleTetris.Control;
 
@@ -27,6 +28,8 @@ internal class TetrominoManager
         _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
+
+
     public void MoveLeft()
     {
         if (_game.ActiveTetromino is null)
@@ -37,9 +40,7 @@ internal class TetrominoManager
         if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
-        _game.ActiveTetromino.X--;
-        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
+        Move(-1, 0);
     }
 
     public void MoveRight()
@@ -52,10 +53,10 @@ internal class TetrominoManager
         if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
-        _game.ActiveTetromino.X++;
-        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
+        Move(1, 0);
     }
+
+
 
     public void SpinLeft()
     {
@@ -71,9 +72,7 @@ internal class TetrominoManager
         if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
-        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
-        _game.ActiveTetromino.Direction = targetDirection;
-        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
+        Move(0, 0, targetDirection);
     }
 
     public void SpinRight()
@@ -90,10 +89,23 @@ internal class TetrominoManager
         if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return;
 
+        Move(0, 0, targetDirection);
+    }
+
+    private void Move(int xMod, int yMod, Direction? targetDirection = null)
+    {
+        if (_game.ActiveTetromino is null)
+            return;
+
         _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
-        _game.ActiveTetromino.Direction = targetDirection;
+        _game.ActiveTetromino.X += xMod;
+        _game.ActiveTetromino.Y += yMod;
+        if (targetDirection.HasValue)
+            _game.ActiveTetromino.Direction = targetDirection.Value;
         _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
+
+
 
     public void SoftDrop()
     {
@@ -122,11 +134,11 @@ internal class TetrominoManager
         if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
             return false;
 
-        _game.Playfield.RemovePieces(tetromino.PiecesCoords);
-        tetromino.Y--;
-        _game.Playfield.AddMovingPieces(tetromino);
+        Move(0, -1);
         return true;
     }
+
+
 
     public bool Hold()
     {
