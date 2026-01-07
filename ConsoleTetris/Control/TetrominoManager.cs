@@ -1,5 +1,4 @@
 ﻿using ConsoleTetris.GameComponents;
-using System.Xml.Linq;
 
 namespace ConsoleTetris.Control;
 
@@ -14,21 +13,6 @@ internal class TetrominoManager
     {
         _game = game;
     }
-
-    public void Spawn()
-    {
-        _game.ActiveTetromino = new Tetromino()
-        {
-            Shape = _tetrominoRandomizer.GetNext(),
-            X = PlayfieldSize.Width / 2 - 2,
-            Y = PlayfieldSize.Height - 2,
-            Direction = Direction.A,
-        };
-
-        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
-    }
-
-
 
     public void MoveLeft()
     {
@@ -55,8 +39,6 @@ internal class TetrominoManager
 
         Move(1, 0);
     }
-
-
 
     public void SpinLeft()
     {
@@ -140,15 +122,17 @@ internal class TetrominoManager
 
 
 
-    public bool Hold()
+    public void Spawn()
     {
-        // TODO: Implement holding logic.
-        // - Check if holding is allowed.
-        // - If no tetromino is held, store the active tetromino and spawn a new one.
-        // - If a tetromino is held, swap it with the active tetromino and put it at the top.
-        // - Store the held tetromino in a separate variable.
-        // - Disable further holds until the next tetromino is locked.
-        throw new NotImplementedException();
+        _game.ActiveTetromino = new Tetromino()
+        {
+            Shape = _tetrominoRandomizer.GetNext(),
+            X = PlayfieldSize.Width / 2 - 2,
+            Y = PlayfieldSize.Height - 2,
+            Direction = Direction.A,
+        };
+
+        _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
     }
 
     public void Lock()
@@ -158,5 +142,16 @@ internal class TetrominoManager
 
         _game.Playfield.AddLockedPieces(_game.ActiveTetromino);
         _game.ActiveTetromino = null;
+    }
+
+    public bool Hold()
+    {
+        // TODO: Implement holding logic.
+        // - Check if holding is allowed.
+        // - If no tetromino is held, store the active tetromino and spawn a new one.
+        // - If a tetromino is held, swap it with the active tetromino and put it at the top.
+        // - Store the held tetromino in a separate variable.
+        // - Disable further holds until the next tetromino is locked.
+        throw new NotImplementedException();
     }
 }
