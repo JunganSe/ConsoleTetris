@@ -38,14 +38,8 @@ internal class GuiRenderer
 
     public void DrawNextTetromino(TetrominoShape shape)
     {
-        var tetromino = new Tetromino()
-        {
-            Shape = shape,
-            Direction = Direction.A,
-            X = 1,
-            Y = 1,
-        };
         Console.ForegroundColor = ColorMapper.GetTetrominoColor(shape);
+        var relativeCoords = Tetromino.GetRelativePiecesCoords(shape, Direction.A);
 
         for (int x = 0; x < GuiPosition.NextWith; x++)
         {
@@ -53,7 +47,7 @@ internal class GuiRenderer
             {
                 int cursorX = GuiPosition.NextX + x * 2;
                 int cursorY = GuiPosition.NextY - y;
-                var texture = (tetromino.PiecesCoords.Any(coord => coord.X == x && coord.Y == y))
+                var texture = relativeCoords.Any(coord => coord.X == x - 1 && coord.Y == y - 1)
                     ? PieceTexture.Block
                     : PieceTexture.Empty;
                 Console.SetCursorPosition(cursorX, cursorY);
