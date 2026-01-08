@@ -16,28 +16,12 @@ internal class TetrominoManager
 
     public void MoveLeft()
     {
-        if (_game.ActiveTetromino is null)
-            return;
-
-        var tempTetromino = _game.ActiveTetromino.GetCopy();
-        tempTetromino.X--;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Move(-1, 0);
+        TryMove(-1, 0);
     }
 
     public void MoveRight()
     {
-        if (_game.ActiveTetromino is null)
-            return;
-
-        var tempTetromino = _game.ActiveTetromino.GetCopy();
-        tempTetromino.X++;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return;
-
-        Move(1, 0);
+        TryMove(1, 0);
     }
 
     public void SpinLeft()
@@ -71,7 +55,7 @@ internal class TetrominoManager
             || TryMove(1, 0, targetDirection);
     }
 
-    private bool TryMove(int xMod, int yMod, Direction targetDirection)
+    private bool TryMove(int xMod, int yMod, Direction? targetDirection = null)
     {
         if (_game.ActiveTetromino is null)
             return false;
@@ -79,10 +63,11 @@ internal class TetrominoManager
         var tempTetromino = _game.ActiveTetromino.GetCopy();
         tempTetromino.X += xMod;
         tempTetromino.Y += yMod;
-        tempTetromino.Direction = targetDirection;
+        if (targetDirection.HasValue)
+            tempTetromino.Direction = targetDirection.Value;
         bool canMove = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
         if (canMove)
-            Move(-1, 0, targetDirection);
+            Move(xMod, yMod, targetDirection);
 
         return canMove;
     }
@@ -104,33 +89,16 @@ internal class TetrominoManager
 
     public void SoftDrop()
     {
-        if (_game.ActiveTetromino is null)
-            return;
-
-        TryMoveDown(_game.ActiveTetromino);
+        TryMove(0, -1);
     }
 
     public void HardDrop()
     {
-        if (_game.ActiveTetromino is null)
-            return;
-
         bool isBottomReached = false;
         while (!isBottomReached)
         {
-            isBottomReached = !TryMoveDown(_game.ActiveTetromino);
+            isBottomReached = !TryMove(0, -1);
         }
-    }
-
-    private bool TryMoveDown(Tetromino tetromino)
-    {
-        var tempTetromino = tetromino.GetCopy();
-        tempTetromino.Y--;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
-            return false;
-
-        Move(0, -1);
-        return true;
     }
 
 
