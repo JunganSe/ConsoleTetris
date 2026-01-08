@@ -10,22 +10,21 @@ internal class TetrominoRandomizer
 
     public TetrominoShape GetNext()
     {
-        if (_bag.Count == 0)
-            FillBag();
-
+        FillBagIfEmpty();
         return _bag.Pop();
     }
 
     public TetrominoShape PeekNext()
     {
-        if (_bag.Count == 0)
-            FillBag();
-
+        FillBagIfEmpty();
         return _bag.Peek();
     }
 
-    private void FillBag()
+    private void FillBagIfEmpty()
     {
+        if (_bag.Count > 0)
+            return;
+
         var shapes = _possibleShapes.OrderBy(_ => _random.Next()).ToArray();
         foreach (var shape in shapes)
             _bag.Push(shape);
