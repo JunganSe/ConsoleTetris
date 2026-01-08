@@ -45,16 +45,18 @@ internal class TetrominoManager
         if (_game.ActiveTetromino is null)
             return;
 
-        // TODO: Kick from wall if necessary and possible.
-
         var targetDirection = _game.ActiveTetromino.Direction.Previous();
 
         var tempTetromino = _game.ActiveTetromino.GetCopy();
         tempTetromino.Direction = targetDirection;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+        bool canSpin = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        if (canSpin)
+        {
+            Move(0, 0, targetDirection);
             return;
+        }
 
-        Move(0, 0, targetDirection);
+        TryKick(targetDirection);
     }
 
     public void SpinRight()
@@ -62,16 +64,70 @@ internal class TetrominoManager
         if (_game.ActiveTetromino is null)
             return;
 
-        // TODO: Kick from wall if necessary and possible.
-
         var targetDirection = _game.ActiveTetromino.Direction.Next();
 
         var tempTetromino = _game.ActiveTetromino.GetCopy();
         tempTetromino.Direction = targetDirection;
-        if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+        bool canSpin = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        if (canSpin)
+        {
+            Move(0, 0, targetDirection);
             return;
+        }
 
-        Move(0, 0, targetDirection);
+        TryKick(targetDirection);
+    }
+
+    private bool TryKick(Direction targetDirection)
+    {
+        return TryKickUp(targetDirection)
+            || TryKickLeft(targetDirection)
+            || TryKickRight(targetDirection);
+    }
+
+    private bool TryKickLeft(Direction targetDirection)
+    {
+        if (_game.ActiveTetromino is null)
+            return false;
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+        tempTetromino.X--;
+        tempTetromino.Direction = targetDirection;
+        bool canKick = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        if (canKick)
+            Move(-1, 0, targetDirection);
+
+        return canKick;
+    }
+
+    private bool TryKickRight(Direction targetDirection)
+    {
+        if (_game.ActiveTetromino is null)
+            return false;
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+        tempTetromino.X++;
+        tempTetromino.Direction = targetDirection;
+        bool canKick = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        if (canKick)
+            Move(1, 0, targetDirection);
+
+        return canKick;
+    }
+
+    private bool TryKickUp(Direction targetDirection)
+    {
+        if (_game.ActiveTetromino is null)
+            return false;
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+        tempTetromino.Y++;
+        tempTetromino.Direction = targetDirection;
+        bool canKick = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        if (canKick)
+            Move(0, 1, targetDirection);
+
+        return canKick;
     }
 
     private void Move(int xMod, int yMod, Direction? targetDirection = null)
