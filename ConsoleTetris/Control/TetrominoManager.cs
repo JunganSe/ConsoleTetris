@@ -24,6 +24,20 @@ internal class TetrominoManager
         TryMove(1, 0);
     }
 
+    public void SoftDrop()
+    {
+        TryMove(0, -1);
+    }
+
+    public void HardDrop()
+    {
+        bool isBottomReached = false;
+        while (!isBottomReached)
+        {
+            isBottomReached = !TryMove(0, -1);
+        }
+    }
+
     public void SpinLeft()
     {
         if (_game.ActiveTetromino is null)
@@ -65,6 +79,7 @@ internal class TetrominoManager
         tempTetromino.Y += yMod;
         if (targetDirection.HasValue)
             tempTetromino.Direction = targetDirection.Value;
+
         bool canMove = _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
         if (canMove)
             Move(xMod, yMod, targetDirection);
@@ -83,22 +98,6 @@ internal class TetrominoManager
         if (targetDirection.HasValue)
             _game.ActiveTetromino.Direction = targetDirection.Value;
         _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
-    }
-
-
-
-    public void SoftDrop()
-    {
-        TryMove(0, -1);
-    }
-
-    public void HardDrop()
-    {
-        bool isBottomReached = false;
-        while (!isBottomReached)
-        {
-            isBottomReached = !TryMove(0, -1);
-        }
     }
 
 
