@@ -9,8 +9,7 @@ internal class GameManager
     private readonly TetrominoManager _tetrominoManager;
 
     public Game Game { get; }
-    public bool IsTetrominoOnBoard => Game.ActiveTetromino is not null;
-    public TetrominoShape NextTetrominoShape { get; private set; }
+    public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;
     public TetrominoShape? HeldTetrominoShape => _tetrominoManager.HeldShape;
 
     public GameManager()
@@ -59,11 +58,7 @@ internal class GameManager
 
     public void SpawnTetrominoIfApplicable()
     {
-        if (!IsTetrominoOnBoard)
-        {
+        if (Game.ActiveTetromino is null)
             _tetrominoManager.SpawnNext();
-            NextTetrominoShape = _tetrominoManager.NextShape;
-        }
-
     }
 }
