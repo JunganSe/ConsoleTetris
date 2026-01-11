@@ -36,7 +36,13 @@ internal class GuiRenderer
             """);
     }
 
-    public void DrawHeldTetromino(TetrominoShape? shape)
+    public void DrawHeldTetromino(TetrominoShape? shape) =>
+        DrawTetromino(shape, GuiPosition.HoldX, GuiPosition.HoldY);
+
+    public void DrawNextTetromino(TetrominoShape shape) =>
+        DrawTetromino(shape, GuiPosition.NextX, GuiPosition.NextY);
+
+    private void DrawTetromino(TetrominoShape? shape, int x, int y)
     {
         Console.ForegroundColor = (shape.HasValue)
             ? ColorMapper.GetTetrominoColor(shape.Value)
@@ -45,33 +51,13 @@ internal class GuiRenderer
             ? Tetromino.GetRelativePiecesCoords(shape.Value, Direction.A)
             : [];
 
-        for (int x = 0; x < GuiPosition.HoldWidth; x++)
+        for (int iX = 0; iX < GuiPosition.TetrominoWidth; iX++)
         {
-            for (int y = 0; y < GuiPosition.HoldHeight; y++)
+            for (int iY = 0; iY < GuiPosition.TetrominoHeight; iY++)
             {
-                int cursorX = GuiPosition.HoldX + x * 2;
-                int cursorY = GuiPosition.HoldY - y;
-                string texture = relativeCoords.Any(coord => coord.X == x && coord.Y == y)
-                    ? PieceTexture.Block
-                    : PieceTexture.Empty;
-                Console.SetCursorPosition(cursorX, cursorY);
-                Console.Write(texture);
-            }
-        }
-    }
-
-    public void DrawNextTetromino(TetrominoShape shape)
-    {
-        Console.ForegroundColor = ColorMapper.GetTetrominoColor(shape);
-        var relativeCoords = Tetromino.GetRelativePiecesCoords(shape, Direction.A);
-
-        for (int x = 0; x < GuiPosition.NextWidth; x++)
-        {
-            for (int y = 0; y < GuiPosition.NextHeight; y++)
-            {
-                int cursorX = GuiPosition.NextX + x * 2;
-                int cursorY = GuiPosition.NextY - y;
-                string texture = relativeCoords.Any(coord => coord.X == x && coord.Y == y)
+                int cursorX = x + iX * 2;
+                int cursorY = y - iY;
+                string texture = relativeCoords.Any(coord => coord.X == iX && coord.Y == iY)
                     ? PieceTexture.Block
                     : PieceTexture.Empty;
                 Console.SetCursorPosition(cursorX, cursorY);
