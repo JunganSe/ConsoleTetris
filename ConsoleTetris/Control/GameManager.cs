@@ -60,7 +60,7 @@ internal class GameManager
     {
         if (!IsTetrominoOnBoard)
         {
-            _tetrominoManager.Spawn();
+            _tetrominoManager.SpawnNext();
             NextTetrominoShape = _tetrominoManager.NextShape;
         }
 

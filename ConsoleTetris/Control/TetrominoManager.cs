@@ -6,7 +6,9 @@ internal class TetrominoManager
 {
     private readonly Game _game;
     private readonly TetrominoRandomizer _tetrominoRandomizer = new();
+    private bool _canHold = true;
 
+    public TetrominoShape? HeldShape { get; private set; }
     public TetrominoShape NextShape => _tetrominoRandomizer.PeekNext();
 
     public TetrominoManager(Game game)
@@ -102,17 +104,33 @@ internal class TetrominoManager
 
 
 
-    public void Spawn()
+    public void SpawnNext()
+    {
+        var nextShape = _tetrominoRandomizer.GetNext();
+        Spawn(nextShape);
+    }
+
+
+    public void SpawnHeld()
+    {
+        if (HeldShape is null)
+            return;
+
+        Spawn(HeldShape.Value);
+    }
+
+    private void Spawn(TetrominoShape shape)
     {
         _game.ActiveTetromino = new Tetromino()
         {
-            Shape = _tetrominoRandomizer.GetNext(),
+            Shape = shape,
             X = PlayfieldSize.Width / 2 - 2,
             Y = PlayfieldSize.Height - 2,
             Direction = Direction.A,
         };
 
         _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
+        _canHold = true;
     }
 
     public void Lock()
@@ -124,14 +142,20 @@ internal class TetrominoManager
         _game.ActiveTetromino = null;
     }
 
-    public bool Hold()
+    public void Hold()
     {
-        // TODO: Implement holding logic.
-        // - Check if holding is allowed.
-        // - If no tetromino is held, store the active tetromino and spawn a new one.
-        // - If a tetromino is held, swap it with the active tetromino and put it at the top.
-        // - Store the held tetromino in a separate variable.
-        // - Disable further holds until the next tetromino is locked.
-        throw new NotImplementedException();
+        if (!_canHold || _game.ActiveTetromino is null)
+            return;
+
+        var activeShape = _game.ActiveTetromino.Shape;
+        _game.Playfield.RemovePieces(_game.ActiveTetromino.PiecesCoords);
+
+        if (HeldShape.HasValue)
+            SpawnHeld();
+        else
+            SpawnNext();
+
+        HeldShape = activeShape;
+        _canHold = false;
     }
 }
