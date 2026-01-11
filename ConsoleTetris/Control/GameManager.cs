@@ -10,6 +10,7 @@ internal class GameManager
 
     public Game Game { get; }
     public bool IsTetrominoOnBoard => Game.ActiveTetromino is not null;
+    public TetrominoShape? HeldTetrominoShape => _tetrominoManager.HeldShape;
     public TetrominoShape NextTetrominoShape { get; private set; }
 
     public GameManager()

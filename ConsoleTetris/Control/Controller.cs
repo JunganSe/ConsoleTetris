@@ -92,9 +92,10 @@ internal class Controller
     private void Render()
     {
         // TODO: Render Score.
-        // TODO: Render Held tetromino.
-        _playfieldRenderer.DrawPlayfield(Playfield);
+        // TODO: Optimize to only draw held tetromino when it has changed.
         // TODO: Optimize to only draw next tetromino when it has changed.
+        _playfieldRenderer.DrawPlayfield(Playfield);
+        _guiRenderer.DrawHeldTetromino(_gameManager.HeldTetrominoShape);
         _guiRenderer.DrawNextTetromino(_gameManager.NextTetrominoShape);
         _guiRenderer.DrawFps(_fpsTracker.CurrentFps);
     }
