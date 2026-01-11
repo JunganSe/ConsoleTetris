@@ -8,8 +8,8 @@ internal class TetrominoManager
     private readonly TetrominoRandomizer _tetrominoRandomizer = new();
     private bool _canHold = true;
 
-    public TetrominoShape? HeldShape { get; private set; }
     public TetrominoShape NextShape => _tetrominoRandomizer.PeekNext();
+    public TetrominoShape? HeldShape { get; private set; }
 
     public TetrominoManager(Game game)
     {

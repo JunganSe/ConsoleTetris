@@ -15,11 +15,11 @@ internal class GuiRenderer
             ║                    ║ SCORE  ║
             ║                    ║        ║
             ║                    ╠════════╣
-            ║                    ║ HOLD   ║
+            ║                    ║ NEXT   ║
             ║                    ║        ║
             ║                    ║        ║
             ║                    ╠════════╣
-            ║                    ║ NEXT   ║
+            ║                    ║ HOLD   ║
             ║                    ║        ║
             ║                    ║        ║
             ║                    ╠════════╝
@@ -36,11 +36,11 @@ internal class GuiRenderer
             """);
     }
 
-    public void DrawHeldTetromino(TetrominoShape? shape) =>
-        DrawTetromino(shape, GuiPosition.HoldX, GuiPosition.HoldY);
-
     public void DrawNextTetromino(TetrominoShape shape) =>
         DrawTetromino(shape, GuiPosition.NextX, GuiPosition.NextY);
+
+    public void DrawHeldTetromino(TetrominoShape? shape) =>
+        DrawTetromino(shape, GuiPosition.HoldX, GuiPosition.HoldY);
 
     private void DrawTetromino(TetrominoShape? shape, int x, int y)
     {
