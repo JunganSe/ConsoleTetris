@@ -12,11 +12,14 @@ internal class InputManager
     public void Update()
     {
         _previousHeldInputs = [.. _currentHeldInputs];
-        _currentHeldInputs = InputReader.GetHeldKeys<Key>()
-                                        .Select(KeyMapper.Map)
-                                        .ToHashSet();
+        _currentHeldInputs = GetHeldInputs();
         InputState = GetInputState();
     }
+
+    private HashSet<Input> GetHeldInputs() =>
+        InputReader.GetHeldKeys<Key>()
+                   .Select(KeyMapper.Map)
+                   .ToHashSet();
 
     private InputState GetInputState() => new(
         held: new HashSet<Input>(_currentHeldInputs),
