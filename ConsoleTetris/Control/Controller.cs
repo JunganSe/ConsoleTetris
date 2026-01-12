@@ -7,7 +7,7 @@ namespace ConsoleTetris.Control;
 
 internal class Controller
 {
-    private const int _targetFps = 30;
+    private const int _targetFps = 60;
     private const double _targetFrameTime = 1000.0 / _targetFps;
 
     private readonly GameManager _gameManager = new();
