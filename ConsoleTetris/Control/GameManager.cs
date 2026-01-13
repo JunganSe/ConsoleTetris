@@ -47,12 +47,6 @@ internal class GameManager
             _tetrominoManager.MoveRight();
         }
 
-        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
-            _tetrominoManager.SpinLeft();
-
-        if (_inputManager.InputState.IsPressed(Input.SpinRight))
-            _tetrominoManager.SpinRight();
-
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
             _inputCooldown.Reset(Input.SoftDrop);
@@ -64,6 +58,12 @@ internal class GameManager
             _tetrominoManager.HardDrop();
             _tetrominoManager.Lock();
         }
+
+        if (_inputManager.InputState.IsPressed(Input.SpinLeft))
+            _tetrominoManager.SpinLeft();
+
+        if (_inputManager.InputState.IsPressed(Input.SpinRight))
+            _tetrominoManager.SpinRight();
 
         if (_inputManager.InputState.IsPressed(Input.Hold))
             _tetrominoManager.Hold();
