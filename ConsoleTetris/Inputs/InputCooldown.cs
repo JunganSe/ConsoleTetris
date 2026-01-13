@@ -1,6 +1,6 @@
 ﻿namespace ConsoleTetris.Inputs;
 
-public class InputCooldown
+internal class InputCooldown
 {
     private readonly Dictionary<Input, int> _cooldowns = [];
     private readonly Dictionary<Input, int> _framesSinceInput = [];
