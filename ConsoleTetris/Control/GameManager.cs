@@ -56,7 +56,7 @@ internal class GameManager
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
             _inputCooldown.Reset(Input.SoftDrop);
-            _tetrominoManager.SoftDrop();
+            _tetrominoManager.MoveDown();
         }
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))

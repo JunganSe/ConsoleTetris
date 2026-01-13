@@ -26,7 +26,7 @@ internal class TetrominoManager
         TryMove(1, 0);
     }
 
-    public void SoftDrop()
+    public void MoveDown()
     {
         TryMove(0, -1);
     }
