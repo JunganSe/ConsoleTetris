@@ -84,6 +84,7 @@ internal class Controller
         // TODO: Lock tetromino if it cannot move down or overlaps a piece.
         // TODO: Check for overlapping pieces and end the game if applicable.
         // TODO: Handle line clears.
+        // TODO: Handle levels, affecting score and gravity.
         _gameManager.SpawnTetrominoIfApplicable();
     }
 

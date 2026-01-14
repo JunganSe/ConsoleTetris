@@ -9,7 +9,7 @@ internal class GameManager
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
     private readonly Cooldown<Input> _inputCooldown;
-    private readonly Cooldown<int> _gravityCooldown;
+    private readonly SimpleCooldown _gravityCooldown;
 
     public Game Game { get; }
     public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;
@@ -25,7 +25,7 @@ internal class GameManager
         _inputCooldown.SetCooldown(Input.Right, 3);
         _inputCooldown.SetCooldown(Input.SoftDrop, 2);
         _gravityCooldown = new();
-        _gravityCooldown.SetCooldown(0, 30);
+        _gravityCooldown.SetCooldown(30);
     }
 
     public void UpdateInput()
@@ -36,9 +36,9 @@ internal class GameManager
     public void MoveDownOnTimer()
     {
         _gravityCooldown.Update();
-        if (_gravityCooldown.IsReady(0))
+        if (_gravityCooldown.IsReady())
         {
-            _gravityCooldown.Reset(0);
+            _gravityCooldown.Reset();
             _tetrominoManager.MoveDown();
         }
     }
@@ -89,7 +89,7 @@ internal class GameManager
         if (Game.ActiveTetromino is null)
         {
             _tetrominoManager.SpawnNext();
-            _gravityCooldown.Reset(0);
+            _gravityCooldown.Reset();
         }
     }
 }
