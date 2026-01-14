@@ -31,8 +31,6 @@ internal class GameManager
 
     public void HandleInput()
     {
-        // TODO: Buffer inputs if cooldown is not ready.
-
         _inputCooldown.Update();
 
         if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldown.IsReady(Input.Left))
