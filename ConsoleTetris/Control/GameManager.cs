@@ -1,5 +1,6 @@
 ﻿using ConsoleTetris.GameComponents;
 using ConsoleTetris.Inputs;
+using ConsoleTetris.Mechanics;
 
 namespace ConsoleTetris.Control;
 
@@ -7,7 +8,7 @@ internal class GameManager
 {
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
-    private readonly InputCooldown _inputCooldown;
+    private readonly Cooldown<Input> _inputCooldown;
 
     public Game Game { get; }
     public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;
