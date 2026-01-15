@@ -31,6 +31,11 @@ internal class TetrominoManager
         TryMove(0, -1);
     }
 
+    public bool TryMoveDown()
+    {
+        return TryMove(0, -1);
+    }
+
     public void HardDrop()
     {
         bool isBottomReached = false;

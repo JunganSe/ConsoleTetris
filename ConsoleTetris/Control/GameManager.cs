@@ -33,14 +33,15 @@ internal class GameManager
         _inputManager.Update();
     }
 
-    public void MoveDownOnTimer()
+    public void MoveDownOrLockOnTimer()
     {
         _gravityCooldown.Update();
-        if (_gravityCooldown.IsReady())
-        {
-            _gravityCooldown.Reset();
-            _tetrominoManager.MoveDown();
-        }
+        if (!_gravityCooldown.IsReady())
+            return;
+
+        _gravityCooldown.Reset();
+        if(!_tetrominoManager.TryMoveDown())
+            _tetrominoManager.Lock();
     }
 
     public void HandleInput()
