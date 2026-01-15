@@ -17,7 +17,7 @@ internal enum TetrominoShape
     L,
 }
 
-internal enum TetrominoState
+internal enum TetrominoPieceState
 {
     Moving,
     Locked,

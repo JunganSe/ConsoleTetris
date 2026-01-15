@@ -12,12 +12,12 @@ internal class Playfield
     }
 
     public void AddMovingPieces(Tetromino tetromino) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoState.Moving);
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Moving);
 
     public void AddLockedPieces(Tetromino tetromino) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoState.Locked);
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Locked);
 
-    public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoState state)
+    public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoPieceState state)
     {
         foreach (var coord in coords)
         {
@@ -47,6 +47,6 @@ internal class Playfield
     {
         return coord.X >= 0 && coord.X < PlayfieldSize.Width // Within X bounds.
             && ((coord.Y >= PlayfieldSize.Height) // Above playfield is ok.
-                || (coord.Y >= 0 && Pieces[coord.X, coord.Y]?.State != TetrominoState.Locked)); // In playfield and no locked piece at coordinate.
+                || (coord.Y >= 0 && Pieces[coord.X, coord.Y]?.State != TetrominoPieceState.Locked)); // In playfield and no locked piece at coordinate.
     }
 }
