@@ -40,6 +40,25 @@ internal class Playfield
         }
     }
 
+    public void MoveLinesDown(int yStart)
+    {
+        yStart = Math.Max(1, yStart); // Bottom line can't be moved down.
+        for (int y = yStart; y < PlayfieldSize.Height; y++)
+        {
+            for (int x = 0; x < PlayfieldSize.Width; x++)
+            {
+                if (IsPieceMovable(x, y) && IsPieceMovable(x, y - 1))
+                {
+                    Pieces[x, y - 1] = Pieces[x, y];
+                    Pieces[x, y] = null;
+                }
+            }
+        }
+
+        bool IsPieceMovable(int x, int y) =>
+            Pieces[x, y]?.State is null or TetrominoPieceState.Locked;
+    }
+
     public void ClearLine(int y)
     {
         for (int x = 0; x < PlayfieldSize.Width; x++)

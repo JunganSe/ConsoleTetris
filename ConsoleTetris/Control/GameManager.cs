@@ -92,7 +92,7 @@ internal class GameManager
             if (Game.Playfield.IsLineComplete(y))
             {
                 Game.Playfield.ClearLine(y);
-                // TODO: Move higher lines down.
+                Game.Playfield.MoveLinesDown(y + 1);
             }
         }
 
