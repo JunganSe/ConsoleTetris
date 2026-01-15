@@ -49,4 +49,14 @@ internal class Playfield
             && ((coord.Y >= PlayfieldSize.Height) // Above playfield is ok.
                 || (coord.Y >= 0 && Pieces[coord.X, coord.Y]?.State != TetrominoPieceState.Locked)); // In playfield and no locked piece at coordinate.
     }
+
+    public bool IsLineComplete(int y)
+    {
+        for (int x = 0; x < PlayfieldSize.Width; x++)
+        {
+            if (Pieces[x, y]?.State != TetrominoPieceState.Locked)
+                return false;
+        }
+        return true;
+    }
 }
