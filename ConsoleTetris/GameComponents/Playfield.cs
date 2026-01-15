@@ -40,6 +40,14 @@ internal class Playfield
         }
     }
 
+    public void ClearLine(int y)
+    {
+        for (int x = 0; x < PlayfieldSize.Width; x++)
+        {
+            Pieces[x, y] = null;
+        }
+    }
+
     public bool AreCoordsFree(Coord[] coords) =>
         coords.All(IsCoordFree);
 

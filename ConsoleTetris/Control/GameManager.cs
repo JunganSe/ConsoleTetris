@@ -40,7 +40,7 @@ internal class GameManager
             return;
 
         _gravityCooldown.Reset();
-        if(!_tetrominoManager.TryMoveDown())
+        if (!_tetrominoManager.TryMoveDown())
             _tetrominoManager.Lock();
     }
 
@@ -83,6 +83,20 @@ internal class GameManager
 
         if (_inputManager.InputState.IsPressed(Input.Pause))
             _tetrominoManager.Lock(); // Temporary for testing.
+    }
+
+    public void ClearCompletedLines()
+    {
+        for (int y = 0; y < PlayfieldSize.Height; y++)
+        {
+            if (Game.Playfield.IsLineComplete(y))
+            {
+                Game.Playfield.ClearLine(y);
+                // TODO: Move higher lines down.
+            }
+        }
+
+        // TODO: Count cleared lines and handle score.
     }
 
     public void SpawnTetrominoIfApplicable()

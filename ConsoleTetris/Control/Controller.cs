@@ -78,11 +78,10 @@ internal class Controller
     private void Update(double deltaTime)
     {
         _fpsTracker.Update(deltaTime);
-        // TODO: Move tetromino down based on timer.
         _gameManager.MoveDownOrLockOnTimer();
         _gameManager.HandleInput();
+        _gameManager.ClearCompletedLines();
         // TODO: Check for overlapping pieces and end the game if applicable.
-        // TODO: Handle line clears.
         // TODO: Handle levels, affecting score and gravity.
         _gameManager.SpawnTetrominoIfApplicable();
     }
