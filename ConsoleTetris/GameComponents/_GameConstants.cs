@@ -6,6 +6,12 @@ internal abstract class PlayfieldSize
     public const int Height = 20;
 }
 
+internal abstract class TetrominoSpawnLocation
+{
+    public const int X = PlayfieldSize.Width / 2 - 2;
+    public const int Y = PlayfieldSize.Height - 2;
+}
+
 internal enum TetrominoShape
 {
     I,

@@ -107,8 +107,8 @@ internal class GameManager
         var tempTetromino = new Tetromino()
         {
             Shape = _tetrominoManager.NextShape,
-            X = PlayfieldSize.Width / 2 - 2,
-            Y = PlayfieldSize.Height - 2,
+            X = TetrominoSpawnLocation.X,
+            Y = TetrominoSpawnLocation.Y,
             Direction = Direction.A,
         };
         bool areCoordsFree = Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);

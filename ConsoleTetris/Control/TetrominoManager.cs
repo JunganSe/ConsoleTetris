@@ -129,8 +129,8 @@ internal class TetrominoManager
         _game.ActiveTetromino = new Tetromino()
         {
             Shape = shape,
-            X = PlayfieldSize.Width / 2 - 2,
-            Y = PlayfieldSize.Height - 2,
+            X = TetrominoSpawnLocation.X,
+            Y = TetrominoSpawnLocation.Y,
             Direction = Direction.A,
         };
 
