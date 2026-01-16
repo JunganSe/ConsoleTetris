@@ -104,13 +104,7 @@ internal class GameManager
         if (Game.ActiveTetromino is not null)
             return false;
 
-        var tempTetromino = new Tetromino()
-        {
-            Shape = _tetrominoManager.NextShape,
-            X = TetrominoSpawnLocation.X,
-            Y = TetrominoSpawnLocation.Y,
-            Direction = Direction.A,
-        };
+        var tempTetromino = _tetrominoManager.GetSpawnTetromino(_tetrominoManager.NextShape);
         bool areCoordsFree = Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
         return !areCoordsFree;
     }

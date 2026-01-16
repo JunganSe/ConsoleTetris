@@ -126,17 +126,18 @@ internal class TetrominoManager
 
     private void Spawn(TetrominoShape shape)
     {
-        _game.ActiveTetromino = new Tetromino()
-        {
-            Shape = shape,
-            X = TetrominoSpawnLocation.X,
-            Y = TetrominoSpawnLocation.Y,
-            Direction = Direction.A,
-        };
-
+        _game.ActiveTetromino = GetSpawnTetromino(shape);
         _game.Playfield.AddMovingPieces(_game.ActiveTetromino);
         _canHold = true;
     }
+
+    public Tetromino GetSpawnTetromino(TetrominoShape shape) => new()
+    {
+        Shape = shape,
+        X = TetrominoSpawnLocation.X,
+        Y = TetrominoSpawnLocation.Y,
+        Direction = Direction.A,
+    };
 
     public void Lock()
     {
