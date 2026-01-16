@@ -99,6 +99,22 @@ internal class GameManager
         // TODO: Count cleared lines and handle score.
     }
 
+    public bool CheckForLoss()
+    {
+        if (Game.ActiveTetromino is not null)
+            return false;
+
+        var tempTetromino = new Tetromino()
+        {
+            Shape = _tetrominoManager.NextShape,
+            X = PlayfieldSize.Width / 2 - 2,
+            Y = PlayfieldSize.Height - 2,
+            Direction = Direction.A,
+        };
+        bool areCoordsFree = Game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+        return !areCoordsFree;
+    }
+
     public void SpawnTetrominoIfApplicable()
     {
         if (Game.ActiveTetromino is null)

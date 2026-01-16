@@ -81,9 +81,13 @@ internal class Controller
         _gameManager.MoveDownOrLockOnTimer();
         _gameManager.HandleInput();
         _gameManager.ClearCompletedLines();
-        // TODO: Check for overlapping pieces and end the game if applicable.
+        bool isGameLost = _gameManager.CheckForLoss();
+        // TODO: Handle game loss.
+        if (isGameLost)
+            throw new NotImplementedException("Game is lost!");
         // TODO: Handle levels, affecting score and gravity.
         _gameManager.SpawnTetrominoIfApplicable();
+
     }
 
     private void Render()
