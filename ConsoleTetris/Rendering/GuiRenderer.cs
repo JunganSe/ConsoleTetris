@@ -12,6 +12,9 @@ internal class GuiRenderer
         Console.Write(
             """
             ╔════════════════════╦════════╗
+            ║                    ║ LEVEL  ║
+            ║                    ║        ║
+            ║                    ╠════════╣
             ║                    ║ SCORE  ║
             ║                    ║        ║
             ║                    ╠════════╣
@@ -23,9 +26,6 @@ internal class GuiRenderer
             ║                    ║        ║
             ║                    ║        ║
             ║                    ╠════════╝
-            ║                    ║
-            ║                    ║
-            ║                    ║
             ║                    ║
             ║                    ║
             ║                    ║

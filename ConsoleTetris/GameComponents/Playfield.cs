@@ -42,7 +42,7 @@ internal class Playfield
 
     public void MoveLinesDown(int yStart)
     {
-        yStart = Math.Max(1, yStart); // Bottom line can't be moved down.
+        yStart = Math.Max(1, yStart); // Ensure >=1 since bottom line can't be moved down.
         for (int y = yStart; y < PlayfieldSize.Height; y++)
         {
             for (int x = 0; x < PlayfieldSize.Width; x++)
