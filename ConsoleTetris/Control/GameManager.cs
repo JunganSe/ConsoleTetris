@@ -37,6 +37,9 @@ internal class GameManager
 
     public void MoveDownOrLockOnTimer()
     {
+        // TODO: Separate gravity drop and locking.
+        //       Allow movement for a duration when the tetromino reaches bottom. Reset movement timer if it starts falling again.
+
         _gravityCooldown.Update();
         if (!_gravityCooldown.IsReady())
             return;
@@ -64,12 +67,14 @@ internal class GameManager
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
+            // TODO: Award score for soft dropping.
             _inputCooldown.Reset(Input.SoftDrop);
             _tetrominoManager.MoveDown();
         }
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
         {
+            // TODO: Award score for hard dropping.
             _tetrominoManager.HardDrop();
             _tetrominoManager.Lock();
         }

@@ -86,7 +86,6 @@ internal class Controller
         // TODO: Handle game loss.
         if (isGameLost)
             throw new NotImplementedException("Game is lost!");
-        // TODO: Handle levels, affecting score and gravity.
         _gameManager.SpawnTetrominoIfApplicable();
 
     }
