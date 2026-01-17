@@ -81,6 +81,7 @@ internal class Controller
         _gameManager.MoveDownOrLockOnTimer();
         _gameManager.HandleInput();
         _gameManager.HandleCompletedLines();
+        _gameManager.UpdateLevel();
         bool isGameLost = _gameManager.CheckForLoss();
         // TODO: Handle game loss.
         if (isGameLost)

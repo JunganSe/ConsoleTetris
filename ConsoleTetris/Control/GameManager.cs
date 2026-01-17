@@ -105,6 +105,11 @@ internal class GameManager
         Game.ClearedLines += clearedLinesCount;
     }
 
+    public void UpdateLevel()
+    {
+        Game.Level = (int)Math.Ceiling(Game.ClearedLines / 10d);
+    }
+
     public bool CheckForLoss()
     {
         if (Game.ActiveTetromino is not null)
