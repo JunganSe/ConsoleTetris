@@ -87,7 +87,8 @@ internal class GameManager
             _tetrominoManager.Lock(); // Temporary for testing.
     }
 
-    public void ClearCompletedLines()
+    /// <summary> Clears completed lines and awards score. </summary>
+    public void HandleCompletedLines()
     {
         int clearedLinesCount = 0;
         for (int y = 0; y < PlayfieldSize.Height; y++)
@@ -101,6 +102,7 @@ internal class GameManager
         }
 
         Game.Score += _scoreManager.GetClearScore(Game.Level, clearedLinesCount);
+        Game.ClearedLines += clearedLinesCount;
     }
 
     public bool CheckForLoss()

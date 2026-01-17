@@ -80,7 +80,7 @@ internal class Controller
         _fpsTracker.Update(deltaTime);
         _gameManager.MoveDownOrLockOnTimer();
         _gameManager.HandleInput();
-        _gameManager.ClearCompletedLines();
+        _gameManager.HandleCompletedLines();
         bool isGameLost = _gameManager.CheckForLoss();
         // TODO: Handle game loss.
         if (isGameLost)
