@@ -8,6 +8,7 @@ internal class GameManager
 {
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
+    private readonly ScoreManager _scoreManager;
     private readonly Cooldown<Input> _inputCooldown;
     private readonly SimpleCooldown _gravityCooldown;
 
@@ -20,6 +21,7 @@ internal class GameManager
         Game = new();
         _tetrominoManager = new(Game);
         _inputManager = new();
+        _scoreManager = new();
         _inputCooldown = new();
         _inputCooldown.SetCooldown(Input.Left, 3);
         _inputCooldown.SetCooldown(Input.Right, 3);
@@ -87,16 +89,18 @@ internal class GameManager
 
     public void ClearCompletedLines()
     {
+        int clearedLinesCount = 0;
         for (int y = 0; y < PlayfieldSize.Height; y++)
         {
             if (Game.Playfield.IsLineComplete(y))
             {
                 Game.Playfield.ClearLine(y);
                 Game.Playfield.MoveLinesDown(y + 1);
+                clearedLinesCount++;
             }
         }
 
-        // TODO: Count cleared lines and handle score.
+        Game.Score += _scoreManager.GetClearScore(Game.Level, clearedLinesCount);
     }
 
     public bool CheckForLoss()
