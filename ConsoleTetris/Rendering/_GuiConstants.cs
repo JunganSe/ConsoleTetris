@@ -10,6 +10,8 @@ internal abstract class GuiPosition
 {
     public const int PlayfieldX = 1;
     public const int PlayfieldY = 1;
+    public const int LevelX = 23;
+    public const int LevelY = 2;
     public const int ScoreX = 23;
     public const int ScoreY = 5;
     public const int NextX = 22;
@@ -25,6 +27,7 @@ internal abstract class GuiPosition
 internal abstract class GuiColor
 {
     public const ConsoleColor Border = ConsoleColor.White;
+    public const ConsoleColor Text = ConsoleColor.White;
     public const ConsoleColor FpsText = ConsoleColor.Gray;
 }
 

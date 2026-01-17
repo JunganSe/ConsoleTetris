@@ -5,6 +5,7 @@ internal class Game
 {
     public Playfield Playfield { get; } = new();
     public Tetromino? ActiveTetromino { get; set; }
-    public int Level { get; set; }
-    public int Score { get; set; }
+    public int Level { get; set; } = 1;
+    public int LineClears { get; set; } = 0;
+    public int Score { get; set; } = 0;
 }

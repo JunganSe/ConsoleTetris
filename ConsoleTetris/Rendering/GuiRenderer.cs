@@ -36,6 +36,14 @@ internal class GuiRenderer
             """);
     }
 
+    public void DrawLevel(int level)
+    {
+        Console.ForegroundColor = GuiColor.Text;
+        Console.SetCursorPosition(GuiPosition.LevelX, GuiPosition.LevelY);
+        string levelText = level.ToString().PadRight(3);
+        Console.Write(levelText);
+    }
+
     public void DrawNextTetromino(TetrominoShape shape) =>
         DrawTetromino(shape, GuiPosition.NextX, GuiPosition.NextY);
 
