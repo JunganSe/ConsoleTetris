@@ -44,6 +44,14 @@ internal class GuiRenderer
         Console.Write(levelText);
     }
 
+    public void DrawScore(int score)
+    {
+        Console.ForegroundColor = GuiColor.Text;
+        Console.SetCursorPosition(GuiPosition.ScoreX, GuiPosition.ScoreY);
+        string scoreText = score.ToString().PadRight(6);
+        Console.Write(scoreText);
+    }
+
     public void DrawNextTetromino(TetrominoShape shape) =>
         DrawTetromino(shape, GuiPosition.NextX, GuiPosition.NextY);
 
