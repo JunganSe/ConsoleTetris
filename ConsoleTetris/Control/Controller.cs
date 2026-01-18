@@ -70,7 +70,6 @@ internal class Controller
 
     private void MainLoop(double deltaTime)
     {
-        _gameManager.UpdateInput();
         Update(deltaTime);
         Render();
     }
@@ -78,7 +77,7 @@ internal class Controller
     private void Update(double deltaTime)
     {
         _fpsTracker.Update(deltaTime);
-        _gameManager.MoveDownOrLockOnTimer();
+        _gameManager.Update();
         _gameManager.HandleInput();
         _gameManager.HandleCompletedLines();
         _gameManager.UpdateLevel();

@@ -30,9 +30,13 @@ internal class GameManager
         _gravityCooldown.SetCooldown(30);
     }
 
-    public void UpdateInput()
+    /// <remarks> Call once per frame. </remarks>
+    public void Update()
     {
         _inputManager.Update();
+        _gravityCooldown.Update();
+        _lockGraceCooldown.Update();
+        _inputCooldown.Update();
     }
 
     public void MoveDownOrLockOnTimer()
@@ -51,8 +55,6 @@ internal class GameManager
 
     public void HandleInput()
     {
-        _inputCooldown.Update();
-
         if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldown.IsReady(Input.Left))
         {
             _inputCooldown.Reset(Input.Left);
