@@ -5,10 +5,12 @@ internal class SimpleCooldown
     private int _cooldown;
     private int _elapsedFrames;
 
+    public bool IsActive { get; set; } = true;
+
     /// <remarks> Call once per frame. </remarks>
     public void Update()
     {
-        if (_elapsedFrames < _cooldown)
+        if (IsActive && _elapsedFrames < _cooldown)
             _elapsedFrames++;
     }
 
@@ -19,7 +21,7 @@ internal class SimpleCooldown
 
     public bool IsReady()
     {
-        return _elapsedFrames >= _cooldown;
+        return (IsActive && _elapsedFrames >= _cooldown);
     }
 
     public void Reset()
