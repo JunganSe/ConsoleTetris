@@ -78,13 +78,14 @@ internal class Controller
     {
         _fpsTracker.Update(deltaTime);
         _gameManager.Update();
+        _gameManager.HandleGravity();
+        _gameManager.HandleLocking();
         _gameManager.HandleInput();
         _gameManager.HandleCompletedLines();
         _gameManager.UpdateLevel();
         bool isGameLost = _gameManager.CheckForLoss();
-        // TODO: Handle game loss.
         if (isGameLost)
-            throw new NotImplementedException("Game is lost!");
+            throw new NotImplementedException("Game is lost!"); // TODO: Handle game loss.
         _gameManager.SpawnTetrominoIfApplicable();
 
     }

@@ -11,6 +11,7 @@ internal class GameManager
     private readonly ScoreManager _scoreManager;
     private readonly Cooldown<Input> _inputCooldown;
     private readonly SimpleCooldown _gravityCooldown;
+    private readonly SimpleCooldown _lockGraceCooldown;
 
     public Game Game { get; }
     public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;
@@ -28,6 +29,8 @@ internal class GameManager
         _inputCooldown.SetCooldown(Input.SoftDrop, 2);
         _gravityCooldown = new();
         _gravityCooldown.SetCooldown(30);
+        _lockGraceCooldown = new() { IsActive = false };
+        _lockGraceCooldown.SetCooldown(30);
     }
 
     /// <remarks> Call once per frame. </remarks>
@@ -39,18 +42,26 @@ internal class GameManager
         _inputCooldown.Update();
     }
 
-    public void MoveDownOrLockOnTimer()
+    public void HandleGravity()
     {
-        // TODO: Separate gravity drop and locking.
-        //       Allow movement for a duration when the tetromino reaches bottom. Reset movement timer if it starts falling again.
-
-        _gravityCooldown.Update();
         if (!_gravityCooldown.IsReady())
             return;
 
         _gravityCooldown.Reset();
         if (!_tetrominoManager.TryMoveDown())
-            _tetrominoManager.Lock();
+        {
+            _lockGraceCooldown.IsActive = true;
+            _lockGraceCooldown.Reset(); // Cooldown is constantly reset when at bottom so locking is not performed.
+        }
+    }
+
+    public void HandleLocking()
+    {
+        if (!_lockGraceCooldown.IsActive || !_lockGraceCooldown.IsReady())
+            return;
+
+        _lockGraceCooldown.IsActive = false;
+        _tetrominoManager.Lock();
     }
 
     public void HandleInput()
