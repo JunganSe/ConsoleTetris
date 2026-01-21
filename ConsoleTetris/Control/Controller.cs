@@ -97,6 +97,7 @@ internal class Controller
         // TODO: Optimize to only draw held tetromino when it has changed.
         _playfieldRenderer.DrawPlayfield(Playfield);
         _guiRenderer.DrawLevel(_gameManager.Game.Level);
+        // TODO: Draw cleared lines count.
         _guiRenderer.DrawScore(_gameManager.Game.Score);
         _guiRenderer.DrawNextTetromino(_gameManager.NextTetrominoShape);
         _guiRenderer.DrawHeldTetromino(_gameManager.HeldTetrominoShape);

@@ -36,13 +36,15 @@ internal class TetrominoManager
         return TryMove(0, -1);
     }
 
-    public void HardDrop()
+    /// <returns> The height dropped. </returns>
+    public int HardDrop()
     {
-        bool isBottomReached = false;
-        while (!isBottomReached)
+        int height = 0;
+        while (TryMove(0, -1))
         {
-            isBottomReached = !TryMove(0, -1);
+            height++;
         }
+        return height;
     }
 
     public void SpinLeft()

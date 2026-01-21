@@ -12,4 +12,9 @@ internal class ScoreManager
     {
         return level;
     }
+
+    public int GetHardDropScore(int level, int height)
+    {
+        return 2 * level * height;
+    }
 }

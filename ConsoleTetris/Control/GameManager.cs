@@ -89,9 +89,9 @@ internal class GameManager
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
         {
-            // TODO: Award score for hard dropping.
-            _tetrominoManager.HardDrop();
+            int height = _tetrominoManager.HardDrop();
             _tetrominoManager.Lock();
+            Game.Score += _scoreManager.GetHardDropScore(Game.Level, height);
         }
 
         if (_inputManager.InputState.IsPressed(Input.SpinLeft))
@@ -110,6 +110,7 @@ internal class GameManager
     /// <summary> Clears completed lines and awards score. </summary>
     public void HandleCompletedLines()
     {
+        // TODO: Refactor, handle this loop in playfield.
         int clearedLinesCount = 0;
         for (int y = 0; y < PlayfieldSize.Height; y++)
         {
