@@ -127,7 +127,7 @@ internal class GameManager
 
     public void UpdateLevel()
     {
-        Game.Level = (int)Math.Ceiling(Game.ClearedLines / 10d);
+        Game.Level = (int)Math.Floor(1 + Game.ClearedLines / 10d);
     }
 
     public bool CheckForLoss()
