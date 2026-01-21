@@ -30,7 +30,7 @@ internal class GameManager
         _gravityCooldown = new();
         _gravityCooldown.SetCooldown(30);
         _lockGraceCooldown = new() { IsActive = false };
-        _lockGraceCooldown.SetCooldown(30);
+        _lockGraceCooldown.SetCooldown(20);
     }
 
     /// <remarks> Call once per frame. </remarks>
@@ -48,10 +48,10 @@ internal class GameManager
             return;
 
         _gravityCooldown.Reset();
-        if (!_tetrominoManager.TryMoveDown())
+        if (!_lockGraceCooldown.IsActive && !_tetrominoManager.TryMoveDown())
         {
             _lockGraceCooldown.IsActive = true;
-            _lockGraceCooldown.Reset(); // Cooldown is constantly reset when at bottom so locking is not performed.
+            _lockGraceCooldown.Reset();
         }
     }
 
@@ -61,7 +61,9 @@ internal class GameManager
             return;
 
         _lockGraceCooldown.IsActive = false;
-        _tetrominoManager.Lock();
+
+        if (!_tetrominoManager.CanMoveDown())
+            _tetrominoManager.Lock();
     }
 
     public void HandleInput()

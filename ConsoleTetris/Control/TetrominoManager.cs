@@ -76,6 +76,16 @@ internal class TetrominoManager
             || TryMove(1, 0, targetDirection);
     }
 
+    public bool CanMoveDown()
+    {
+        if (_game.ActiveTetromino is null)
+            return false;
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+        tempTetromino.Y -= 1;
+        return _game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords);
+    }
+
     private bool TryMove(int xMod, int yMod, Direction? targetDirection = null)
     {
         if (_game.ActiveTetromino is null)
