@@ -7,4 +7,9 @@ internal class ScoreManager
         // TODO: Implement proper score calculation.
         return level * clearedLinesCount;
     }
+
+    public int GetSoftDropScore(int level)
+    {
+        return level;
+    }
 }

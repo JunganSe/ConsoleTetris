@@ -82,9 +82,9 @@ internal class GameManager
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
-            // TODO: Award score for soft dropping.
             _inputCooldown.Reset(Input.SoftDrop);
-            _tetrominoManager.MoveDown();
+            if (_tetrominoManager.TryMoveDown())
+                Game.Score += _scoreManager.GetSoftDropScore(Game.Level);
         }
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
