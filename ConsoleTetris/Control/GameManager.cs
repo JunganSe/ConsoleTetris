@@ -82,6 +82,7 @@ internal class GameManager
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
+            // TODO: Lock without grace if at bottom while soft dropping.
             _inputCooldown.Reset(Input.SoftDrop);
             if (_tetrominoManager.TryMoveDown())
                 Game.Score += _scoreManager.GetSoftDropScore(Game.Level);

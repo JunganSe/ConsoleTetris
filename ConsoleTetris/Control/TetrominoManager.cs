@@ -26,11 +26,6 @@ internal class TetrominoManager
         TryMove(1, 0);
     }
 
-    public void MoveDown()
-    {
-        TryMove(0, -1);
-    }
-
     public bool TryMoveDown()
     {
         return TryMove(0, -1);
