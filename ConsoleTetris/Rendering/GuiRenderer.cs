@@ -15,6 +15,9 @@ internal class GuiRenderer
             ║                    ║ LEVEL  ║
             ║                    ║        ║
             ║                    ╠════════╣
+            ║                    ║ LINES  ║
+            ║                    ║        ║
+            ║                    ╠════════╣
             ║                    ║ SCORE  ║
             ║                    ║        ║
             ║                    ╠════════╣
@@ -29,9 +32,6 @@ internal class GuiRenderer
             ║                    ║
             ║                    ║
             ║                    ║
-            ║                    ║
-            ║                    ║
-            ║                    ║
             ╚════════════════════╝
             """);
     }
@@ -42,6 +42,14 @@ internal class GuiRenderer
         Console.SetCursorPosition(GuiPosition.LevelX, GuiPosition.LevelY);
         string levelText = level.ToString().PadRight(3);
         Console.Write(levelText);
+    }
+
+    public void DrawClearedLines(int linesCount)
+    {
+        Console.ForegroundColor = GuiColor.Text;
+        Console.SetCursorPosition(GuiPosition.LinesX, GuiPosition.LinesY);
+        string scoreText = linesCount.ToString().PadRight(6);
+        Console.Write(scoreText);
     }
 
     public void DrawScore(int score)

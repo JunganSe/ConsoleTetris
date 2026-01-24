@@ -12,12 +12,14 @@ internal abstract class GuiPosition
     public const int PlayfieldY = 1;
     public const int LevelX = 23;
     public const int LevelY = 2;
+    public const int LinesX = 23;
+    public const int LinesY = 5;
     public const int ScoreX = 23;
-    public const int ScoreY = 5;
+    public const int ScoreY = 8;
     public const int NextX = 22;
-    public const int NextY = 9;
+    public const int NextY = 12;
     public const int HoldX = 22;
-    public const int HoldY = 13;
+    public const int HoldY = 16;
     public const int TetrominoWidth = 4;
     public const int TetrominoHeight = 2;
     public const int FpsX = 25;
