@@ -59,6 +59,22 @@ internal class Playfield
             Pieces[x, y]?.State is null or TetrominoPieceState.Locked;
     }
 
+    public int ClearAllCompletedLines()
+    {
+        int clearedLinesCount = 0;
+        for (int y = 0; y < PlayfieldSize.Height; y++)
+        {
+            if (IsLineComplete(y))
+            {
+                ClearLine(y);
+                MoveLinesDown(y + 1);
+                clearedLinesCount++;
+                y--; // Recheck this line since lines above have moved down.
+            }
+        }
+        return clearedLinesCount;
+    }
+
     public void ClearLine(int y)
     {
         for (int x = 0; x < PlayfieldSize.Width; x++)

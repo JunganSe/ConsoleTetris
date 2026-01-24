@@ -111,18 +111,7 @@ internal class GameManager
     /// <summary> Clears completed lines and awards score. </summary>
     public void HandleCompletedLines()
     {
-        // TODO: Refactor, handle this loop in playfield.
-        int clearedLinesCount = 0;
-        for (int y = 0; y < PlayfieldSize.Height; y++)
-        {
-            if (Game.Playfield.IsLineComplete(y))
-            {
-                Game.Playfield.ClearLine(y);
-                Game.Playfield.MoveLinesDown(y + 1);
-                clearedLinesCount++;
-            }
-        }
-
+        int clearedLinesCount = Game.Playfield.ClearAllCompletedLines();
         Game.Score += _scoreManager.GetClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
     }
