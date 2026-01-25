@@ -11,7 +11,7 @@ internal class GameManager
     private readonly ScoreManager _scoreManager;
     private readonly Cooldown<Input> _inputCooldown;
     private readonly SimpleCooldown _gravityCooldown;
-    private readonly SimpleCooldown _lockGraceCooldown;
+    private readonly SimpleCooldown _lockDelayCooldown;
 
     public Game Game { get; }
     public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;
@@ -29,8 +29,8 @@ internal class GameManager
         _inputCooldown.SetCooldown(Input.SoftDrop, 2);
         _gravityCooldown = new();
         _gravityCooldown.SetCooldown(30);
-        _lockGraceCooldown = new() { IsActive = false };
-        _lockGraceCooldown.SetCooldown(20);
+        _lockDelayCooldown = new() { IsActive = false };
+        _lockDelayCooldown.SetCooldown(20);
     }
 
     /// <remarks> Call once per frame. </remarks>
@@ -38,7 +38,7 @@ internal class GameManager
     {
         _inputManager.Update();
         _gravityCooldown.Update();
-        _lockGraceCooldown.Update();
+        _lockDelayCooldown.Update();
         _inputCooldown.Update();
     }
 
@@ -48,19 +48,19 @@ internal class GameManager
             return;
 
         _gravityCooldown.Reset();
-        if (!_lockGraceCooldown.IsActive && !_tetrominoManager.TryMoveDown())
+        if (!_lockDelayCooldown.IsActive && !_tetrominoManager.TryMoveDown())
         {
-            _lockGraceCooldown.IsActive = true;
-            _lockGraceCooldown.Reset();
+            _lockDelayCooldown.IsActive = true;
+            _lockDelayCooldown.Reset();
         }
     }
 
     public void HandleLocking()
     {
-        if (!_lockGraceCooldown.IsActive || !_lockGraceCooldown.IsReady())
+        if (!_lockDelayCooldown.IsActive || !_lockDelayCooldown.IsReady())
             return;
 
-        _lockGraceCooldown.IsActive = false;
+        _lockDelayCooldown.IsActive = false;
 
         if (!_tetrominoManager.CanMoveDown())
             _tetrominoManager.Lock();
@@ -84,7 +84,7 @@ internal class GameManager
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
         {
-            // TODO: Lock without grace if at bottom while soft dropping.
+            // TODO: Maybe: Lock without delay if at bottom while soft dropping.
             _inputCooldown.Reset(Input.SoftDrop);
             if (_tetrominoManager.TryMoveDown())
                 Game.Score += _scoreManager.GetSoftDropScore(Game.Level);
