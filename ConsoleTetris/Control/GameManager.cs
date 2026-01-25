@@ -68,6 +68,8 @@ internal class GameManager
 
     public void HandleInput()
     {
+        // TODO: Longer cooldown after first side movement.
+
         if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldown.IsReady(Input.Left))
         {
             _inputCooldown.Reset(Input.Left);
@@ -112,7 +114,7 @@ internal class GameManager
     public void HandleCompletedLines()
     {
         int clearedLinesCount = Game.Playfield.ClearAllCompletedLines();
-        Game.Score += _scoreManager.GetClearScore(Game.Level, clearedLinesCount);
+        Game.Score += _scoreManager.GetLineClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
     }
 
