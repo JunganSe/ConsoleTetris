@@ -80,7 +80,6 @@ internal class Controller
         _gameManager.HandleLocking();
         _gameManager.HandleInput();
         _gameManager.HandleCompletedLines();
-        _gameManager.UpdateLevel();
         bool isGameLost = _gameManager.CheckForLoss();
         if (isGameLost)
             throw new NotImplementedException("Game is lost!"); // TODO: Handle game loss.

@@ -59,6 +59,7 @@ internal class Playfield
             Pieces[x, y]?.State is null or TetrominoPieceState.Locked;
     }
 
+    /// <returns> The number of cleared lines. </returns>
     public int ClearAllCompletedLines()
     {
         int clearedLinesCount = 0;

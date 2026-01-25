@@ -114,8 +114,12 @@ internal class GameManager
     public void HandleCompletedLines()
     {
         int clearedLinesCount = Game.Playfield.ClearAllCompletedLines();
+        if (clearedLinesCount == 0)
+            return;
+
         Game.Score += _scoreManager.GetLineClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
+        UpdateLevel();
     }
 
     public void UpdateLevel()
