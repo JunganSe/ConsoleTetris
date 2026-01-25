@@ -6,6 +6,7 @@ internal static class ConsoleManager
     {
         Console.CursorVisible = false;
         Console.Clear();
+        Console.Title = "Tetris";
         Console.SetWindowSize(WindowSize.Width, WindowSize.Height);
     }
 }

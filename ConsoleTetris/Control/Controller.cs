@@ -34,8 +34,6 @@ internal class Controller
 
     private void Initialize()
     {
-        // TODO: Initialize score.
-
         ConsoleManager.InitializeConsole();
         _guiRenderer.DrawGui();
     }
