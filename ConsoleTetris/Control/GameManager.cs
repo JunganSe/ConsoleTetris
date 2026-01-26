@@ -28,7 +28,7 @@ internal class GameManager
         _inputCooldown.SetCooldown(Input.Right, 3);
         _inputCooldown.SetCooldown(Input.SoftDrop, 2);
         _gravityCooldown = new();
-        _gravityCooldown.SetCooldown(30);
+        UpdateGravityCooldown();
         _lockDelayCooldown = new() { IsActive = false };
         _lockDelayCooldown.SetCooldown(20);
     }
@@ -120,11 +120,24 @@ internal class GameManager
         Game.Score += _scoreManager.GetLineClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
         UpdateLevel();
+        UpdateGravityCooldown();
     }
 
-    public void UpdateLevel()
+    private void UpdateLevel()
     {
         Game.Level = (int)Math.Floor(1 + Game.ClearedLines / 10d);
+    }
+
+    private void UpdateGravityCooldown()
+    {
+        int minCooldownSoft = 2;
+        int minCooldownHard = 1;
+        int maxCooldown = 30;
+
+        int cooldown = (Game.Level < 20)
+            ? Math.Max(minCooldownSoft, maxCooldown - (Game.Level - 1) * 2)
+            : minCooldownHard;
+        _gravityCooldown.SetCooldown(cooldown);
     }
 
     public bool CheckForLoss()
