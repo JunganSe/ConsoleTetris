@@ -1,4 +1,5 @@
 ﻿using ConsoleTetris.GameComponents;
+using ConsoleTetris.Helpers;
 using ConsoleTetris.Inputs;
 using ConsoleTetris.Mechanics;
 
@@ -130,13 +131,7 @@ internal class GameManager
 
     private void UpdateGravityCooldown()
     {
-        int minCooldownSoft = 2;
-        int minCooldownHard = 1;
-        int maxCooldown = 30;
-
-        int cooldown = (Game.Level < 20)
-            ? Math.Max(minCooldownSoft, maxCooldown - (Game.Level - 1) * 2)
-            : minCooldownHard;
+        int cooldown = GravityHelper.GetGravityCooldown(Game.Level);
         _gravityCooldown.SetCooldown(cooldown);
     }
 
