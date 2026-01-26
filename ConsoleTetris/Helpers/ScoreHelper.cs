@@ -1,8 +1,8 @@
-﻿namespace ConsoleTetris.Control;
+﻿namespace ConsoleTetris.Helpers;
 
-internal class ScoreManager
+internal static class ScoreHelper
 {
-    public int GetLineClearScore(int level, int clearedLinesCount)
+    public static int GetLineClearScore(int level, int clearedLinesCount)
     {
         int multiplier = clearedLinesCount switch
         {
@@ -15,12 +15,12 @@ internal class ScoreManager
         return level * multiplier;
     }
 
-    public int GetSoftDropScore(int level)
+    public static int GetSoftDropScore(int level)
     {
         return level;
     }
 
-    public int GetHardDropScore(int level, int height)
+    public static int GetHardDropScore(int level, int height)
     {
         return 2 * level * height;
     }

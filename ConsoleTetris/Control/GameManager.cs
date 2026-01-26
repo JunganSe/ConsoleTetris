@@ -9,7 +9,6 @@ internal class GameManager
 {
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
-    private readonly ScoreManager _scoreManager;
     private readonly Cooldown<Input> _inputCooldown;
     private readonly SimpleCooldown _gravityCooldown;
     private readonly SimpleCooldown _lockDelayCooldown;
@@ -23,7 +22,7 @@ internal class GameManager
         Game = new();
         _tetrominoManager = new(Game);
         _inputManager = new();
-        _scoreManager = new();
+
         _inputCooldown = new();
         _inputCooldown.SetCooldown(Input.Left, 3);
         _inputCooldown.SetCooldown(Input.Right, 3);
@@ -88,14 +87,14 @@ internal class GameManager
             // TODO: Maybe: Lock without delay if at bottom while soft dropping.
             _inputCooldown.Reset(Input.SoftDrop);
             if (_tetrominoManager.TryMoveDown())
-                Game.Score += _scoreManager.GetSoftDropScore(Game.Level);
+                Game.Score += ScoreHelper.GetSoftDropScore(Game.Level);
         }
 
         if (_inputManager.InputState.IsPressed(Input.HardDrop))
         {
             int height = _tetrominoManager.HardDrop();
             _tetrominoManager.Lock();
-            Game.Score += _scoreManager.GetHardDropScore(Game.Level, height);
+            Game.Score += ScoreHelper.GetHardDropScore(Game.Level, height);
         }
 
         if (_inputManager.InputState.IsPressed(Input.SpinLeft))
@@ -118,7 +117,7 @@ internal class GameManager
         if (clearedLinesCount == 0)
             return;
 
-        Game.Score += _scoreManager.GetLineClearScore(Game.Level, clearedLinesCount);
+        Game.Score += ScoreHelper.GetLineClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
         UpdateLevel();
         UpdateGravityCooldown();
