@@ -171,4 +171,25 @@ internal class TetrominoManager
         HeldShape = activeShape;
         _canHold = false;
     }
+
+    public void UpdateGhost()
+    {
+        if (_game.ActiveTetromino is null)
+            return;
+
+        var tempTetromino = _game.ActiveTetromino.GetCopy();
+
+        while (true)
+        {
+            tempTetromino.Y--;
+            if (!_game.Playfield.AreCoordsFree(tempTetromino.PiecesCoords))
+            {
+                tempTetromino.Y++;
+                break;
+            }
+        }
+
+        // TODO: Clear existing ghost pieces before adding new ones.
+        _game.Playfield.AddGhostPieces(tempTetromino);
+    }
 }

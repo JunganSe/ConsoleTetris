@@ -14,6 +14,9 @@ internal class Playfield
     public void AddMovingPieces(Tetromino tetromino) =>
         AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Moving);
 
+    public void AddGhostPieces(Tetromino tetromino) =>
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Ghost);
+
     public void AddLockedPieces(Tetromino tetromino) =>
         AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Locked);
 

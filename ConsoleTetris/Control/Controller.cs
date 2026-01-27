@@ -84,6 +84,7 @@ internal class Controller
         if (isGameLost)
             throw new NotImplementedException("Game is lost!"); // TODO: Handle game loss.
         _gameManager.SpawnTetrominoIfApplicable();
+        _gameManager.UpdateGhost();
 
     }
 
@@ -91,6 +92,7 @@ internal class Controller
     {
         // TODO: Optimize to only draw next tetromino when it has changed.
         // TODO: Optimize to only draw held tetromino when it has changed.
+        // TODO: Draw ghost.
         _playfieldRenderer.DrawPlayfield(Playfield);
         _guiRenderer.DrawLevel(_gameManager.Game.Level);
         _guiRenderer.DrawClearedLines(_gameManager.Game.ClearedLines);

@@ -152,4 +152,9 @@ internal class GameManager
             _gravityCooldown.Reset();
         }
     }
+
+    public void UpdateGhost()
+    {
+        _tetrominoManager.UpdateGhost();
+    }
 }
