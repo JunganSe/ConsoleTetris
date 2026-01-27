@@ -14,17 +14,29 @@ internal class Playfield
     public void AddMovingPieces(Tetromino tetromino) =>
         AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Moving);
 
-    public void AddGhostPieces(Tetromino tetromino) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Ghost);
-
     public void AddLockedPieces(Tetromino tetromino) =>
         AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Locked);
+
+    public void AddGhostPieces(Tetromino tetromino) =>
+        AddPiecesIfEmpty(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Ghost);
 
     public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoPieceState state)
     {
         foreach (var coord in coords)
         {
             if (coord.Y >= PlayfieldSize.Height)
+                continue;
+
+            var piece = new TetrominoPiece { Shape = shape, State = state };
+            Pieces[coord.X, coord.Y] = piece;
+        }
+    }
+
+    public void AddPiecesIfEmpty(Coord[] coords, TetrominoShape shape, TetrominoPieceState state)
+    {
+        foreach (var coord in coords)
+        {
+            if (coord.Y >= PlayfieldSize.Height || Pieces[coord.X, coord.Y] is not null)
                 continue;
 
             var piece = new TetrominoPiece { Shape = shape, State = state };
