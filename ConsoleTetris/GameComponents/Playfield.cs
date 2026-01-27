@@ -12,31 +12,19 @@ internal class Playfield
     }
 
     public void AddMovingPieces(Tetromino tetromino) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Moving);
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Moving, overwrite: true);
 
     public void AddLockedPieces(Tetromino tetromino) =>
-        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Locked);
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Locked, overwrite: true);
 
     public void AddGhostPieces(Tetromino tetromino) =>
-        AddPiecesIfEmpty(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Ghost);
+        AddPieces(tetromino.PiecesCoords, tetromino.Shape, TetrominoPieceState.Ghost, overwrite: false);
 
-    public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoPieceState state)
+    public void AddPieces(Coord[] coords, TetrominoShape shape, TetrominoPieceState state, bool overwrite)
     {
         foreach (var coord in coords)
         {
-            if (coord.Y >= PlayfieldSize.Height)
-                continue;
-
-            var piece = new TetrominoPiece { Shape = shape, State = state };
-            Pieces[coord.X, coord.Y] = piece;
-        }
-    }
-
-    public void AddPiecesIfEmpty(Coord[] coords, TetrominoShape shape, TetrominoPieceState state)
-    {
-        foreach (var coord in coords)
-        {
-            if (coord.Y >= PlayfieldSize.Height || Pieces[coord.X, coord.Y] is not null)
+            if (coord.Y >= PlayfieldSize.Height || (!overwrite && Pieces[coord.X, coord.Y] is not null))
                 continue;
 
             var piece = new TetrominoPiece { Shape = shape, State = state };
