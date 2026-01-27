@@ -23,16 +23,19 @@ internal class PlayfieldRenderer
                 Console.SetCursorPosition(cursorX, cursorY);
 
                 var piece = playfield.Pieces[x, y];
+                var texture = GetPieceTexture(piece);
                 if (piece is not null)
-                {
                     Console.ForegroundColor = ColorMapper.GetTetrominoColor(piece.Shape);
-                    Console.Write(PieceTexture.Block);
-                }
-                else
-                {
-                    Console.Write(PieceTexture.Empty);
-                }
+                Console.Write(texture);
             }
         }
     }
+
+    private string GetPieceTexture(TetrominoPiece? piece) => piece?.State switch
+    {
+        TetrominoPieceState.Moving => PieceTexture.Block,
+        TetrominoPieceState.Locked => PieceTexture.Block,
+        TetrominoPieceState.Ghost => PieceTexture.Ghost,
+        _ => PieceTexture.Empty,
+    };
 }
