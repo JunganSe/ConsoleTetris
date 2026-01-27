@@ -189,7 +189,7 @@ internal class TetrominoManager
             }
         }
 
-        // TODO: Clear existing ghost pieces before adding new ones.
+        _game.Playfield.ClearGhostPieces();
         _game.Playfield.AddGhostPieces(tempTetromino);
     }
 }

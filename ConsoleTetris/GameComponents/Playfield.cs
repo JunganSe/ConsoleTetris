@@ -106,4 +106,16 @@ internal class Playfield
         }
         return true;
     }
+
+    public void ClearGhostPieces()
+    {
+        for (int x = 0; x < PlayfieldSize.Width; x++)
+        {
+            for (int y = 0; y < PlayfieldSize.Height; y++)
+            {
+                if (Pieces[x, y]?.State == TetrominoPieceState.Ghost)
+                    Pieces[x, y] = null;
+            }
+        }
+    }
 }
