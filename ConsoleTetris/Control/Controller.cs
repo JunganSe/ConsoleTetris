@@ -60,6 +60,16 @@ internal class Controller
                 Thread.SpinWait(100);
             }
         }
+
+        if (_gameState is GameState.GameOver)
+        {
+            throw new NotImplementedException("Game is lost!");
+            // TODO: Handle game loss.
+            // - Draw a text over the playfield saying "Game Over! Press R to restart or Q to quit."
+            // - Wait for user input.
+            // - If R is pressed, reset the game and start running again.
+            // - If Q is pressed, exit the application.
+        }
     }
 
     private void MainLoop(double deltaTime)
@@ -88,7 +98,6 @@ internal class Controller
     {
         // TODO: Optimize to only draw next tetromino when it has changed.
         // TODO: Optimize to only draw held tetromino when it has changed.
-        // TODO: Draw ghost.
         _playfieldRenderer.DrawPlayfield(Playfield);
         _guiRenderer.DrawLevel(_gameManager.Game.Level);
         _guiRenderer.DrawClearedLines(_gameManager.Game.ClearedLines);
