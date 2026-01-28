@@ -134,7 +134,7 @@ internal class GameManager
         _gravityCooldown.SetCooldown(cooldown);
     }
 
-    public bool CheckForLoss()
+    public bool IsGameLost()
     {
         if (Game.ActiveTetromino is not null)
             return false;

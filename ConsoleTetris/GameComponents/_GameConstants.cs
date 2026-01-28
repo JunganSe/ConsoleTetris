@@ -1,5 +1,13 @@
 ﻿namespace ConsoleTetris.GameComponents;
 
+internal enum GameState
+{
+    Starting,
+    Running,
+    Paused,
+    GameOver,
+}
+
 internal abstract class PlayfieldSize
 {
     public const int Width = 10;

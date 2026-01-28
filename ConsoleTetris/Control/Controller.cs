@@ -15,7 +15,7 @@ internal class Controller
     private readonly GuiRenderer _guiRenderer = new();
     private readonly PlayfieldRenderer _playfieldRenderer = new();
 
-    private bool _isRunning = true;
+    private GameState _gameState = GameState.Starting;
 
     private Playfield Playfield => _gameManager.Game.Playfield;
 
@@ -23,11 +23,6 @@ internal class Controller
     {
         Initialize();
         Run();
-    }
-
-    public void Stop()
-    {
-        _isRunning = false;
     }
 
 
@@ -40,10 +35,11 @@ internal class Controller
 
     private void Run()
     {
+        _gameState = GameState.Running;
         var stopwatch = Stopwatch.StartNew();
         double lastFrameTime = 0;
 
-        while (_isRunning)
+        while (_gameState is GameState.Running)
         {
             double frameStartTime = stopwatch.Elapsed.TotalMilliseconds;
             double deltaTime = frameStartTime - lastFrameTime;
@@ -80,12 +76,12 @@ internal class Controller
         _gameManager.HandleLocking();
         _gameManager.HandleInput();
         _gameManager.HandleCompletedLines();
-        bool isGameLost = _gameManager.CheckForLoss();
-        if (isGameLost)
-            throw new NotImplementedException("Game is lost!"); // TODO: Handle game loss.
+
+        if (_gameManager.IsGameLost())
+            _gameState = GameState.GameOver;
+
         _gameManager.SpawnTetrominoIfApplicable();
         _gameManager.UpdateGhost();
-
     }
 
     private void Render()
