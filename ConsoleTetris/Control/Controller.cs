@@ -36,6 +36,21 @@ internal class Controller
     private void Run()
     {
         _gameState = GameState.Running;
+        RunMainLoop();
+
+        if (_gameState is GameState.GameOver)
+        {
+            throw new NotImplementedException("Game is lost!");
+            // TODO: Handle game loss.
+            // - Draw a text over the playfield saying "Game Over! Press R to restart or Q to quit."
+            // - Wait for user input.
+            // - If R is pressed, reset the game and start running again.
+            // - If Q is pressed, exit the application.
+        }
+    }
+
+    private void RunMainLoop()
+    {
         var stopwatch = Stopwatch.StartNew();
         double lastFrameTime = 0;
 
@@ -45,7 +60,8 @@ internal class Controller
             double deltaTime = frameStartTime - lastFrameTime;
             lastFrameTime = frameStartTime;
 
-            MainLoop(deltaTime);
+            Update(deltaTime);
+            Render();
 
             double frameTime = stopwatch.Elapsed.TotalMilliseconds - frameStartTime;
             double sleepTime = _targetFrameTime - frameTime;
@@ -60,22 +76,6 @@ internal class Controller
                 Thread.SpinWait(100);
             }
         }
-
-        if (_gameState is GameState.GameOver)
-        {
-            throw new NotImplementedException("Game is lost!");
-            // TODO: Handle game loss.
-            // - Draw a text over the playfield saying "Game Over! Press R to restart or Q to quit."
-            // - Wait for user input.
-            // - If R is pressed, reset the game and start running again.
-            // - If Q is pressed, exit the application.
-        }
-    }
-
-    private void MainLoop(double deltaTime)
-    {
-        Update(deltaTime);
-        Render();
     }
 
     private void Update(double deltaTime)
