@@ -6,6 +6,10 @@ internal class Cooldown<T> where T : struct
     private readonly Dictionary<T, int> _temporaryCooldowns = [];
     private readonly Dictionary<T, int> _elapsedFrames = [];
 
+    // TODO: Count down instead. Rename _elapsedFrames to _remainingFrames.
+    // As of now, the temp cooldown is not used since we must reset after setting it, it is then removed.
+    // _temporaryCooldowns is probably not needed if we count down, the remaining frames can just be set to the temp cooldown value.
+
     /// <remarks> Call once per frame. </remarks>
     public void Update()
     {
