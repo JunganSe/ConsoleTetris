@@ -15,7 +15,7 @@ internal class Cooldown<T> where T : struct
 
         foreach (var key in keys)
         {
-            if (_elapsedFrames[key] < GetHighestCooldown(key))
+            if (_elapsedFrames[key] < GetActiveCooldown(key))
                 _elapsedFrames[key]++;
         }
     }
@@ -38,25 +38,25 @@ internal class Cooldown<T> where T : struct
 
     public bool IsReady(T key)
     {
-        int highestCooldown = GetHighestCooldown(key);
-        return _elapsedFrames[key] >= highestCooldown;
+        int activeCooldown = GetActiveCooldown(key);
+        return _elapsedFrames[key] >= activeCooldown;
     }
 
     public void Reset(T key)
     {
-        if (_elapsedFrames.ContainsKey(key))
-            _elapsedFrames[key] = 0;
-
         if (_temporaryCooldowns.ContainsKey(key))
             _temporaryCooldowns.Remove(key);
+
+        if (_elapsedFrames.ContainsKey(key))
+            _elapsedFrames[key] = 0;
     }
 
-
-
-    private int GetHighestCooldown(T key)
+    private int GetActiveCooldown(T key)
     {
+        if (_temporaryCooldowns.TryGetValue(key, out int temporaryCooldown))
+            return temporaryCooldown;
+
         _cooldowns.TryGetValue(key, out int cooldown);
-        _temporaryCooldowns.TryGetValue(key, out int tempCooldown);
-        return Math.Max(cooldown, tempCooldown);
+        return cooldown;
     }
 }
