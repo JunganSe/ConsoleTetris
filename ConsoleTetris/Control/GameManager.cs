@@ -24,13 +24,18 @@ internal class GameManager
         _inputManager = new();
 
         _inputCooldown = new();
+        _gravityCooldown = new();
+        _lockDelayCooldown = new() { IsActive = false };
+        SetCooldowns();
+    }
+
+    private void SetCooldowns()
+    {
         _inputCooldown.SetCooldown(Input.Left, 3);
         _inputCooldown.SetCooldown(Input.Right, 3);
         _inputCooldown.SetCooldown(Input.SoftDrop, 2);
-        _gravityCooldown = new();
-        UpdateGravityCooldown();
-        _lockDelayCooldown = new() { IsActive = false };
         _lockDelayCooldown.SetCooldown(20);
+        SetGravityCooldownByLevel();
     }
 
     /// <remarks> Call once per frame. </remarks>
@@ -120,7 +125,7 @@ internal class GameManager
         Game.Score += ScoreHelper.GetLineClearScore(Game.Level, clearedLinesCount);
         Game.ClearedLines += clearedLinesCount;
         UpdateLevel();
-        UpdateGravityCooldown();
+        SetGravityCooldownByLevel();
     }
 
     private void UpdateLevel()
@@ -128,7 +133,7 @@ internal class GameManager
         Game.Level = (int)Math.Floor(1 + Game.ClearedLines / 10d);
     }
 
-    private void UpdateGravityCooldown()
+    private void SetGravityCooldownByLevel()
     {
         int cooldown = GravityHelper.GetGravityCooldown(Game.Level);
         _gravityCooldown.SetCooldown(cooldown);
