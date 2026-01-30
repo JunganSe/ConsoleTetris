@@ -26,14 +26,17 @@ internal class GameManager
         _inputCooldowns = new();
         _gravityCooldown = new();
         _lockDelayCooldown = new() { IsActive = false };
-        SetCooldowns();
+        InitializeCooldowns();
     }
 
-    private void SetCooldowns()
+    private void InitializeCooldowns()
     {
         _inputCooldowns.SetCooldown(Input.Left, 3);
+        _inputCooldowns.Ready(Input.Left);
         _inputCooldowns.SetCooldown(Input.Right, 3);
+        _inputCooldowns.Ready(Input.Right);
         _inputCooldowns.SetCooldown(Input.SoftDrop, 2);
+        _inputCooldowns.Ready(Input.SoftDrop);
         _lockDelayCooldown.SetCooldown(20);
         SetGravityCooldownByLevel();
     }
