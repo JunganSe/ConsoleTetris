@@ -3,64 +3,45 @@
 internal class Cooldown<T> where T : struct
 {
     private readonly Dictionary<T, int> _cooldowns = [];
-    private readonly Dictionary<T, int> _temporaryCooldowns = [];
-    private readonly Dictionary<T, int> _elapsedFrames = [];
-
-    // TODO: Count down instead. Rename _elapsedFrames to _remainingFrames.
-    // As of now, the temp cooldown is not used since we must reset after setting it, it is then removed.
-    // _temporaryCooldowns is probably not needed if we count down, the remaining frames can just be set to the temp cooldown value.
+    private readonly Dictionary<T, int> _remainingFrames = [];
 
     /// <remarks> Call once per frame. </remarks>
     public void Update()
     {
-        var keys = _cooldowns.Keys
-            .Concat(_temporaryCooldowns.Keys)
-            .ToHashSet();
-
-        foreach (var key in keys)
+        foreach (var key in _remainingFrames.Keys)
         {
-            if (_elapsedFrames[key] < GetActiveCooldown(key))
-                _elapsedFrames[key]++;
+            if (_remainingFrames[key] > 0)
+                _remainingFrames[key]--;
         }
     }
 
     public void SetCooldown(T key, int frames)
     {
         _cooldowns[key] = frames;
-
-        if (!_elapsedFrames.ContainsKey(key))
-            _elapsedFrames[key] = frames; // Ensure it's ready initially.
+        _remainingFrames[key] = frames;
     }
 
     public void SetTemporaryCooldown(T key, int frames)
     {
-        _temporaryCooldowns[key] = frames;
+        _remainingFrames[key] = frames;
+    }
 
-        if (!_elapsedFrames.ContainsKey(key))
-            _elapsedFrames[key] = frames; // Ensure it's ready initially.
+    public void Ready(T key)
+    {
+        if (_remainingFrames.ContainsKey(key))
+            _remainingFrames[key] = 0;
     }
 
     public bool IsReady(T key)
     {
-        int activeCooldown = GetActiveCooldown(key);
-        return _elapsedFrames[key] >= activeCooldown;
+        bool cooldownExists = _remainingFrames.TryGetValue(key, out int remainingFrames);
+        return cooldownExists && remainingFrames <= 0;
     }
 
     public void Reset(T key)
     {
-        if (_temporaryCooldowns.ContainsKey(key))
-            _temporaryCooldowns.Remove(key);
-
-        if (_elapsedFrames.ContainsKey(key))
-            _elapsedFrames[key] = 0;
-    }
-
-    private int GetActiveCooldown(T key)
-    {
-        if (_temporaryCooldowns.TryGetValue(key, out int temporaryCooldown))
-            return temporaryCooldown;
-
-        _cooldowns.TryGetValue(key, out int cooldown);
-        return cooldown;
+        bool cooldownExists = _cooldowns.TryGetValue(key, out int cooldown);
+        if (cooldownExists)
+            _remainingFrames[key] = cooldown;
     }
 }
