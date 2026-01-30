@@ -1,6 +1,6 @@
 ﻿namespace ConsoleTetris.Mechanics;
 
-internal class Cooldown<T> where T : struct
+internal class Cooldowns<T> where T : struct
 {
     private readonly Dictionary<T, int> _cooldowns = [];
     private readonly Dictionary<T, int> _remainingFrames = [];

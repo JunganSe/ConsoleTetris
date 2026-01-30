@@ -9,7 +9,7 @@ internal class GameManager
 {
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
-    private readonly Cooldown<Input> _inputCooldown;
+    private readonly Cooldowns<Input> _inputCooldowns;
     private readonly SimpleCooldown _gravityCooldown;
     private readonly SimpleCooldown _lockDelayCooldown;
 
@@ -23,7 +23,7 @@ internal class GameManager
         _tetrominoManager = new(Game);
         _inputManager = new();
 
-        _inputCooldown = new();
+        _inputCooldowns = new();
         _gravityCooldown = new();
         _lockDelayCooldown = new() { IsActive = false };
         SetCooldowns();
@@ -31,9 +31,9 @@ internal class GameManager
 
     private void SetCooldowns()
     {
-        _inputCooldown.SetCooldown(Input.Left, 3);
-        _inputCooldown.SetCooldown(Input.Right, 3);
-        _inputCooldown.SetCooldown(Input.SoftDrop, 2);
+        _inputCooldowns.SetCooldown(Input.Left, 3);
+        _inputCooldowns.SetCooldown(Input.Right, 3);
+        _inputCooldowns.SetCooldown(Input.SoftDrop, 2);
         _lockDelayCooldown.SetCooldown(20);
         SetGravityCooldownByLevel();
     }
@@ -44,7 +44,7 @@ internal class GameManager
         _inputManager.Update();
         _gravityCooldown.Update();
         _lockDelayCooldown.Update();
-        _inputCooldown.Update();
+        _inputCooldowns.Update();
     }
 
     public void HandleGravity()
@@ -75,22 +75,22 @@ internal class GameManager
     {
         // TODO: Longer cooldown after first side movement.
 
-        if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldown.IsReady(Input.Left))
+        if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldowns.IsReady(Input.Left))
         {
-            _inputCooldown.Reset(Input.Left);
+            _inputCooldowns.Reset(Input.Left);
             _tetrominoManager.MoveLeft();
         }
 
-        if (_inputManager.InputState.IsHeld(Input.Right) && _inputCooldown.IsReady(Input.Right))
+        if (_inputManager.InputState.IsHeld(Input.Right) && _inputCooldowns.IsReady(Input.Right))
         {
-            _inputCooldown.Reset(Input.Right);
+            _inputCooldowns.Reset(Input.Right);
             _tetrominoManager.MoveRight();
         }
 
-        if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldown.IsReady(Input.SoftDrop))
+        if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldowns.IsReady(Input.SoftDrop))
         {
             // TODO: Maybe: Lock without delay if at bottom while soft dropping.
-            _inputCooldown.Reset(Input.SoftDrop);
+            _inputCooldowns.Reset(Input.SoftDrop);
             if (_tetrominoManager.TryMoveDown())
                 Game.Score += ScoreHelper.GetSoftDropScore(Game.Level);
         }
