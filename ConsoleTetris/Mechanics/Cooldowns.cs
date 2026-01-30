@@ -23,7 +23,8 @@ internal class Cooldowns<T> where T : struct
 
     public void SetTemporaryCooldown(T key, int frames)
     {
-        _remainingFrames[key] = frames;
+        if (_cooldowns.ContainsKey(key))
+            _remainingFrames[key] = frames;
     }
 
     public void Ready(T key)
