@@ -24,6 +24,11 @@ internal class Cooldown
         _remainingFrames = frames;
     }
 
+    public void Reset()
+    {
+        _remainingFrames = _cooldown;
+    }
+
     public void Ready()
     {
         _remainingFrames = 0;
@@ -32,10 +37,5 @@ internal class Cooldown
     public bool IsReady()
     {
         return (IsActive && _remainingFrames <= 0);
-    }
-
-    public void Reset()
-    {
-        _remainingFrames = _cooldown;
     }
 }

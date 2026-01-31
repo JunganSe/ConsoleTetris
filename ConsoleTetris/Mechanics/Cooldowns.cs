@@ -27,6 +27,13 @@ internal class Cooldowns<T> where T : struct
             _remainingFrames[key] = frames;
     }
 
+    public void Reset(T key)
+    {
+        bool cooldownExists = _cooldowns.TryGetValue(key, out int cooldown);
+        if (cooldownExists)
+            _remainingFrames[key] = cooldown;
+    }
+
     public void Ready(T key)
     {
         if (_remainingFrames.ContainsKey(key))
@@ -37,12 +44,5 @@ internal class Cooldowns<T> where T : struct
     {
         bool cooldownExists = _remainingFrames.TryGetValue(key, out int remainingFrames);
         return cooldownExists && remainingFrames <= 0;
-    }
-
-    public void Reset(T key)
-    {
-        bool cooldownExists = _cooldowns.TryGetValue(key, out int cooldown);
-        if (cooldownExists)
-            _remainingFrames[key] = cooldown;
     }
 }
