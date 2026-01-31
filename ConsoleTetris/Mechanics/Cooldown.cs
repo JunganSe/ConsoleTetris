@@ -14,28 +14,18 @@ internal class Cooldown
             _remainingFrames--;
     }
 
-    public void SetCooldown(int frames)
-    {
+    public void SetCooldown(int frames) =>
         _cooldown = frames;
-    }
 
-    public void SetTemporaryCooldown(int frames)
-    {
+    public void SetTemporaryCooldown(int frames) =>
         _remainingFrames = frames;
-    }
 
-    public void Reset()
-    {
+    public void Reset() =>
         _remainingFrames = _cooldown;
-    }
 
-    public void Ready()
-    {
+    public void Ready() =>
         _remainingFrames = 0;
-    }
 
-    public bool IsReady()
-    {
-        return (IsActive && _remainingFrames <= 0);
-    }
+    public bool IsReady() =>
+        IsActive && _remainingFrames <= 0;
 }
