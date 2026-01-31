@@ -10,8 +10,8 @@ internal class GameManager
     private readonly TetrominoManager _tetrominoManager;
     private readonly InputManager _inputManager;
     private readonly Cooldowns<Input> _inputCooldowns;
-    private readonly SimpleCooldown _gravityCooldown;
-    private readonly SimpleCooldown _lockDelayCooldown;
+    private readonly Cooldown _gravityCooldown;
+    private readonly Cooldown _lockDelayCooldown;
 
     public Game Game { get; }
     public TetrominoShape NextTetrominoShape => _tetrominoManager.NextShape;

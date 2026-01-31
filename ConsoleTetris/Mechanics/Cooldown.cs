@@ -1,6 +1,7 @@
 ﻿namespace ConsoleTetris.Mechanics;
 
-internal class SimpleCooldown
+// TODO: Count down instead of up.
+internal class Cooldown
 {
     private int _cooldown;
     private int _elapsedFrames;
