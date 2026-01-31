@@ -19,6 +19,11 @@ internal class Cooldown
         _cooldown = frames;
     }
 
+    public void SetTemporaryCooldown(int frames)
+    {
+        _remainingFrames = frames;
+    }
+
     public void Ready()
     {
         _remainingFrames = 0;
