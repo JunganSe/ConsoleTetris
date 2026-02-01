@@ -15,16 +15,17 @@ internal class Cooldowns<T> where T : struct
         }
     }
 
-    public void SetCooldown(T key, int frames)
+    /// <summary> Sets the standard cooldown duration. </summary>
+    public void SetCooldown(T key, int frames, bool isReady = true)
     {
         _cooldowns[key] = frames;
-        _remainingFrames[key] = frames;
+        _remainingFrames[key] = isReady ? 0 : frames;
     }
 
+    /// <summary> Sets a temporary cooldown that lasts until the next reset. </summary>
     public void SetTemporaryCooldown(T key, int frames)
     {
-        if (_cooldowns.ContainsKey(key))
-            _remainingFrames[key] = frames;
+        _remainingFrames[key] = Math.Max(0, frames);
     }
 
     public void Reset(T key)

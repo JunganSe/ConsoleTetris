@@ -31,12 +31,9 @@ internal class GameManager
 
     private void InitializeCooldowns()
     {
-        _inputCooldowns.SetCooldown(Input.Left, 3);
-        _inputCooldowns.Ready(Input.Left);
-        _inputCooldowns.SetCooldown(Input.Right, 3);
-        _inputCooldowns.Ready(Input.Right);
-        _inputCooldowns.SetCooldown(Input.SoftDrop, 2);
-        _inputCooldowns.Ready(Input.SoftDrop);
+        _inputCooldowns.SetCooldown(Input.Left, 3, isReady: true);
+        _inputCooldowns.SetCooldown(Input.Right, 3, isReady: true);
+        _inputCooldowns.SetCooldown(Input.SoftDrop, 2, isReady: true);
         SetGravityCooldownByLevel();
     }
 
