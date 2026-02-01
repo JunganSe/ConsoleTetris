@@ -7,6 +7,12 @@ internal class Cooldown
 
     public bool IsActive { get; set; } = true;
 
+    public Cooldown(int frames = 0, bool isReady = true)
+    {
+        _cooldown = Math.Max(0, frames);
+        _remainingFrames = isReady ? 0 : frames;
+    }
+
     /// <remarks> Call once per frame. </remarks>
     public void Update()
     {
@@ -14,11 +20,13 @@ internal class Cooldown
             _remainingFrames--;
     }
 
+    /// <summary> Sets the standard cooldown duration. </summary>
     public void SetCooldown(int frames) =>
-        _cooldown = frames;
+        _cooldown = Math.Max(0, frames);
 
+    /// <summary> Sets a temporary cooldown that lasts until the next reset. </summary>
     public void SetTemporaryCooldown(int frames) =>
-        _remainingFrames = frames;
+        _remainingFrames = Math.Max(0, frames);
 
     public void Reset() =>
         _remainingFrames = _cooldown;
