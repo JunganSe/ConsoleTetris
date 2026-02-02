@@ -2,48 +2,56 @@
 
 internal class Cooldowns<T> where T : struct
 {
-    private readonly Dictionary<T, int> _cooldowns = [];
-    private readonly Dictionary<T, int> _remainingFrames = [];
+    private class CooldownData(int duration, int remainingFrames)
+    {
+        public int Duration = duration;
+        public int RemainingFrames = remainingFrames;
+    }
+
+    private readonly Dictionary<T, CooldownData> _cooldowns = [];
 
     /// <remarks> Call once per frame. </remarks>
     public void Update()
     {
-        foreach (var key in _remainingFrames.Keys)
+        foreach (var key in _cooldowns.Keys)
         {
-            if (_remainingFrames[key] > 0)
-                _remainingFrames[key]--;
+            var cooldown = _cooldowns[key];
+            if (cooldown.RemainingFrames > 0)
+                cooldown.RemainingFrames--;
         }
     }
 
     /// <summary> Sets the standard cooldown duration. </summary>
     public void SetCooldown(T key, int frames, bool isReady = true)
     {
-        _cooldowns[key] = frames;
-        _remainingFrames[key] = isReady ? 0 : frames;
+        int clampedFrames = Math.Max(0, frames);
+        int remainingFrames = isReady ? 0 : clampedFrames;
+        _cooldowns[key] = new CooldownData(clampedFrames, remainingFrames);
     }
 
     /// <summary> Sets a temporary cooldown that lasts until the next reset. </summary>
+    /// <remarks> A cooldown must already exist for the key. </remarks>
     public void SetTemporaryCooldown(T key, int frames)
     {
-        _remainingFrames[key] = Math.Max(0, frames);
+        if (_cooldowns.TryGetValue(key, out CooldownData? cooldownData))
+            cooldownData.RemainingFrames = Math.Max(0, frames);
     }
 
     public void Reset(T key)
     {
-        bool cooldownExists = _cooldowns.TryGetValue(key, out int cooldown);
-        if (cooldownExists)
-            _remainingFrames[key] = cooldown;
+        if (_cooldowns.TryGetValue(key, out CooldownData? cooldownData))
+            cooldownData.RemainingFrames = cooldownData.Duration;
     }
 
     public void Ready(T key)
     {
-        if (_remainingFrames.ContainsKey(key))
-            _remainingFrames[key] = 0;
+        if (_cooldowns.TryGetValue(key, out CooldownData? cooldownData))
+            cooldownData.RemainingFrames = 0;
     }
 
     public bool IsReady(T key)
     {
-        bool cooldownExists = _remainingFrames.TryGetValue(key, out int remainingFrames);
-        return cooldownExists && remainingFrames <= 0;
+        return _cooldowns.TryGetValue(key, out CooldownData? cooldownData)
+            && cooldownData.RemainingFrames <= 0;
     }
 }
