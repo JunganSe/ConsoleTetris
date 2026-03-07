@@ -72,18 +72,18 @@ internal class GameManager
 
     public void HandleInput()
     {
-        // TODO: Longer cooldown after first side movement.
-
         if (_inputManager.InputState.IsHeld(Input.Left) && _inputCooldowns.IsReady(Input.Left))
         {
             _inputCooldowns.Reset(Input.Left);
             _tetrominoManager.MoveLeft();
+            SetExtraDelayIfInputWasPressed(Input.Left);
         }
 
         if (_inputManager.InputState.IsHeld(Input.Right) && _inputCooldowns.IsReady(Input.Right))
         {
             _inputCooldowns.Reset(Input.Right);
             _tetrominoManager.MoveRight();
+            SetExtraDelayIfInputWasPressed(Input.Right);
         }
 
         if (_inputManager.InputState.IsHeld(Input.SoftDrop) && _inputCooldowns.IsReady(Input.SoftDrop))
@@ -112,6 +112,16 @@ internal class GameManager
 
         if (_inputManager.InputState.IsPressed(Input.Pause))
             _tetrominoManager.Lock(); // Temporary for testing.
+    }
+
+    // TODO: Instead of checking if input was pressed, check if movement was attempted.
+    private void SetExtraDelayIfInputWasPressed(Input input)
+    {
+        if (!_inputManager.InputState.IsPressed(input))
+            return;
+
+        _inputCooldowns.SetTemporaryCooldown(Input.Left, 6);
+        _inputCooldowns.SetTemporaryCooldown(Input.Right, 6);
     }
 
     /// <summary> Clears completed lines and awards score. </summary>
