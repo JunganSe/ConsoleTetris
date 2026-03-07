@@ -21,7 +21,7 @@ internal class Cooldowns<T> where T : struct
         }
     }
 
-    /// <summary> Sets the standard cooldown duration. </summary>
+    /// <summary> Sets the cooldown duration. </summary>
     public void SetCooldown(T key, int frames, bool isReady = true)
     {
         int clampedFrames = Math.Max(0, frames);
@@ -37,18 +37,21 @@ internal class Cooldowns<T> where T : struct
             cooldownData.RemainingFrames = Math.Max(0, frames);
     }
 
+    /// <summary> Resets the cooldown for the specified key to its set duration. </summary>
     public void Reset(T key)
     {
         if (_cooldowns.TryGetValue(key, out CooldownData? cooldownData))
             cooldownData.RemainingFrames = cooldownData.Duration;
     }
 
+    /// <summary> Clear the cooldown for the specified key, allowing immediate use.</summary>
     public void Ready(T key)
     {
         if (_cooldowns.TryGetValue(key, out CooldownData? cooldownData))
             cooldownData.RemainingFrames = 0;
     }
 
+    /// <summary> Checks if the cooldown is ready. </summary>
     public bool IsReady(T key)
     {
         return _cooldowns.TryGetValue(key, out CooldownData? cooldownData)
